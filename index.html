@@ -61,7 +61,11 @@ tailwind.config = {
         "tertiary-fixed": "rgb(var(--c-tertiary-fixed) / <alpha-value>)",
         "gold": "rgb(var(--c-gold) / <alpha-value>)",
         "epic": "rgb(var(--c-epic) / <alpha-value>)",
-        "rare": "rgb(var(--c-rare) / <alpha-value>)"
+        "rare": "rgb(var(--c-rare) / <alpha-value>)",
+        "mythic": "rgb(var(--c-mythic) / <alpha-value>)",
+        "legendary": "rgb(var(--c-legendary) / <alpha-value>)",
+        "uncommon": "rgb(var(--c-uncommon) / <alpha-value>)",
+        "common": "rgb(var(--c-common) / <alpha-value>)"
       },
       "borderRadius": {
         "DEFAULT": "0.25rem",
@@ -151,6 +155,10 @@ tailwind.config = {
     --c-gold: 176 134 12;
     --c-epic: 124 73 196;
     --c-rare: 30 102 184;
+    --c-mythic: 214 40 57;
+    --c-legendary: 199 41 142;
+    --c-uncommon: 46 138 86;
+    --c-common: 90 94 99;
 
     --sun-opacity: 1;
     --moon-opacity: 0;
@@ -208,6 +216,10 @@ tailwind.config = {
     --c-gold: 240 196 80;
     --c-epic: 178 140 230;
     --c-rare: 110 165 235;
+    --c-mythic: 255 90 90;
+    --c-legendary: 240 100 200;
+    --c-uncommon: 110 220 150;
+    --c-common: 170 175 185;
 
     --sun-opacity: 0;
     --moon-opacity: 1;
@@ -241,10 +253,14 @@ tailwind.config = {
   .theme-toggle .icon-moon { opacity: var(--moon-opacity); transform: rotate(0deg) scale(1); color: #c9d2ff; }
   html:not(.dark) .theme-toggle .icon-moon { transform: rotate(-60deg) scale(.5); }
   html.dark .theme-toggle .icon-sun { transform: rotate(60deg) scale(.5); }
+  html {
+    background-color: rgb(var(--c-background));
+  }
   body {
     background-color: rgb(var(--c-background));
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
   .glass {
     background: rgba(var(--c-surface-variant), 0.15);
@@ -256,8 +272,13 @@ tailwind.config = {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .cosmic-gradient {
-    background: radial-gradient(circle at top left, rgba(var(--c-primary), 0.06), transparent),
-                radial-gradient(circle at bottom right, rgba(var(--c-primary), 0.09), transparent);
+    background-color: rgb(var(--c-background));
+    background-image: radial-gradient(circle at top left, rgba(var(--c-primary), 0.07), transparent 60%),
+                radial-gradient(circle at bottom right, rgba(var(--c-primary), 0.1), transparent 60%);
+  }
+  html.dark .cosmic-gradient {
+    background-image: radial-gradient(circle at top left, rgba(120, 130, 200, 0.16), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(90, 70, 160, 0.18), transparent 55%);
   }
   .nebula-glow {
     box-shadow: 0 0 25px rgba(var(--c-primary), 0.18);
@@ -271,9 +292,13 @@ tailwind.config = {
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(var(--c-primary), 0.3); border-radius: 9999px; }
-  .rarity-glow-5 { box-shadow: 0 0 0 2px rgba(212,175,55,0.7), 0 0 20px rgba(212,175,55,0.25); }
-  .rarity-glow-4 { box-shadow: 0 0 0 2px rgba(155,109,214,0.6), 0 0 16px rgba(155,109,214,0.2); }
-  .rarity-glow-3 { box-shadow: 0 0 0 2px rgba(91,143,212,0.5); }
+  .rarity-glow-7 { box-shadow: 0 0 0 2px rgba(var(--c-mythic),0.85), 0 0 28px rgba(var(--c-mythic),0.45), 0 0 50px rgba(var(--c-mythic),0.2); animation: pulse-soft 1.6s ease-in-out infinite; }
+  .rarity-glow-6 { box-shadow: 0 0 0 2px rgba(var(--c-legendary),0.8), 0 0 24px rgba(var(--c-legendary),0.35); }
+  .rarity-glow-5 { box-shadow: 0 0 0 2px rgba(var(--c-gold),0.7), 0 0 20px rgba(var(--c-gold),0.25); }
+  .rarity-glow-4 { box-shadow: 0 0 0 2px rgba(var(--c-epic),0.6), 0 0 16px rgba(var(--c-epic),0.2); }
+  .rarity-glow-3 { box-shadow: 0 0 0 2px rgba(var(--c-rare),0.5); }
+  .rarity-glow-2 { box-shadow: 0 0 0 2px rgba(var(--c-uncommon),0.4); }
+  .rarity-glow-1 { box-shadow: 0 0 0 1px rgba(var(--c-common),0.3); }
   @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
   .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
 </style>
@@ -576,6 +601,142 @@ document.querySelectorAll('.glass').forEach(card => {
       localStorage.setItem('anhquoc-theme', isDark ? 'dark' : 'light');
     });
   }
+})();
+</script>
+<script>
+// ===== Custom laser cursor trail =====
+(function() {
+  // Skip on touch-only devices (no real mouse)
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'laserCursorCanvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '2147483647';
+  canvas.style.mixBlendMode = 'screen';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function colors() {
+    const isDark = document.documentElement.classList.contains('dark');
+    return isDark
+      ? { core: 'rgba(190, 210, 255, 1)', glow: 'rgba(130, 150, 255, 0.9)', tail: 'rgba(160, 110, 255, 0.5)' }
+      : { core: 'rgba(255, 250, 230, 1)', glow: 'rgba(255, 190, 60, 0.85)', tail: 'rgba(255, 120, 40, 0.45)' };
+  }
+
+  const points = [];
+  const MAX_POINTS = 16;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let lastX = mouseX, lastY = mouseY;
+  let active = false;
+  let hideTimer = null;
+
+  function onMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    active = true;
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => { active = false; }, 2500);
+  }
+  window.addEventListener('mousemove', onMove, { passive: true });
+
+  // Click pulse burst
+  const bursts = [];
+  window.addEventListener('mousedown', (e) => {
+    bursts.push({ x: e.clientX, y: e.clientY, r: 2, life: 1 });
+  });
+
+  function tick() {
+    requestAnimationFrame(tick);
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    if (!active && points.length === 0 && bursts.length === 0) return;
+
+    const c = colors();
+
+    // Add new point with velocity-based spacing
+    const dx = mouseX - lastX, dy = mouseY - lastY;
+    const dist = Math.hypot(dx, dy);
+    points.push({ x: mouseX, y: mouseY, life: 1 });
+    if (points.length > MAX_POINTS) points.shift();
+    lastX = mouseX; lastY = mouseY;
+
+    // Draw laser trail (fading line strip)
+    if (points.length > 1) {
+      for (let i = 1; i < points.length; i++) {
+        const p0 = points[i - 1];
+        const p1 = points[i];
+        const t = i / points.length; // 0 (old) -> 1 (new)
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.lineWidth = 0.6 + t * 2.6;
+        ctx.strokeStyle = c.tail;
+        ctx.globalAlpha = t * 0.55;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+    }
+
+    // Decay points
+    for (let i = points.length - 1; i >= 0; i--) {
+      points[i].life -= 0.06;
+      if (points[i].life <= 0) points.splice(i, 1);
+    }
+
+    // Core glow at current position
+    ctx.globalAlpha = 1;
+    const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 14);
+    grad.addColorStop(0, c.core);
+    grad.addColorStop(0.35, c.glow);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 2.2, 0, Math.PI * 2);
+    ctx.fillStyle = c.core;
+    ctx.fill();
+
+    // Click bursts
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      ctx.globalAlpha = b.life * 0.6;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = c.glow;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      b.r += 2.2;
+      b.life -= 0.045;
+      if (b.life <= 0) bursts.splice(i, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(tick);
+
+  // Hide native cursor, use our own
+  const styleTag = document.createElement('style');
+  styleTag.textContent = '* { cursor: none !important; }';
+  document.head.appendChild(styleTag);
 })();
 </script>
 </body></html>
