@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANH QUỐC - Trang Chủ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "secondary-fixed": "rgb(var(--c-secondary-fixed) / <alpha-value>)",
+        "on-secondary-fixed-variant": "rgb(var(--c-on-secondary-fixed-variant) / <alpha-value>)",
+        "inverse-on-surface": "rgb(var(--c-inverse-on-surface) / <alpha-value>)",
+        "on-tertiary-container": "rgb(var(--c-on-tertiary-container) / <alpha-value>)",
+        "surface-variant": "rgb(var(--c-surface-variant) / <alpha-value>)",
+        "inverse-primary": "rgb(var(--c-inverse-primary) / <alpha-value>)",
+        "surface-tint": "rgb(var(--c-surface-tint) / <alpha-value>)",
+        "on-primary": "rgb(var(--c-on-primary) / <alpha-value>)",
+        "primary-fixed-dim": "rgb(var(--c-primary-fixed-dim) / <alpha-value>)",
+        "on-primary-fixed": "rgb(var(--c-on-primary-fixed) / <alpha-value>)",
+        "secondary": "rgb(var(--c-secondary) / <alpha-value>)",
+        "surface-dim": "rgb(var(--c-surface-dim) / <alpha-value>)",
+        "tertiary-fixed-dim": "rgb(var(--c-tertiary-fixed-dim) / <alpha-value>)",
+        "primary": "rgb(var(--c-primary) / <alpha-value>)",
+        "on-background": "rgb(var(--c-on-background) / <alpha-value>)",
+        "tertiary-container": "rgb(var(--c-tertiary-container) / <alpha-value>)",
+        "surface-container-high": "rgb(var(--c-surface-container-high) / <alpha-value>)",
+        "secondary-container": "rgb(var(--c-secondary-container) / <alpha-value>)",
+        "on-tertiary-fixed": "rgb(var(--c-on-tertiary-fixed) / <alpha-value>)",
+        "surface": "rgb(var(--c-surface) / <alpha-value>)",
+        "outline-variant": "rgb(var(--c-outline-variant) / <alpha-value>)",
+        "on-surface-variant": "rgb(var(--c-on-surface-variant) / <alpha-value>)",
+        "error-container": "rgb(var(--c-error-container) / <alpha-value>)",
+        "on-secondary": "rgb(var(--c-on-secondary) / <alpha-value>)",
+        "surface-bright": "rgb(var(--c-surface-bright) / <alpha-value>)",
+        "background": "rgb(var(--c-background) / <alpha-value>)",
+        "surface-container-low": "rgb(var(--c-surface-container-low) / <alpha-value>)",
+        "secondary-fixed-dim": "rgb(var(--c-secondary-fixed-dim) / <alpha-value>)",
+        "outline": "rgb(var(--c-outline) / <alpha-value>)",
+        "on-primary-container": "rgb(var(--c-on-primary-container) / <alpha-value>)",
+        "surface-container-highest": "rgb(var(--c-surface-container-highest) / <alpha-value>)",
+        "surface-container": "rgb(var(--c-surface-container) / <alpha-value>)",
+        "inverse-surface": "rgb(var(--c-inverse-surface) / <alpha-value>)",
+        "surface-container-lowest": "rgb(var(--c-surface-container-lowest) / <alpha-value>)",
+        "primary-container": "rgb(var(--c-primary-container) / <alpha-value>)",
+        "on-error": "rgb(var(--c-on-error) / <alpha-value>)",
+        "error": "rgb(var(--c-error) / <alpha-value>)",
+        "on-primary-fixed-variant": "rgb(var(--c-on-primary-fixed-variant) / <alpha-value>)",
+        "on-tertiary": "rgb(var(--c-on-tertiary) / <alpha-value>)",
+        "on-error-container": "rgb(var(--c-on-error-container) / <alpha-value>)",
+        "on-tertiary-fixed-variant": "rgb(var(--c-on-tertiary-fixed-variant) / <alpha-value>)",
+        "on-secondary-fixed": "rgb(var(--c-on-secondary-fixed) / <alpha-value>)",
+        "on-secondary-container": "rgb(var(--c-on-secondary-container) / <alpha-value>)",
+        "on-surface": "rgb(var(--c-on-surface) / <alpha-value>)",
+        "primary-fixed": "rgb(var(--c-primary-fixed) / <alpha-value>)",
+        "tertiary": "rgb(var(--c-tertiary) / <alpha-value>)",
+        "tertiary-fixed": "rgb(var(--c-tertiary-fixed) / <alpha-value>)",
+        "gold": "rgb(var(--c-gold) / <alpha-value>)",
+        "epic": "rgb(var(--c-epic) / <alpha-value>)",
+        "rare": "rgb(var(--c-rare) / <alpha-value>)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "gutter": "24px",
+        "margin-mobile": "16px",
+        "margin-desktop": "64px",
+        "unit": "4px"
+      },
+      "fontFamily": {
+        "label-sm": ["JetBrains Mono"],
+        "body-md": ["Hanken Grotesk"],
+        "headline-lg-mobile": ["Space Grotesk"],
+        "display-lg": ["Space Grotesk"],
+        "headline-lg": ["Space Grotesk"],
+        "body-lg": ["Hanken Grotesk"],
+        "headline-md": ["Space Grotesk"]
+      },
+      "fontSize": {
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+        "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}]
+      }
+    },
+  },
+}
+</script>
+<style>
+  :root {
+    /* ===== LIGHT THEME (contrast-boosted) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 50 49 54;
+    --c-inverse-on-surface: 244 240 239;
+    --c-on-tertiary-container: 78 71 61;
+    --c-surface-variant: 229 226 225;
+    --c-inverse-primary: 198 198 199;
+    --c-surface-tint: 51 54 61;
+    --c-on-primary: 255 255 255;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 59 58 64;
+    --c-surface-dim: 221 217 217;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 51 54 61;
+    --c-on-background: 20 21 23;
+    --c-tertiary-container: 251 240 229;
+    --c-surface-container-high: 235 231 231;
+    --c-secondary-container: 228 225 231;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 252 248 248;
+    --c-outline-variant: 168 172 174;
+    --c-on-surface-variant: 53 56 58;
+    --c-error-container: 255 218 214;
+    --c-on-secondary: 255 255 255;
+    --c-surface-bright: 252 248 248;
+    --c-background: 252 248 248;
+    --c-surface-container-low: 246 243 242;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 89 93 94;
+    --c-on-primary-container: 30 32 36;
+    --c-surface-container-highest: 229 226 225;
+    --c-surface-container: 241 237 236;
+    --c-inverse-surface: 49 48 48;
+    --c-surface-container-lowest: 255 255 255;
+    --c-primary-container: 222 224 230;
+    --c-on-error: 255 255 255;
+    --c-error: 186 26 26;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 147 0 10;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 40 39 44;
+    --c-on-surface: 20 21 23;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 100 93 85;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 176 134 12;
+    --c-epic: 124 73 196;
+    --c-rare: 30 102 184;
+
+    --sun-opacity: 1;
+    --moon-opacity: 0;
+  }
+
+  html.dark {
+    /* ===== DARK THEME (cosmic) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 215 212 219;
+    --c-inverse-on-surface: 28 27 31;
+    --c-on-tertiary-container: 224 213 200;
+    --c-surface-variant: 56 59 66;
+    --c-inverse-primary: 51 54 61;
+    --c-surface-tint: 197 202 219;
+    --c-on-primary: 16 18 26;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 207 211 224;
+    --c-surface-dim: 13 14 18;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 197 202 219;
+    --c-on-background: 232 233 237;
+    --c-tertiary-container: 72 62 48;
+    --c-surface-container-high: 33 35 41;
+    --c-secondary-container: 47 50 58;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 12 13 17;
+    --c-outline-variant: 70 74 82;
+    --c-on-surface-variant: 200 204 214;
+    --c-error-container: 96 30 30;
+    --c-on-secondary: 26 28 34;
+    --c-surface-bright: 36 38 45;
+    --c-background: 9 10 14;
+    --c-surface-container-low: 19 20 25;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 138 143 153;
+    --c-on-primary-container: 222 224 230;
+    --c-surface-container-highest: 41 43 50;
+    --c-surface-container: 24 25 31;
+    --c-inverse-surface: 232 233 237;
+    --c-surface-container-lowest: 6 7 10;
+    --c-primary-container: 51 56 74;
+    --c-on-error: 255 255 255;
+    --c-error: 255 138 128;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 255 218 214;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 222 224 235;
+    --c-on-surface: 237 238 241;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 214 199 180;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 240 196 80;
+    --c-epic: 178 140 230;
+    --c-rare: 110 165 235;
+
+    --sun-opacity: 0;
+    --moon-opacity: 1;
+  }
+
+  /* Smooth theme transition */
+  body, .glass, nav, aside { transition: background-color .35s ease, border-color .35s ease, color .35s ease; }
+
+  /* ===== Theme toggle (sun/moon) ===== */
+  .theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(120,120,130,0.25);
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  html.dark .theme-toggle {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .theme-toggle:hover { transform: scale(1.06); }
+  .theme-toggle svg { position: absolute; width: 20px; height: 20px; transition: opacity .3s ease, transform .4s ease; }
+  .theme-toggle .icon-sun { opacity: var(--sun-opacity); transform: rotate(0deg) scale(1); color: #b08600; }
+  .theme-toggle .icon-moon { opacity: var(--moon-opacity); transform: rotate(0deg) scale(1); color: #c9d2ff; }
+  html:not(.dark) .theme-toggle .icon-moon { transform: rotate(-60deg) scale(.5); }
+  html.dark .theme-toggle .icon-sun { transform: rotate(60deg) scale(.5); }
+  body {
+    background-color: rgb(var(--c-background));
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .glass {
+    background: rgba(var(--c-surface-variant), 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--c-on-surface), 0.08);
+  }
+  html.dark .glass {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cosmic-gradient {
+    background: radial-gradient(circle at top left, rgba(var(--c-primary), 0.06), transparent),
+                radial-gradient(circle at bottom right, rgba(var(--c-primary), 0.09), transparent);
+  }
+  .nebula-glow {
+    box-shadow: 0 0 25px rgba(var(--c-primary), 0.18);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  .fill-icon {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(var(--c-primary), 0.3); border-radius: 9999px; }
+  .rarity-glow-5 { box-shadow: 0 0 0 2px rgba(212,175,55,0.7), 0 0 20px rgba(212,175,55,0.25); }
+  .rarity-glow-4 { box-shadow: 0 0 0 2px rgba(155,109,214,0.6), 0 0 16px rgba(155,109,214,0.2); }
+  .rarity-glow-3 { box-shadow: 0 0 0 2px rgba(91,143,212,0.5); }
+  @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+  .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+</style>
+<script>
+(function() {
+  try {
+    var t = localStorage.getItem('anhquoc-theme');
+    if (t === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+  } catch (e) {}
+})();
+</script>
+</head>
+<body class="cosmic-gradient min-h-screen font-body-md text-on-surface">
+<nav class="fixed top-0 left-0 right-0 flex justify-between items-center px-6 md:px-8 py-3 z-50 max-w-7xl mx-auto rounded-full mt-4 mx-margin-desktop bg-surface-variant/15 backdrop-blur-[40px] border border-white/20">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary text-[26px] fill-icon">shield_moon</span>
+    <span class="text-headline-md font-headline-md font-extrabold text-on-surface tracking-tight">ANH QUỐC</span>
+  </div>
+  <div class="hidden md:flex gap-6">
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+      <span class="text-label-sm font-label-sm uppercase">Vàng</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2">1.240.500</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">diamond</span>
+      <span class="text-label-sm font-label-sm uppercase">Kim Cương</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2">4.850</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+      <span class="text-label-sm font-label-sm uppercase">Thể Lực</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2">140/150</span>
+    </div>
+  </div>
+  <div class="flex items-center gap-3">
+    <button class="theme-toggle" id="themeToggle" title="Đổi giao diện sáng/tối" type="button">
+      <svg class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      <svg class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Thông báo">notifications</button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Tài khoản">account_circle</button>
+  </div>
+</nav>
+
+<aside class="fixed left-0 top-0 bottom-0 w-64 hidden lg:flex flex-col p-6 z-40 my-8 ml-margin-desktop rounded-xl bg-surface-variant/15 backdrop-blur-[40px] border border-white/20 shadow-xl shadow-primary/5">
+  <div class="mb-10 px-2">
+    <h2 class="font-headline-md text-on-surface font-bold text-headline-md">ANH QUỐC</h2>
+    <p class="text-label-sm font-label-sm text-on-surface-variant/60">SECTOR 7 · NEBULA HUB</p>
+  </div>
+  <div class="space-y-2 flex-grow">
+      <a class="flex items-center gap-4 p-3 bg-primary text-on-primary rounded-lg font-bold shadow-[0_0_15px_rgba(93,95,95,0.4)] translate-x-1 transition-all duration-300" href="index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span class="text-label-sm font-label-sm uppercase">Trang Chủ</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="story.html">
+        <span class="material-symbols-outlined">auto_stories</span>
+        <span class="text-label-sm font-label-sm uppercase">Cốt Truyện</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="challenge.html">
+        <span class="material-symbols-outlined">swords</span>
+        <span class="text-label-sm font-label-sm uppercase">Thử Thách</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="raid.html">
+        <span class="material-symbols-outlined">groups</span>
+        <span class="text-label-sm font-label-sm uppercase">Đột Kích</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="gacha.html">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span class="text-label-sm font-label-sm uppercase">Triệu Hồi</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="inventory.html">
+        <span class="material-symbols-outlined">inventory_2</span>
+        <span class="text-label-sm font-label-sm uppercase">Kho Đồ</span>
+      </a>
+  </div>
+  <a href="gacha.html" class="w-full block text-center py-4 mt-8 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.02] transition-transform active:scale-95">
+    TRIỆU HỒI NGAY
+  </a>
+</aside>
+<main class="lg:ml-[320px] pt-32 pb-32 px-6 lg:pr-margin-desktop min-h-screen">
+  <!-- Header Section -->
+  <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+      <h1 class="font-headline-lg text-headline-lg uppercase mb-2">Chào Mừng Trở Lại</h1>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">military_tech</span>
+          <span class="text-label-sm font-label-sm">CHỈ HUY · CẤP 47</span>
+        </div>
+        <div class="h-4 w-[1px] bg-outline-variant"></div>
+        <p class="text-on-surface-variant/70 italic">Sector 7 đang chờ lệnh của bạn.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 px-5 py-2 glass rounded-full">
+        <span class="material-symbols-outlined text-primary text-[18px] fill-icon">local_fire_department</span>
+        <span class="text-label-sm font-label-sm">ĐIỂM DANH: 12 NGÀY LIÊN TIẾP</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Hero Event Banner -->
+    <div class="lg:col-span-2 glass rounded-[32px] overflow-hidden group relative min-h-[340px]">
+      <div class="absolute inset-0 bg-cover bg-center opacity-30 transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgM6LsvKrbU1od2FxSfTglGVOeHTbWUGY9pRy_ZNUOsJbzfxlkLkp5zD-7T3McwyarJUNwoWfRSxXSDqQkX8i_vOQ-fEFFuUHq2uVuRIgz2Ns9jCGlDB_nVwOpAXF2TjICm8qhcHKjiTMviHj-3-aG1dt5PPVA3XBM-PIaT3dV2ZC9Fh9NE2NdaiBWBrW2vN6_qfrIP8L5vi95uuwdNdIq9rgwXmZT77Oi5z3N8-nUQNFOo0vmSjjrnFzfM9Y_sIYQKQP2C3KuWro')"></div>
+      <div class="relative p-10 h-full flex flex-col justify-end">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary/20 text-primary text-label-sm font-label-sm mb-6 w-fit">
+          <span class="material-symbols-outlined text-sm">auto_awesome</span>
+          SỰ KIỆN GIỚI HẠN · CÒN 12 NGÀY
+        </div>
+        <h2 class="font-headline-lg text-headline-lg mb-3 uppercase">Kỷ Nguyên Vàng Của Nebula</h2>
+        <p class="text-body-md text-on-surface-variant/80 mb-6 max-w-lg">Hoàn thành chuỗi thử thách đặc biệt để mở khóa Avatar "Hộ Vệ Tinh Không" và 10.000 Kim Cương Tím.</p>
+        <div class="flex items-center gap-4">
+          <a href="gacha.html" class="px-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:shadow-lg transition-all active:scale-95">TRIỆU HỒI NGAY</a>
+          <a href="challenge.html" class="px-8 py-3 glass rounded-xl font-label-sm tracking-widest hover:bg-white/20 transition-all active:scale-95">XEM THỬ THÁCH</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Check-in -->
+    <div class="glass rounded-[32px] p-6 flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-headline-md text-[18px] font-bold">Điểm Danh Hàng Ngày</h3>
+        <span class="material-symbols-outlined text-primary text-[18px]">event_available</span>
+      </div>
+      <div class="grid grid-cols-7 gap-2 mb-4">
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-primary/10"><span class="text-[10px] font-label-sm">T2</span><span class="material-symbols-outlined text-[16px] text-primary fill-icon">check_circle</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-primary/10"><span class="text-[10px] font-label-sm">T3</span><span class="material-symbols-outlined text-[16px] text-primary fill-icon">check_circle</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-primary/10"><span class="text-[10px] font-label-sm">T4</span><span class="material-symbols-outlined text-[16px] text-primary fill-icon">check_circle</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-on-background text-on-primary nebula-glow"><span class="text-[10px] font-label-sm">T5</span><span class="material-symbols-outlined text-[16px] fill-icon">redeem</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50"><span class="text-[10px] font-label-sm">T6</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50"><span class="text-[10px] font-label-sm">T7</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50"><span class="text-[10px] font-label-sm">CN</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+      </div>
+      <p class="text-label-sm font-label-sm text-on-surface-variant/60 mb-4">Phần thưởng hôm nay: 500 Kim Cương + Vé Triệu Hồi x1</p>
+      <button id="claimDailyBtn" class="mt-auto w-full py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.02] transition-transform active:scale-95">NHẬN NGAY</button>
+    </div>
+  </div>
+
+  <!-- Quick Access -->
+  <div class="mt-12">
+    <div class="flex items-center gap-4 mb-6">
+      <h3 class="font-headline-md text-headline-md">Truy Cập Nhanh</h3>
+      <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <a href="story.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">auto_stories</span>
+        <span class="font-headline-md text-[16px] font-bold">Cốt Truyện</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Chương 7 · 64% hoàn thành</span>
+      </a>
+      <a href="raid.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">groups</span>
+        <span class="font-headline-md text-[16px] font-bold">Đột Kích</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">2 lượt đột kích còn lại</span>
+      </a>
+      <a href="gacha.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group nebula-glow">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">auto_awesome</span>
+        <span class="font-headline-md text-[16px] font-bold">Triệu Hồi</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Banner giới hạn đang mở</span>
+      </a>
+      <a href="inventory.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">inventory_2</span>
+        <span class="font-headline-md text-[16px] font-bold">Kho Đồ</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">3 trang bị mới chưa xem</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-4 mb-6">
+        <h3 class="font-headline-md text-headline-md">Thông Báo</h3>
+        <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+      </div>
+      <div class="space-y-3">
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-label-sm font-label-sm uppercase shrink-0">Sự Kiện</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Kỷ Nguyên Vàng Của Nebula đã bắt đầu</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">18/06/2026</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-error/10 text-error text-label-sm font-label-sm uppercase shrink-0">Bảo Trì</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Bảo trì định kỳ máy chủ Sector 7</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">20/06/2026 · 02:00 - 04:00</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-label-sm font-label-sm uppercase shrink-0">Cập Nhật</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Phiên bản 3.2 - Thêm Chương 8 Cốt Truyện</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">15/06/2026</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Summary -->
+    <div>
+      <div class="flex items-center gap-4 mb-6">
+        <h3 class="font-headline-md text-headline-md">Tiến Độ</h3>
+        <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+      </div>
+      <div class="glass rounded-[24px] p-6 space-y-5">
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>NHIỆM VỤ HÀNG NGÀY</span><span>4/6</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 66%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>THỬ THÁCH TUẦN</span><span>2/5</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 40%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>SỰ KIỆN MÙA</span><span>3/10</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 30%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex lg:hidden justify-around items-center px-2 py-2 pb-safe bg-surface-variant/20 backdrop-blur-[40px] rounded-t-[32px] border-t border-white/20 shadow-2xl overflow-x-auto">
+  <a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-3 py-1.5 shadow-[0_0_10px_rgba(93,95,95,0.5)]" href="index.html">
+    <span class="material-symbols-outlined text-[20px]">home</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Trang Chủ</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="story.html">
+    <span class="material-symbols-outlined text-[20px]">auto_stories</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Cốt Truyện</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="challenge.html">
+    <span class="material-symbols-outlined text-[20px]">swords</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Thử Thách</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="raid.html">
+    <span class="material-symbols-outlined text-[20px]">groups</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Đột Kích</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="gacha.html">
+    <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Triệu Hồi</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="inventory.html">
+    <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Kho Đồ</span>
+  </a>
+</nav>
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+
+<script>
+// Daily claim button
+const claimBtn = document.getElementById('claimDailyBtn');
+if (claimBtn) {
+  claimBtn.addEventListener('click', () => {
+    claimBtn.innerText = 'ĐÃ NHẬN';
+    claimBtn.classList.add('opacity-50', 'pointer-events-none');
+  });
+}
+
+// Micro-interaction: Hover glow tracking
+document.querySelectorAll('.glass').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+</script>
+
+<script>
+// Theme toggle: sync across pages via localStorage
+(function() {
+  const html = document.documentElement;
+  const stored = localStorage.getItem('anhquoc-theme');
+  if (stored === 'dark') { html.classList.add('dark'); html.classList.remove('light'); }
+  else if (stored === 'light') { html.classList.remove('dark'); html.classList.add('light'); }
+
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isDark = html.classList.toggle('dark');
+      html.classList.toggle('light', !isDark);
+      localStorage.setItem('anhquoc-theme', isDark ? 'dark' : 'light');
+    });
+  }
+})();
+</script>
+</body></html>
