@@ -283,10 +283,6 @@ tailwind.config = {
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
-  body > *:not(.bg-video):not(.bg-video-overlay) {
-    position: relative;
-    z-index: 2;
-  }
   .glass {
     background: rgba(var(--c-surface-variant), 0.15);
     backdrop-filter: blur(20px);
@@ -337,6 +333,58 @@ tailwind.config = {
     }
   } catch (e) {}
 })();
+</script>
+<script>
+const INV_KEY = 'anhquoc-inventory';
+const INV_CAP = 150;
+const INV_AUTODEL_KEY = 'anhquoc-autodelete-threshold';
+
+function invLoad() {
+  try { return JSON.parse(localStorage.getItem(INV_KEY)) || []; }
+  catch (e) { return []; }
+}
+
+function invSave(items) {
+  localStorage.setItem(INV_KEY, JSON.stringify(items));
+}
+
+function invGetThreshold() {
+  const v = parseInt(localStorage.getItem(INV_AUTODEL_KEY), 10);
+  return isNaN(v) ? 0 : v;
+}
+
+function invSetThreshold(v) {
+  localStorage.setItem(INV_AUTODEL_KEY, String(v));
+}
+
+function invAdd(item) {
+  const items = invLoad();
+  items.push({ ...item, id: Date.now() + '-' + Math.random().toString(36).slice(2) });
+  invAutoDelete(items);
+  invSave(items);
+  return items;
+}
+
+function invAutoDelete(items) {
+  const threshold = invGetThreshold();
+  if (threshold > 0) {
+    for (let i = items.length - 1; i >= 0; i--) {
+      if (!items[i].locked && items[i].rarity < threshold) items.splice(i, 1);
+    }
+  }
+  while (items.length > INV_CAP) {
+    let worstIdx = -1, worstRarity = 99;
+    for (let i = 0; i < items.length; i++) {
+      if (!items[i].locked && items[i].rarity < worstRarity) {
+        worstRarity = items[i].rarity;
+        worstIdx = i;
+      }
+    }
+    if (worstIdx === -1) break;
+    items.splice(worstIdx, 1);
+  }
+}
+
 </script>
 </head>
 <body class="min-h-screen font-body-md text-on-surface">
@@ -418,13 +466,22 @@ tailwind.config = {
       <div class="flex items-center gap-6">
         <div class="flex items-center gap-2">
           <span class="material-symbols-outlined text-primary">inventory_2</span>
-          <span class="text-label-sm font-label-sm">42/120 VẬT PHẨM</span>
+          <span id="invCountText" class="text-label-sm font-label-sm">0/150 VẬT PHẨM</span>
         </div>
         <div class="h-4 w-[1px] bg-outline-variant"></div>
         <p class="text-on-surface-variant/70 italic">Quản lý nhân vật, trang bị và vật phẩm của bạn.</p>
       </div>
     </div>
-    <div class="flex gap-2">
+    <div class="flex gap-2 items-center">
+      <select id="autoDelSelect" class="px-4 py-2.5 rounded-full glass text-label-sm font-label-sm uppercase">
+        <option value="0">Auto Xóa: Tắt</option>
+        <option value="1">Auto Xóa &lt; 1★</option>
+        <option value="2">Auto Xóa &lt; 2★</option>
+        <option value="3">Auto Xóa &lt; 3★</option>
+        <option value="4">Auto Xóa &lt; 4★</option>
+        <option value="5">Auto Xóa &lt; 5★</option>
+        <option value="6">Auto Xóa &lt; 6★</option>
+      </select>
       <button class="filter-btn px-5 py-2.5 rounded-full bg-on-background text-on-primary text-label-sm font-label-sm uppercase" data-filter="all">Tất Cả</button>
       <button class="filter-btn px-5 py-2.5 rounded-full glass text-label-sm font-label-sm uppercase hover:bg-white/20 transition-all" data-filter="character">Nhân Vật</button>
       <button class="filter-btn px-5 py-2.5 rounded-full glass text-label-sm font-label-sm uppercase hover:bg-white/20 transition-all" data-filter="weapon">Vũ Khí</button>
@@ -485,7 +542,11 @@ tailwind.config = {
 </div>
 
 <script>
-const ITEMS = [];
+let ITEMS = invLoad();
+
+function updateInvCount() {
+  document.getElementById('invCountText').textContent = `${ITEMS.length}/${INV_CAP} VẬT PHẨM`;
+}
 
 function rarityClasses(rarity) {
   if (rarity === 7) return { ring: 'rarity-glow-7', bg: 'bg-mythic/10', color: 'text-mythic' };
@@ -498,6 +559,8 @@ function rarityClasses(rarity) {
 }
 
 function renderGrid(filter) {
+  ITEMS = invLoad();
+  updateInvCount();
   const grid = document.getElementById('inventoryGrid');
   grid.innerHTML = '';
   const filtered = filter === 'all' ? ITEMS : ITEMS.filter(i => i.type === filter);
@@ -566,6 +629,15 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 renderGrid('all');
+const autoDelSelect = document.getElementById('autoDelSelect');
+autoDelSelect.value = String(invGetThreshold());
+autoDelSelect.addEventListener('change', () => {
+  invSetThreshold(parseInt(autoDelSelect.value, 10));
+  const items = invLoad();
+  invAutoDelete(items);
+  invSave(items);
+  renderGrid(document.querySelector('.filter-btn.bg-on-background')?.dataset.filter || 'all');
+});
 
 </script>
 
