@@ -322,6 +322,23 @@ tailwind.config = {
   .rarity-glow-1 { box-shadow: 0 0 0 1px rgba(var(--c-common),0.3); }
   @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
   .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+  .flip-card { width: 140px; height: 200px; perspective: 1000px; }
+  .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
+  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+  .flip-card-front, .flip-card-back {
+    position: absolute; inset: 0; backface-visibility: hidden;
+    border-radius: 16px; background: #111; border: 2px solid #ffd700;
+    box-shadow: 0 0 18px rgba(255,215,0,0.5), 0 10px 25px rgba(0,0,0,0.6);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .flip-card-front { color: #ffd700; font-size: 32px; }
+  .flip-card-back { transform: rotateY(180deg); padding: 8px; color: #fff; text-align: center; }
+  .flip-card-back img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin-bottom: 6px; }
+  .flip-card-back h3 { font-size: 13px; font-weight: 700; margin: 0 0 4px; }
+  .flip-card-back .stats { display: flex; gap: 8px; font-size: 10px; margin-bottom: 4px; }
+  .flip-card-back .stats span { color: #ffd700; }
+  .flip-card-back p { font-size: 9px; opacity: 0.8; margin: 0; line-height: 1.2; }
 </style>
 <script>
 (function() {
@@ -534,11 +551,12 @@ function invAutoDelete(items) {
 </main>
 
 <!-- Pull Result Modal -->
-<div id="pullModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 backdrop-blur-sm p-6">
-  <div class="glass rounded-[32px] p-8 max-w-2xl w-full relative">
+<div id="pullModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-6">
+  <video id="gachaCutscene" class="absolute inset-0 w-full h-full object-cover" src="https://res.cloudinary.com/da3wvlqvd/video/upload/v1781882190/PinGrab_1781882136881_riqrlf.mp4" autoplay muted playsinline></video>
+  <div class="relative glass rounded-[32px] p-8 max-w-3xl w-full hidden" id="pullResultsWrap">
     <button id="closeModalBtn" class="absolute top-4 right-4 material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors">close</button>
     <h3 class="font-headline-md text-headline-md text-center mb-6 uppercase">Kết Quả Triệu Hồi</h3>
-    <div id="pullResults" class="grid grid-cols-3 sm:grid-cols-5 gap-3"></div>
+    <div id="pullResults" class="flex flex-wrap justify-center gap-4"></div>
     <button id="confirmModalBtn" class="w-full mt-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.01] transition-transform active:scale-95">XÁC NHẬN</button>
   </div>
 </div>
@@ -599,17 +617,25 @@ document.querySelectorAll('.banner-switch-btn').forEach(btn => {
 });
 </script>
 <script>
+const CHARACTER_DATA = [
+  {n:"Luffy",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Instagram_kruos6.jpg",a:9500,d:7000,noi:"Gomu Gomu no Pistol",r:6},
+  {n:"Naruto",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928311/download_1_ntp22q.jpg",a:8800,d:8000,noi:"Rasengan",r:6},
+  {n:"Zoro",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Zoro_Roronoa_lyrnyl.jpg",a:9200,d:7200,noi:"Santoryu",r:6},
+  {n:"Sasuke",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Sasuke_Wallpaper_Mobile_wzvwxb.jpg",a:9000,d:7500,noi:"Chidori",r:6},
+  {n:"Minato",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928307/download_3_nmsvsz.jpg",a:10500,d:8200,noi:"Hiraishin",r:7},
+  {n:"Shanks",i:"https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Shanks_HD_WALLPAPER_ccpmsl.jpg",a:10800,d:8500,noi:"Conqueror's Haki",r:7},
+];
+
 const ITEM_POOL = {
-  7: [{name:'Chúa Tể Nebula Vĩnh Cửu', icon:'auto_awesome'}],
-  6: [{name:'Hộ Vệ Tinh Không', icon:'shield_moon'}, {name:'Chủ Tể Hư Không', icon:'flare'}],
-  5: [{name:'Lữ Đoàn Trưởng Sao Băng', icon:'rocket_launch'}, {name:'Vệ Thần Ánh Sáng', icon:'wb_sunny'}],
-  4: [{name:'Kỵ Sĩ Băng Giá', icon:'ac_unit'}, {name:'Pháp Sư Cơ Khí', icon:'precision_manufacturing'}, {name:'Thợ Săn Tinh Tú', icon:'target'}],
-  3: [{name:'Lính Canh Sector', icon:'security'}, {name:'Kỹ Thuật Viên', icon:'build'}, {name:'Trinh Sát', icon:'visibility'}, {name:'Vệ Binh', icon:'shield'}],
-  2: [{name:'Tân Binh Sector 7', icon:'badge'}, {name:'Thợ Sửa Chữa', icon:'handyman'}, {name:'Lính Trơn', icon:'person'}],
-  1: [{name:'Dân Thường', icon:'person_outline'}, {name:'Học Viên', icon:'school'}],
+  7: CHARACTER_DATA.filter(c => c.r === 7),
+  6: CHARACTER_DATA.filter(c => c.r === 6),
+  5: [{n:'Lữ Đoàn Trưởng Sao Băng', i:'', icon:'rocket_launch', a:6000, d:4500, noi:'Sao Băng Diệt Thế'}, {n:'Vệ Thần Ánh Sáng', i:'', icon:'wb_sunny', a:5800, d:4700, noi:'Hộ Quang Trận'}],
+  4: [{n:'Kỵ Sĩ Băng Giá', i:'', icon:'ac_unit', a:4200, d:5200, noi:'Băng Phong Trảm'}, {n:'Pháp Sư Cơ Khí', i:'', icon:'precision_manufacturing', a:4500, d:3800, noi:'Cơ Khí Bạo Phát'}, {n:'Thợ Săn Tinh Tú', i:'', icon:'target', a:4400, d:3900, noi:'Tinh Tú Tiễn'}],
+  3: [{n:'Lính Canh Sector', i:'', icon:'security', a:2400, d:2600, noi:'Chắn Đỡ'}, {n:'Kỹ Thuật Viên', i:'', icon:'build', a:2200, d:2500, noi:'Sửa Chữa'}, {n:'Trinh Sát', i:'', icon:'visibility', a:2500, d:2100, noi:'Quan Sát'}, {n:'Vệ Binh', i:'', icon:'shield', a:2300, d:2700, noi:'Phòng Ngự'}],
+  2: [{n:'Tân Binh Sector 7', i:'', icon:'badge', a:1200, d:1300, noi:'Tấn Công Cơ Bản'}, {n:'Thợ Sửa Chữa', i:'', icon:'handyman', a:1100, d:1400, noi:'Hỗ Trợ'}, {n:'Lính Trơn', i:'', icon:'person', a:1150, d:1250, noi:'Chiến Đấu'}],
+  1: [{n:'Dân Thường', i:'', icon:'person_outline', a:500, d:500, noi:'Không Có Kỹ Năng'}, {n:'Học Viên', i:'', icon:'school', a:550, d:520, noi:'Học Tập'}],
 };
 
-// Tỉ lệ rút (cộng dồn): 7★ 0.005% · 6★ 0.05% · 5★ 0.5% · 4★ 5% · 3★ 15% · 2★ 30% · 1★ phần còn lại
 const RARITY_RATES = { 7: 0.005, 6: 0.05, 5: 0.5, 4: 5, 3: 15, 2: 30 };
 
 function rollRarity() {
@@ -626,7 +652,7 @@ function rollItem() {
   const rarity = rollRarity();
   const pool = ITEM_POOL[rarity];
   const item = pool[Math.floor(Math.random() * pool.length)];
-  return { ...item, rarity, type: 'character', desc: `Nhân vật ${rarity}★ thu được từ Triệu Hồi.` };
+  return { name: item.n, icon: item.icon || '', img: item.i || '', atk: item.a, def: item.d, noi: item.noi, rarity, type: 'character', desc: `Nhân vật ${rarity}★ thu được từ Triệu Hồi.` };
 }
 
 function rarityClasses(rarity) {
@@ -643,26 +669,46 @@ function renderResults(items) {
   const container = document.getElementById('pullResults');
   container.innerHTML = '';
   items.forEach((item, i) => {
-    const cls = rarityClasses(item.rarity);
     const card = document.createElement('div');
-    card.className = `flex flex-col items-center gap-2 p-3 rounded-2xl ${cls.bg} ${cls.ring} opacity-0 transition-opacity duration-500`;
+    card.className = 'flip-card';
     card.innerHTML = `
-      <span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">${item.icon}</span>
-      <span class="text-[11px] font-label-sm text-center leading-tight">${item.name}</span>
-      <span class="text-[10px] font-label-sm ${cls.color}">${item.rarity}★</span>
+      <div class="flip-card-inner">
+        <div class="flip-card-front">${item.rarity}★</div>
+        <div class="flip-card-back">
+          ${item.img ? `<img src="${item.img}">` : `<span class="material-symbols-outlined text-3xl" style="color:#ffd700">${item.icon}</span>`}
+          <h3>${item.name}</h3>
+          <div class="stats">ATK:<span>${item.atk}</span> DEF:<span>${item.def}</span></div>
+          <p>${item.noi}</p>
+        </div>
+      </div>
     `;
     container.appendChild(card);
-    setTimeout(() => { card.style.opacity = '1'; }, 80 * i);
+    setTimeout(() => card.classList.add('flipped'), 200 + i * 150);
   });
 }
 
+let pendingItems = [];
+
 function doPull(count) {
-  const items = Array.from({ length: count }, rollItem);
-  items.forEach(it => invAdd(it));
-  renderResults(items);
-  document.getElementById('pullModal').classList.remove('hidden');
-  document.getElementById('pullModal').classList.add('flex');
+  pendingItems = Array.from({ length: count }, rollItem);
+  pendingItems.forEach(it => invAdd(it));
+  const modal = document.getElementById('pullModal');
+  const video = document.getElementById('gachaCutscene');
+  const wrap = document.getElementById('pullResultsWrap');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  wrap.classList.add('hidden');
+  video.classList.remove('hidden');
+  video.currentTime = 0;
+  video.play();
 }
+
+const gachaCutscene = document.getElementById('gachaCutscene');
+gachaCutscene.addEventListener('ended', () => {
+  gachaCutscene.classList.add('hidden');
+  document.getElementById('pullResultsWrap').classList.remove('hidden');
+  renderResults(pendingItems);
+});
 
 const pull1Btn = document.getElementById('pull1Btn');
 const pull10Btn = document.getElementById('pull10Btn');
@@ -683,9 +729,13 @@ previewBtn.addEventListener('click', () => {
       const cls = rarityClasses(rarity);
       const card = document.createElement('div');
       card.className = `flex flex-col items-center gap-1 p-3 rounded-2xl ${cls.bg} ${cls.ring}`;
-      card.innerHTML = `
+      card.innerHTML = item.i ? `
+        <img src="${item.i}" class="w-12 h-12 rounded-lg object-cover">
+        <span class="text-[10px] font-label-sm text-center leading-tight">${item.n}</span>
+        <span class="text-[9px] font-label-sm ${cls.color}">${rarity}★</span>
+      ` : `
         <span class="material-symbols-outlined text-2xl ${cls.color} fill-icon">${item.icon}</span>
-        <span class="text-[10px] font-label-sm text-center leading-tight">${item.name}</span>
+        <span class="text-[10px] font-label-sm text-center leading-tight">${item.n}</span>
         <span class="text-[9px] font-label-sm ${cls.color}">${rarity}★</span>
       `;
       previewPanel.appendChild(card);
@@ -699,6 +749,7 @@ if (pull10Btn) pull10Btn.addEventListener('click', () => doPull(10));
 function hideModal() {
   pullModal.classList.add('hidden');
   pullModal.classList.remove('flex');
+  gachaCutscene.pause();
 }
 if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
 if (confirmModalBtn) confirmModalBtn.addEventListener('click', hideModal);
