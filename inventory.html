@@ -103,6 +103,42 @@ tailwind.config = {
 }
 </script>
 <style>
+  .bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    pointer-events: none;
+  }
+  .bg-video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: rgb(var(--c-background) / 0.72);
+  }
+  html.dark .bg-video-overlay {
+    background: rgb(var(--c-background) / 0.78);
+  }
+
+  #shatterOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    pointer-events: none;
+    opacity: 0;
+  }
+  #shatterOverlay canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
   :root {
     /* ===== LIGHT THEME (contrast-boosted) ===== */
     --c-secondary-fixed: 228 225 231;
@@ -315,6 +351,10 @@ tailwind.config = {
 </script>
 </head>
 <body class="cosmic-gradient min-h-screen font-body-md text-on-surface">
+<video class="bg-video" autoplay muted loop playsinline preload="auto" id="bgVideo">
+  <source src="https://res.cloudinary.com/da3wvlqvd/video/upload/v1781928497/PinGrab_1781928471662_orybdp.mp4" type="video/mp4">
+</video>
+<div class="bg-video-overlay"></div>
 <nav class="fixed top-0 left-0 right-0 flex justify-between items-center px-6 md:px-8 py-3 z-50 max-w-7xl mx-auto rounded-full mt-4 mx-margin-desktop bg-surface-variant/15 backdrop-blur-[40px] border border-white/20">
   <div class="flex items-center gap-3">
     <span class="material-symbols-outlined text-primary text-[26px] fill-icon">shield_moon</span>
@@ -456,22 +496,7 @@ tailwind.config = {
 </div>
 
 <script>
-const ITEMS = [
-  { name: 'Hộ Vệ Tinh Không', type: 'character', rarity: 6, icon: 'shield_moon', desc: 'Nhân vật 6★ hệ Hư Không, chuyên tấn công diện rộng.' },
-  { name: 'Chủ Tể Hư Không', type: 'character', rarity: 6, icon: 'flare', desc: 'Nhân vật 6★ hỗ trợ, hồi phục và buff toàn đội.' },
-  { name: 'Kỵ Sĩ Băng Giá', type: 'character', rarity: 4, icon: 'ac_unit', desc: 'Nhân vật 4★ phòng thủ, khống chế băng giá.' },
-  { name: 'Pháp Sư Cơ Khí', type: 'character', rarity: 4, icon: 'precision_manufacturing', desc: 'Nhân vật 4★ sát thương phép, tốc độ cao.' },
-  { name: 'Thợ Săn Tinh Tú', type: 'character', rarity: 4, icon: 'target', desc: 'Nhân vật 4★ sát thương đơn mục tiêu.' },
-  { name: 'Lính Canh Sector', type: 'character', rarity: 3, icon: 'security', desc: 'Nhân vật 3★ cơ bản, dễ nuôi sớm game.' },
-  { name: 'Trường Kiếm Tinh Vân', type: 'weapon', rarity: 5, icon: 'swords', desc: 'Vũ khí 5★, tăng 48% sát thương chí mạng.' },
-  { name: 'Súng Plasma Mk.II', type: 'weapon', rarity: 4, icon: 'bolt', desc: 'Vũ khí 4★, gây hiệu ứng nổ diện rộng.' },
-  { name: 'Khiên Lượng Tử', type: 'weapon', rarity: 4, icon: 'shield', desc: 'Vũ khí 4★ phòng thủ, hấp thụ 20% sát thương.' },
-  { name: 'Dao Găm Cũ', type: 'weapon', rarity: 3, icon: 'construction', desc: 'Vũ khí 3★ cơ bản dùng để rèn nâng cấp.' },
-  { name: 'Tinh Thể Năng Lượng', type: 'material', rarity: 4, icon: 'diamond', desc: 'Vật liệu nâng cấp trang bị hiếm.' },
-  { name: 'Mảnh Vỡ Thiên Thạch', type: 'material', rarity: 3, icon: 'token', desc: 'Vật liệu chế tạo cơ bản, thu thập từ Đột Kích.' },
-  { name: 'Lõi Cơ Khí', type: 'material', rarity: 3, icon: 'settings', desc: 'Dùng để nâng cấp vũ khí hệ Cơ Khí.' },
-  { name: 'Huy Hiệu Bang Hội', type: 'material', rarity: 3, icon: 'military_tech', desc: 'Đổi lấy vật phẩm tại cửa hàng Bang Hội.' },
-];
+const ITEMS = [];
 
 function rarityClasses(rarity) {
   if (rarity === 7) return { ring: 'rarity-glow-7', bg: 'bg-mythic/10', color: 'text-mythic' };
@@ -487,6 +512,15 @@ function renderGrid(filter) {
   const grid = document.getElementById('inventoryGrid');
   grid.innerHTML = '';
   const filtered = filter === 'all' ? ITEMS : ITEMS.filter(i => i.type === filter);
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="col-span-full flex flex-col items-center justify-center gap-3 py-20 opacity-60">
+        <span class="material-symbols-outlined text-5xl">inventory_2</span>
+        <p class="text-label-sm font-label-sm">Kho đồ trống</p>
+      </div>
+    `;
+    return;
+  }
   filtered.forEach((item, idx) => {
     const cls = rarityClasses(item.rarity);
     const card = document.createElement('button');
@@ -779,6 +813,191 @@ renderGrid('all');
   // Apply immediately on load if already activated in a previous page
   if (localStorage.getItem('anhquoc-admin') === '1') {
     document.addEventListener('DOMContentLoaded', applyAdminDisplay);
+  }
+})();
+</script>
+
+<script>
+(function() {
+  const SHATTER_IMG = 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928309/download_yogvz9.jpg';
+  const COLS = 8, ROWS = 6;
+  const STORAGE_KEY = 'anhquoc-shatter-nav';
+
+  function buildOverlay() {
+    let el = document.getElementById('shatterOverlay');
+    if (el) return el;
+    el = document.createElement('div');
+    el.id = 'shatterOverlay';
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    el.appendChild(canvas);
+    document.body.appendChild(el);
+    return el;
+  }
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  function getShards(w, h) {
+    const shards = [];
+    const cw = w / COLS, ch = h / ROWS;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        shards.push({
+          sx: c * cw, sy: r * ch, sw: cw, sh: ch,
+          dx: c * cw, dy: r * ch,
+        });
+      }
+    }
+    return shards;
+  }
+
+  async function playReassemble() {
+    const overlay = buildOverlay();
+    const canvas = overlay.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    overlay.style.opacity = '1';
+
+    let img;
+    try {
+      img = await loadImage(SHATTER_IMG);
+    } catch (e) {
+      overlay.style.opacity = '0';
+      return;
+    }
+
+    const w = canvas.width, h = canvas.height;
+    const shards = getShards(w, h);
+    const offsets = shards.map(() => ({
+      ox: (Math.random() - 0.5) * w * 0.9,
+      oy: (Math.random() - 0.5) * h * 0.9,
+      rot: (Math.random() - 0.5) * 1.2,
+    }));
+
+    const duration = 650;
+    const start = performance.now();
+
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const e = easeOutCubic(t);
+      ctx.clearRect(0, 0, w, h);
+      shards.forEach((s, i) => {
+        const off = offsets[i];
+        const curOx = off.ox * (1 - e);
+        const curOy = off.oy * (1 - e);
+        const curRot = off.rot * (1 - e);
+        const cx = s.dx + s.sw / 2 + curOx;
+        const cy = s.dy + s.sh / 2 + curOy;
+        ctx.save();
+        ctx.globalAlpha = 0.15 + 0.85 * e;
+        ctx.translate(cx, cy);
+        ctx.rotate(curRot);
+        ctx.drawImage(
+          img,
+          s.sx * (img.width / w), s.sy * (img.height / h), s.sw * (img.width / w), s.sh * (img.height / h),
+          -s.sw / 2, -s.sh / 2, s.sw, s.sh
+        );
+        ctx.restore();
+      });
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        overlay.style.transition = 'opacity .25s ease';
+        overlay.style.opacity = '0';
+        setTimeout(() => { overlay.style.transition = ''; }, 300);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  async function playShatterOut(href) {
+    const overlay = buildOverlay();
+    const canvas = overlay.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    overlay.style.opacity = '1';
+
+    let img;
+    try {
+      img = await loadImage(SHATTER_IMG);
+    } catch (e) {
+      window.location.href = href;
+      return;
+    }
+
+    const w = canvas.width, h = canvas.height;
+    const shards = getShards(w, h);
+    const offsets = shards.map(() => ({
+      ox: (Math.random() - 0.5) * w * 0.9,
+      oy: (Math.random() - 0.5) * h * 0.9,
+      rot: (Math.random() - 0.5) * 1.2,
+    }));
+
+    const duration = 500;
+    const start = performance.now();
+    let navigated = false;
+
+    function easeInCubic(t) { return t * t * t; }
+
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      const e = easeInCubic(t);
+      ctx.clearRect(0, 0, w, h);
+      shards.forEach((s, i) => {
+        const off = offsets[i];
+        const curOx = off.ox * e;
+        const curOy = off.oy * e;
+        const curRot = off.rot * e;
+        const cx = s.dx + s.sw / 2 + curOx;
+        const cy = s.dy + s.sh / 2 + curOy;
+        ctx.save();
+        ctx.globalAlpha = 1 - 0.85 * e;
+        ctx.translate(cx, cy);
+        ctx.rotate(curRot);
+        ctx.drawImage(
+          img,
+          s.sx * (img.width / w), s.sy * (img.height / h), s.sw * (img.width / w), s.sh * (img.height / h),
+          -s.sw / 2, -s.sh / 2, s.sw, s.sh
+        );
+        ctx.restore();
+      });
+      if (t < 1) {
+        requestAnimationFrame(frame);
+      } else if (!navigated) {
+        navigated = true;
+        sessionStorage.setItem(STORAGE_KEY, '1');
+        window.location.href = href;
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || a.target === '_blank') return;
+    if (!href.endsWith('.html')) return;
+    e.preventDefault();
+    playShatterOut(href);
+  });
+
+  if (sessionStorage.getItem(STORAGE_KEY) === '1') {
+    sessionStorage.removeItem(STORAGE_KEY);
+    window.addEventListener('DOMContentLoaded', playReassemble);
   }
 })();
 </script>
