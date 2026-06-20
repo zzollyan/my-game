@@ -578,8 +578,8 @@ function renderGrid(filter) {
     const card = document.createElement('button');
     card.className = `glass rounded-2xl p-4 flex flex-col items-center gap-2 hover:bg-white/20 transition-all hover:-translate-y-1 ${cls.ring}`;
     card.innerHTML = `
-      <div class="w-16 h-16 rounded-xl ${cls.bg} flex items-center justify-center">
-        <span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">${item.icon}</span>
+      <div class="w-16 h-16 rounded-xl ${cls.bg} flex items-center justify-center overflow-hidden">
+        ${item.img ? `<img src="${item.img}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">${item.icon}</span>`}
       </div>
       <span class="text-[11px] font-label-sm text-center leading-tight line-clamp-2">${item.name}</span>
       <span class="text-[10px] font-label-sm ${cls.color}">${item.rarity}★</span>
@@ -591,15 +591,19 @@ function renderGrid(filter) {
 
 function openItemModal(item) {
   const cls = rarityClasses(item.rarity);
-  document.getElementById('itemModalIconWrap').className = `w-24 h-24 rounded-2xl flex items-center justify-center ${cls.bg} ${cls.ring}`;
+  const iconWrap = document.getElementById('itemModalIconWrap');
+  iconWrap.className = `w-24 h-24 rounded-2xl flex items-center justify-center overflow-hidden ${cls.bg} ${cls.ring}`;
   const iconEl = document.getElementById('itemModalIcon');
-  iconEl.className = `material-symbols-outlined text-5xl fill-icon ${cls.color}`;
-  iconEl.innerText = item.icon;
+  if (item.img) {
+    iconWrap.innerHTML = `<img src="${item.img}" class="w-full h-full object-cover">`;
+  } else {
+    iconWrap.innerHTML = `<span id="itemModalIcon" class="material-symbols-outlined text-5xl fill-icon ${cls.color}">${item.icon}</span>`;
+  }
   document.getElementById('itemModalName').innerText = item.name;
   const rarityEl = document.getElementById('itemModalRarity');
   rarityEl.innerText = `${item.rarity}★ · ${item.type === 'character' ? 'NHÂN VẬT' : item.type === 'weapon' ? 'VŨ KHÍ' : 'VẬT LIỆU'}`;
   rarityEl.className = `text-label-sm font-label-sm ${cls.color}`;
-  document.getElementById('itemModalDesc').innerText = item.desc;
+  document.getElementById('itemModalDesc').innerText = item.desc || (item.noi ? `Nội tại: ${item.noi}` : '');
   const modal = document.getElementById('itemModal');
   modal.classList.remove('hidden');
   modal.classList.add('flex');
