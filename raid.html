@@ -324,17 +324,17 @@ tailwind.config = {
     <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
       <span class="material-symbols-outlined text-primary text-[18px]">payments</span>
       <span class="text-label-sm font-label-sm uppercase">Vàng</span>
-      <span class="text-label-sm font-label-sm font-bold ml-2">1.240.500</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="gold">0</span>
     </div>
     <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
       <span class="material-symbols-outlined text-primary text-[18px]">diamond</span>
       <span class="text-label-sm font-label-sm uppercase">Kim Cương</span>
-      <span class="text-label-sm font-label-sm font-bold ml-2">4.850</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="diamond">0</span>
     </div>
     <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
       <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
       <span class="text-label-sm font-label-sm uppercase">Thể Lực</span>
-      <span class="text-label-sm font-label-sm font-bold ml-2">140/150</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="energy">150/150</span>
     </div>
   </div>
   <div class="flex items-center gap-3">
@@ -411,12 +411,12 @@ tailwind.config = {
       </div>
       <h2 class="font-headline-lg text-headline-lg mb-3 uppercase">Kẻ Nuốt Chửng Tinh Vân</h2>
       <div class="w-full max-w-md mb-4">
-        <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>MÁU BOSS</span><span>38%</span></div>
-        <div class="w-full h-3 rounded-full bg-white/10"><div class="h-3 rounded-full bg-error" style="width: 38%"></div></div>
+        <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>MÁU BOSS</span><span>100%</span></div>
+        <div class="w-full h-3 rounded-full bg-white/10"><div class="h-3 rounded-full bg-error" style="width: 100%"></div></div>
       </div>
       <div class="flex items-center gap-4">
         <button class="px-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:shadow-lg transition-all active:scale-95">TẤN CÔNG NGAY</button>
-        <span class="text-label-sm font-label-sm text-on-surface-variant/60 uppercase">2.450 chỉ huy đang tham chiến</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60 uppercase">0 chỉ huy đang tham chiến</span>
       </div>
     </div>
   </div>
@@ -568,7 +568,7 @@ document.querySelectorAll('.glass').forEach(card => {
   canvas.style.height = '100vh';
   canvas.style.pointerEvents = 'none';
   canvas.style.zIndex = '2147483647';
-  canvas.style.mixBlendMode = 'screen';
+  // mixBlendMode set dynamically per-theme in colors()
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext('2d');
@@ -585,9 +585,10 @@ document.querySelectorAll('.glass').forEach(card => {
 
   function colors() {
     const isDark = document.documentElement.classList.contains('dark');
+    canvas.style.mixBlendMode = isDark ? 'screen' : 'normal';
     return isDark
-      ? { core: 'rgba(190, 210, 255, 1)', glow: 'rgba(130, 150, 255, 0.9)', tail: 'rgba(160, 110, 255, 0.5)' }
-      : { core: 'rgba(255, 250, 230, 1)', glow: 'rgba(255, 190, 60, 0.85)', tail: 'rgba(255, 120, 40, 0.45)' };
+      ? { core: 'rgba(210, 225, 255, 1)', glow: 'rgba(140, 160, 255, 0.95)', tail: 'rgba(170, 120, 255, 0.55)', ring: 'rgba(40, 30, 70, 0)' }
+      : { core: 'rgba(255, 60, 20, 1)', glow: 'rgba(255, 110, 20, 0.95)', tail: 'rgba(220, 50, 10, 0.6)', ring: 'rgba(255, 255, 255, 0.9)' };
   }
 
   const points = [];
@@ -661,8 +662,15 @@ document.querySelectorAll('.glass').forEach(card => {
     ctx.arc(mouseX, mouseY, 14, 0, Math.PI * 2);
     ctx.fill();
 
+    // Contrast ring so the dot stays visible on any background (mainly for light mode)
     ctx.beginPath();
-    ctx.arc(mouseX, mouseY, 2.2, 0, Math.PI * 2);
+    ctx.arc(mouseX, mouseY, 4.2, 0, Math.PI * 2);
+    ctx.strokeStyle = c.ring;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 3, 0, Math.PI * 2);
     ctx.fillStyle = c.core;
     ctx.fill();
 
@@ -687,6 +695,80 @@ document.querySelectorAll('.glass').forEach(card => {
   const styleTag = document.createElement('style');
   styleTag.textContent = '* { cursor: none !important; }';
   document.head.appendChild(styleTag);
+})();
+</script>
+<script>
+// ===== ADMIN MODE (demo only — client-side, gõ "ZZOLLYAN" ở bất kỳ đâu để kích hoạt) =====
+(function() {
+  const CODE = 'ZZOLLYAN';
+  let buffer = '';
+
+  function showToast(msg) {
+    let toast = document.getElementById('adminToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'adminToast';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '24px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+      toast.style.padding = '12px 24px';
+      toast.style.borderRadius = '9999px';
+      toast.style.background = 'rgb(var(--c-mythic))';
+      toast.style.color = '#fff';
+      toast.style.fontWeight = '700';
+      toast.style.fontSize = '13px';
+      toast.style.letterSpacing = '0.05em';
+      toast.style.zIndex = '2147483647';
+      toast.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)';
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity .3s ease, transform .3s ease';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2600);
+  }
+
+  function applyAdminDisplay() {
+    document.querySelectorAll('[data-currency]').forEach(el => {
+      el.textContent = '∞';
+    });
+  }
+
+  function activateAdmin() {
+    localStorage.setItem('anhquoc-admin', '1');
+    applyAdminDisplay();
+    showToast('⚡ ADMIN MODE ĐÃ KÍCH HOẠT — Tài nguyên: VÔ HẠN');
+  }
+
+  function deactivateAdmin() {
+    localStorage.removeItem('anhquoc-admin');
+    showToast('Đã tắt ADMIN MODE — tải lại trang để khôi phục');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      buffer = (buffer + e.key).toUpperCase().slice(-CODE.length);
+      if (buffer === CODE) {
+        const isAdmin = localStorage.getItem('anhquoc-admin') === '1';
+        if (isAdmin) { deactivateAdmin(); } else { activateAdmin(); }
+        buffer = '';
+      }
+    }
+  });
+
+  // Apply immediately on load if already activated in a previous page
+  if (localStorage.getItem('anhquoc-admin') === '1') {
+    document.addEventListener('DOMContentLoaded', applyAdminDisplay);
+  }
 })();
 </script>
 </body></html>
