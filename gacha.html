@@ -322,23 +322,6 @@ tailwind.config = {
   .rarity-glow-1 { box-shadow: 0 0 0 1px rgba(var(--c-common),0.3); }
   @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
   .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
-  .flip-card { width: 140px; height: 200px; perspective: 1000px; }
-  .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; }
-  .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-  .flip-card-front, .flip-card-back {
-    position: absolute; inset: 0; backface-visibility: hidden;
-    border-radius: 16px; background: #111; border: 2px solid #ffd700;
-    box-shadow: 0 0 18px rgba(255,215,0,0.5), 0 10px 25px rgba(0,0,0,0.6);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  .flip-card-front { color: #ffd700; font-size: 32px; }
-  .flip-card-back { transform: rotateY(180deg); padding: 8px; color: #fff; text-align: center; }
-  .flip-card-back img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; margin-bottom: 6px; }
-  .flip-card-back h3 { font-size: 13px; font-weight: 700; margin: 0 0 4px; }
-  .flip-card-back .stats { display: flex; gap: 8px; font-size: 10px; margin-bottom: 4px; }
-  .flip-card-back .stats span { color: #ffd700; }
-  .flip-card-back p { font-size: 9px; opacity: 0.8; margin: 0; line-height: 1.2; }
 </style>
 <script>
 (function() {
@@ -556,7 +539,7 @@ function invAutoDelete(items) {
   <div class="relative glass rounded-[32px] p-8 max-w-3xl w-full hidden" id="pullResultsWrap">
     <button id="closeModalBtn" class="absolute top-4 right-4 material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors">close</button>
     <h3 class="font-headline-md text-headline-md text-center mb-6 uppercase">Kết Quả Triệu Hồi</h3>
-    <div id="pullResults" class="flex flex-wrap justify-center gap-4"></div>
+    <div id="pullResults" class="grid grid-cols-3 sm:grid-cols-5 gap-3"></div>
     <button id="confirmModalBtn" class="w-full mt-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.01] transition-transform active:scale-95">XÁC NHẬN</button>
   </div>
 </div>
@@ -669,25 +652,24 @@ function renderResults(items) {
   const container = document.getElementById('pullResults');
   container.innerHTML = '';
   items.forEach((item, i) => {
+    const cls = rarityClasses(item.rarity);
     const card = document.createElement('div');
-    card.className = 'flip-card';
+    card.className = `flex flex-col items-center gap-2 p-3 rounded-2xl ${cls.bg} ${cls.ring} opacity-0 transition-opacity duration-500`;
     card.innerHTML = `
-      <div class="flip-card-inner">
-        <div class="flip-card-front">${item.rarity}★</div>
-        <div class="flip-card-back">
-          ${item.img ? `<img src="${item.img}">` : `<span class="material-symbols-outlined text-3xl" style="color:#ffd700">${item.icon}</span>`}
-          <h3>${item.name}</h3>
-          <div class="stats">ATK:<span>${item.atk}</span> DEF:<span>${item.def}</span></div>
-          <p>${item.noi}</p>
-        </div>
-      </div>
+      ${item.img
+        ? `<img src="${item.img}" class="w-16 h-16 rounded-xl object-cover">`
+        : `<span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">${item.icon}</span>`}
+      <span class="text-[11px] font-label-sm text-center leading-tight">${item.name}</span>
+      <span class="text-[10px] font-label-sm ${cls.color}">${item.rarity}★</span>
+      ${item.atk ? `<span class="text-[9px] font-label-sm text-on-surface-variant/60">ATK ${item.atk} · DEF ${item.def}</span>` : ''}
     `;
     container.appendChild(card);
-    setTimeout(() => card.classList.add('flipped'), 200 + i * 150);
+    setTimeout(() => { card.style.opacity = '1'; }, 80 * i);
   });
 }
 
 let pendingItems = [];
+let cutsceneTimer = null;
 
 function doPull(count) {
   pendingItems = Array.from({ length: count }, rollItem);
@@ -701,14 +683,16 @@ function doPull(count) {
   video.classList.remove('hidden');
   video.currentTime = 0;
   video.play();
+  clearTimeout(cutsceneTimer);
+  cutsceneTimer = setTimeout(() => {
+    video.pause();
+    video.classList.add('hidden');
+    wrap.classList.remove('hidden');
+    renderResults(pendingItems);
+  }, 1500);
 }
 
 const gachaCutscene = document.getElementById('gachaCutscene');
-gachaCutscene.addEventListener('ended', () => {
-  gachaCutscene.classList.add('hidden');
-  document.getElementById('pullResultsWrap').classList.remove('hidden');
-  renderResults(pendingItems);
-});
 
 const pull1Btn = document.getElementById('pull1Btn');
 const pull10Btn = document.getElementById('pull10Btn');
@@ -749,6 +733,7 @@ if (pull10Btn) pull10Btn.addEventListener('click', () => doPull(10));
 function hideModal() {
   pullModal.classList.add('hidden');
   pullModal.classList.remove('flex');
+  clearTimeout(cutsceneTimer);
   gachaCutscene.pause();
 }
 if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
