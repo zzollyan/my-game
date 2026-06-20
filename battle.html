@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANH QUỐC - Chiến Đấu</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet"/>
+<script>
+/* AQ.Data — định nghĩa thẻ bài, hệ, vai trò, hằng số rarity */
+window.AQ = window.AQ || {};
+
+AQ.RARITY = {
+  1: { stars: 1, color: '#9CA3AF', glow: 'rgba(156,163,175,.6)',  rateBase: 42.0, name: 'Phổ Thông' },
+  2: { stars: 2, color: '#34D399', glow: 'rgba(52,211,153,.6)',   rateBase: 30.0, name: 'Thường' },
+  3: { stars: 3, color: '#3B82F6', glow: 'rgba(59,130,246,.7)',   rateBase: 18.0, name: 'Hiếm', anim: 'blue' },
+  4: { stars: 4, color: '#A855F7', glow: 'rgba(168,85,247,.8)',   rateBase: 7.5,  name: 'Sử Thi', anim: 'purple' },
+  5: { stars: 5, color: '#FACC15', glow: 'rgba(250,204,21,.9)',   rateBase: 1.8,  name: 'Huyền Thoại', anim: 'gold' },
+  6: { stars: 6, color: '#EF4444', glow: 'rgba(239,68,68,1)',     rateBase: 0.6,  name: 'Thần Thoại', anim: 'red' },
+  7: { stars: 7, color: 'rainbow', glow: 'rainbow',                rateBase: 0.1,  name: 'Vĩnh Cửu', anim: 'rainbow', cutscene: true }
+};
+
+AQ.ELEMENTS = ['Fire', 'Water', 'Wind', 'Earth', 'Light', 'Dark'];
+
+// hệ khắc hệ: key thắng value (+30% dmg)
+AQ.ELEMENT_ADV = {
+  Fire: 'Wind', Wind: 'Earth', Earth: 'Water', Water: 'Fire',
+  Light: 'Dark', Dark: 'Light'
+};
+
+AQ.ROLES = ['DPS', 'Tank', 'Support', 'Healer', 'Debuffer', 'Buffer'];
+
+AQ.CONST = {
+  PITY_SOFT: 70,        // pity mềm bắt đầu tăng rate 5★+
+  PITY_HARD: 90,         // pity cứng đảm bảo 5★+
+  PITY_HARD_6: 180,
+  PITY_HARD_7: 500,
+  BASIC_MULT: 1.0, BASIC_ENERGY: 20,
+  SKILL_MULT: 1.8, SKILL_ENERGY: 30,
+  ULT_MULT: 3.0, ULT_ENERGY_COST: 100,
+  DEF_FACTOR: 0.5,
+  ELEMENT_ADV_MULT: 1.3,
+  BREAK_STUN_MULT: 1.5,
+  MAX_LEVEL: 80,
+  MAX_ASCENSION: 6,
+  MAX_SKILL_LV: 10
+};
+
+/* Mẫu thẻ bài — id, name, rarity, element, role, base stats @ Lv1, skills, passive */
+AQ.CARDS = [
+  { id: 'c001', name: 'Lý Thường Kiệt', rarity: 7, element: 'Light', role: 'DPS',
+    hp: 1200, atk: 220, def: 90, spd: 112, energy: 0, img: 'assets/cards/c001.png',
+    skills: {
+      basic: { name: 'Trảm Phong', desc: 'Đòn chém cơ bản gây 100% ATK.' },
+      skill: { name: 'Nam Quốc Sơn Hà', desc: 'Gây 180% ATK, hồi 15 năng lượng đồng đội.' },
+      ultimate: { name: 'Thiên Mệnh Giáng Thế', desc: '300% ATK toàn bộ kẻ địch, +50% crit dmg 2 lượt.' },
+      passive: { name: 'Hồn Thiêng Sông Núi', desc: 'Mỗi lượt +8% ATK cho cả đội (cộng dồn, tối đa 3 lần), synergy với hệ Light.' }
+    }},
+  { id: 'c002', name: 'Bùi Thị Xuân', rarity: 6, element: 'Fire', role: 'DPS',
+    hp: 1050, atk: 205, def: 80, spd: 104, energy: 0, img: 'assets/cards/c002.png',
+    skills: {
+      basic: { name: 'Hỏa Tiễn', desc: '100% ATK, 20% gây Bỏng (DoT 2 lượt).' },
+      skill: { name: 'Voi Chiến Xung Trận', desc: '180% ATK lan rộng 2 mục tiêu liền kề.' },
+      ultimate: { name: 'Tây Sơn Liệt Hỏa', desc: '300% ATK + đốt cháy Break gauge -40%.' },
+      passive: { name: 'Nộ Hỏa', desc: 'Khi địch dưới 30% HP, ATK bản thân +25%.' }
+    }},
+  { id: 'c003', name: 'Trần Hưng Đạo', rarity: 6, element: 'Earth', role: 'Tank',
+    hp: 1800, atk: 130, def: 180, spd: 88, energy: 0, img: 'assets/cards/c003.png',
+    skills: {
+      basic: { name: 'Khiên Vạn Kiếp', desc: '100% ATK, hút 1 mục tiêu công kích.' },
+      skill: { name: 'Hịch Tướng Sĩ', desc: '180% ATK + Khiêu khích toàn địch 1 lượt.' },
+      ultimate: { name: 'Bạch Đằng Giang', desc: '300% ATK + giảm 30% sát thương nhận vào cho cả đội 2 lượt.' },
+      passive: { name: 'Trấn Quốc', desc: 'Giảm 15% sát thương nhận; khi Break, hồi 20% HP tối đa.' }
+    }},
+  { id: 'c004', name: 'Ỷ Lan', rarity: 5, element: 'Light', role: 'Healer',
+    hp: 950, atk: 140, def: 95, spd: 96, energy: 0, img: 'assets/cards/c004.png',
+    skills: {
+      basic: { name: 'Liễu Pháp', desc: '100% ATK, hồi máu nhẹ 10% ATK.' },
+      skill: { name: 'Nhiếp Chính Từ Tâm', desc: 'Hồi 180% ATK máu cho cả đội.' },
+      ultimate: { name: 'Quan Âm Hiển Linh', desc: 'Hồi đầy 1 đồng đội + miễn nhiễm 1 lượt.' },
+      passive: { name: 'Từ Bi', desc: 'Cuối mỗi lượt hồi 5% HP tối đa cho đồng đội thấp máu nhất.' }
+    }},
+  { id: 'c005', name: 'Nguyễn Trãi', rarity: 5, element: 'Dark', role: 'Debuffer',
+    hp: 980, atk: 165, def: 85, spd: 100, energy: 0, img: 'assets/cards/c005.png',
+    skills: {
+      basic: { name: 'Bút Sắc', desc: '100% ATK, -10% DEF địch 1 lượt.' },
+      skill: { name: 'Bình Ngô Đại Cáo', desc: '180% ATK toàn địch, -20% ATK địch 2 lượt.' },
+      ultimate: { name: 'Tâm Công', desc: '300% ATK + khóa skill địch yếu nhất 1 lượt.' },
+      passive: { name: 'Mưu Lược', desc: 'Debuff do đồng đội gây ra kéo dài thêm 1 lượt.' }
+    }},
+  { id: 'c006', name: 'Phạm Ngũ Lão', rarity: 4, element: 'Earth', role: 'DPS',
+    hp: 1000, atk: 175, def: 100, spd: 98, energy: 0, img: 'assets/cards/c006.png',
+    skills: {
+      basic: { name: 'Thương Pháp', desc: '100% ATK.' },
+      skill: { name: 'Đan Tâm', desc: '180% ATK, +Break dmg 20%.' },
+      ultimate: { name: 'Thiết Giáp Phá Trận', desc: '300% ATK, phá Break tức thì nếu còn dưới 30%.' },
+      passive: { name: 'Kiên Định', desc: 'Synergy Earth: +10% DEF cho đội nếu có ≥2 hệ Earth.' }
+    }},
+  { id: 'c007', name: 'Lê Lợi', rarity: 5, element: 'Earth', role: 'Buffer',
+    hp: 1100, atk: 150, def: 110, spd: 94, energy: 0, img: 'assets/cards/c007.png',
+    skills: {
+      basic: { name: 'Gươm Thần', desc: '100% ATK.' },
+      skill: { name: 'Lam Sơn Tụ Nghĩa', desc: '+25% ATK cả đội 2 lượt.' },
+      ultimate: { name: 'Hoàn Kiếm', desc: '+40% ATK & SPD cả đội 1 lượt, hồi 20 energy mỗi người.' },
+      passive: { name: 'Khởi Nghĩa', desc: 'Đầu trận, cả đội +15 năng lượng khởi điểm.' }
+    }},
+  { id: 'c008', name: 'Triệu Thị Trinh', rarity: 4, element: 'Wind', role: 'DPS',
+    hp: 980, atk: 180, def: 75, spd: 118, energy: 0, img: 'assets/cards/c008.png',
+    skills: {
+      basic: { name: 'Song Đao', desc: '100% ATK, 2 hit liên hoàn.' },
+      skill: { name: 'Cưỡi Voi Xung Phong', desc: '180% ATK, +SPD bản thân 15% 1 lượt.' },
+      ultimate: { name: 'Nhụy Kiều Tướng Quân', desc: '300% ATK, hành động lại nếu hạ gục mục tiêu.' },
+      passive: { name: 'Tốc Chiến', desc: 'Synergy Wind: SPD cao nhất đội +10% ATK toàn đội.' }
+    }},
+  { id: 'c009', name: 'Mai Hắc Đế', rarity: 3, element: 'Fire', role: 'DPS',
+    hp: 850, atk: 150, def: 70, spd: 90, energy: 0, img: 'assets/cards/c009.png',
+    skills: {
+      basic: { name: 'Hỏa Quyền', desc: '100% ATK.' },
+      skill: { name: 'Khởi Nghĩa Hoan Châu', desc: '180% ATK lan rộng nhẹ.' },
+      ultimate: { name: 'Đế Vương Chi Nộ', desc: '300% ATK đơn mục tiêu.' }
+    }},
+  { id: 'c010', name: 'Dân Binh', rarity: 1, element: 'Earth', role: 'Tank',
+    hp: 700, atk: 90, def: 90, spd: 70, energy: 0, img: 'assets/cards/c010.png',
+    skills: {
+      basic: { name: 'Đỡ Đòn', desc: '100% ATK.' },
+      skill: { name: 'Phòng Ngự', desc: '180% ATK, +10% DEF bản thân.' },
+      ultimate: { name: 'Tử Thủ', desc: '300% ATK, -20% sát thương nhận 1 lượt.' }
+    }}
+];
+
+AQ.getCard = function (id) { return AQ.CARDS.find(c => c.id === id); };
+/* AQ.Gacha — quay thẻ, pity system, lưu trữ kho */
+window.AQ = window.AQ || {};
+
+AQ.Storage = {
+  KEY_INV: 'aq-inventory',
+  KEY_PITY: 'aq-pity',
+  KEY_CURRENCY: 'aq-currency',
+  KEY_TEAM: 'aq-team',
+  KEY_PROFILE: 'aq-profile',
+
+  load(key, fallback) {
+    try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; }
+    catch { return fallback; }
+  },
+  save(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
+
+  getInventory() { return this.load(this.KEY_INV, []); },
+  setInventory(inv) { this.save(this.KEY_INV, inv); },
+
+  getPity() { return this.load(this.KEY_PITY, { count: 0, count6: 0, count7: 0 }); },
+  setPity(p) { this.save(this.KEY_PITY, p); },
+
+  getCurrency() { return this.load(this.KEY_CURRENCY, { gem: 1600, ticket: 10 }); },
+  setCurrency(c) { this.save(this.KEY_CURRENCY, c); },
+
+  getTeam() { return this.load(this.KEY_TEAM, [null, null, null, null]); },
+  setTeam(t) { this.save(this.KEY_TEAM, t); }
+};
+
+AQ.Gacha = {
+  COST_GEM: 160,
+
+  /** trả về tỉ lệ hiện tại đã áp dụng pity mềm */
+  currentRates(pity) {
+    const r = {};
+    for (const k in AQ.RARITY) r[k] = AQ.RARITY[k].rateBase;
+    if (pity.count >= AQ.CONST.PITY_SOFT) {
+      const bonus = (pity.count - AQ.CONST.PITY_SOFT + 1) * 4;
+      r[5] += bonus; r[6] += bonus * 0.3;
+    }
+    return r;
+  },
+
+  rollRarity(pity) {
+    if (pity.count7 + 1 >= AQ.CONST.PITY_HARD_7) return 7;
+    if (pity.count6 + 1 >= AQ.CONST.PITY_HARD_6) return 6;
+    if (pity.count + 1 >= AQ.CONST.PITY_HARD) return Math.random() < 0.15 ? 6 : 5;
+
+    const rates = this.currentRates(pity);
+    const total = Object.values(rates).reduce((a, b) => a + b, 0);
+    let roll = Math.random() * total;
+    for (const k of [7, 6, 5, 4, 3, 2, 1]) {
+      if (roll < rates[k]) return k;
+      roll -= rates[k];
+    }
+    return 1;
+  },
+
+  pickCardByRarity(rarity) {
+    const pool = AQ.CARDS.filter(c => c.rarity === rarity);
+    if (!pool.length) return AQ.CARDS[AQ.CARDS.length - 1];
+    return pool[Math.floor(Math.random() * pool.length)];
+  },
+
+  updatePity(pity, rarity) {
+    pity.count++; pity.count6++; pity.count7++;
+    if (rarity >= 5) pity.count = 0;
+    if (rarity >= 6) pity.count6 = 0;
+    if (rarity >= 7) pity.count7 = 0;
+    return pity;
+  },
+
+  /** quay n lần, trả {results:[{card,rarity,isNew}], pity, currency} */
+  pull(n = 1) {
+    const currency = AQ.Storage.getCurrency();
+    const cost = this.COST_GEM * n;
+    if (currency.gem < cost) return { error: 'NOT_ENOUGH_GEM' };
+    currency.gem -= cost;
+
+    let pity = AQ.Storage.getPity();
+    const inv = AQ.Storage.getInventory();
+    const results = [];
+
+    for (let i = 0; i < n; i++) {
+      const rarity = this.rollRarity(pity);
+      pity = this.updatePity(pity, rarity);
+      const card = this.pickCardByRarity(rarity);
+      const existing = inv.find(x => x.cardId === card.id);
+      const isNew = !existing;
+      if (existing) existing.dupes = (existing.dupes || 0) + 1;
+      else inv.push({ cardId: card.id, level: 1, ascension: 0, skillLv: { basic: 1, skill: 1, ultimate: 1 }, dupes: 0, equipment: [] });
+      results.push({ card, rarity, isNew });
+    }
+
+    AQ.Storage.setCurrency(currency);
+    AQ.Storage.setPity(pity);
+    AQ.Storage.setInventory(inv);
+    return { results, pity, currency };
+  },
+
+  /** thời lượng animation gợi ý (ms) theo sao, dùng cho UI */
+  animDuration(rarity) {
+    return rarity >= 7 ? 4500 : rarity >= 6 ? 3200 : rarity >= 5 ? 2600 : rarity >= 4 ? 1800 : 1000;
+  }
+};
+/* AQ.Battle — turn-based theo SPD, break gauge, element advantage */
+window.AQ = window.AQ || {};
+
+AQ.Progression = {
+  statAtLevel(base, level, ascension) {
+    const lvFactor = 1 + (level - 1) * 0.045;
+    const ascFactor = 1 + ascension * 0.12;
+    return Math.round(base * lvFactor * ascFactor);
+  },
+  resolvedStats(card, unit) {
+    const lvl = unit.level || 1, asc = unit.ascension || 0;
+    return {
+      hp: this.statAtLevel(card.hp, lvl, asc),
+      atk: this.statAtLevel(card.atk, lvl, asc),
+      def: this.statAtLevel(card.def, lvl, asc),
+      spd: card.spd + Math.floor(asc * 1.5),
+      maxEnergy: 100
+    };
+  }
+};
+
+AQ.Unit = class {
+  constructor(card, unitData, side) {
+    this.card = card;
+    this.side = side; // 'player' | 'enemy'
+    const stats = AQ.Progression.resolvedStats(card, unitData || {});
+    this.maxHp = stats.hp; this.hp = stats.hp;
+    this.atk = stats.atk; this.def = stats.def; this.spd = stats.spd;
+    this.energy = 0; this.maxEnergy = 100;
+    this.element = card.element; this.role = card.role;
+    this.breakGauge = 100; this.broken = false; this.brokenTurns = 0;
+    this.buffs = []; this.debuffs = [];
+    this.alive = true;
+  }
+  isElementWeakAgainst(attackerElement) {
+    return AQ.ELEMENT_ADV[attackerElement] === this.element;
+  }
+};
+
+AQ.BattleEngine = class {
+  constructor(playerUnits, enemyUnits, log = console.log) {
+    this.units = [...playerUnits, ...enemyUnits];
+    this.turnOrder = [];
+    this.log = log;
+    this.turnCount = 0;
+  }
+
+  buildTurnOrder() {
+    this.turnOrder = this.units
+      .filter(u => u.alive)
+      .sort((a, b) => b.spd - a.spd);
+  }
+
+  damage(attacker, target, mult, actionElement) {
+    let raw = attacker.atk * mult - target.def * AQ.CONST.DEF_FACTOR;
+    raw = Math.max(raw, 1);
+
+    const isAdv = AQ.ELEMENT_ADV[attacker.element] === target.element;
+    if (isAdv) raw *= AQ.CONST.ELEMENT_ADV_MULT;
+
+    if (target.broken) raw *= AQ.CONST.BREAK_STUN_MULT;
+
+    if (isAdv && !target.broken) {
+      target.breakGauge -= 25;
+      if (target.breakGauge <= 0) {
+        target.breakGauge = 0;
+        target.broken = true;
+        target.brokenTurns = 1;
+        this.log(`${target.card.name} bị BREAK! Choáng + nhận 50% dmg tăng.`);
+      }
+    }
+
+    target.hp = Math.max(0, target.hp - Math.round(raw));
+    if (target.hp === 0) target.alive = false;
+    return Math.round(raw);
+  }
+
+  basicAttack(attacker, target) {
+    const dmg = this.damage(attacker, target, AQ.CONST.BASIC_MULT);
+    attacker.energy = Math.min(attacker.maxEnergy, attacker.energy + AQ.CONST.BASIC_ENERGY);
+    this.log(`${attacker.card.name} dùng [${attacker.card.skills.basic.name}] gây ${dmg} dmg lên ${target.card.name}.`);
+    return dmg;
+  }
+
+  skillAttack(attacker, target) {
+    if (attacker.energy < AQ.CONST.SKILL_ENERGY) return null;
+    const dmg = this.damage(attacker, target, AQ.CONST.SKILL_MULT);
+    attacker.energy = Math.min(attacker.maxEnergy, attacker.energy + AQ.CONST.SKILL_ENERGY);
+    this.log(`${attacker.card.name} dùng [${attacker.card.skills.skill.name}] gây ${dmg} dmg lên ${target.card.name}.`);
+    return dmg;
+  }
+
+  ultimateAttack(attacker, target) {
+    if (attacker.energy < AQ.CONST.ULT_ENERGY_COST) return null;
+    const dmg = this.damage(attacker, target, AQ.CONST.ULT_MULT);
+    attacker.energy = 0;
+    this.log(`${attacker.card.name} kích hoạt TUYỆT KỸ [${attacker.card.skills.ultimate.name}] gây ${dmg} dmg lên ${target.card.name}!`);
+    return dmg;
+  }
+
+  takeTurn(unit, chooseAction, chooseTarget) {
+    if (!unit.alive) return;
+    if (unit.broken && unit.brokenTurns > 0) {
+      unit.brokenTurns--;
+      if (unit.brokenTurns === 0) { unit.broken = false; unit.breakGauge = 100; }
+      this.log(`${unit.card.name} đang choáng, bỏ lượt.`);
+      return;
+    }
+    const enemies = this.units.filter(u => u.side !== unit.side && u.alive);
+    if (!enemies.length) return;
+    const target = chooseTarget ? chooseTarget(unit, enemies) : enemies[0];
+    const action = chooseAction ? chooseAction(unit) : (unit.energy >= AQ.CONST.ULT_ENERGY_COST ? 'ultimate' : unit.energy >= AQ.CONST.SKILL_ENERGY ? 'skill' : 'basic');
+
+    if (action === 'ultimate') this.ultimateAttack(unit, target) ?? this.basicAttack(unit, target);
+    else if (action === 'skill') this.skillAttack(unit, target) ?? this.basicAttack(unit, target);
+    else this.basicAttack(unit, target);
+  }
+
+  isOver() {
+    const p = this.units.some(u => u.side === 'player' && u.alive);
+    const e = this.units.some(u => u.side === 'enemy' && u.alive);
+    return !p || !e;
+  }
+
+  winner() {
+    if (!this.isOver()) return null;
+    return this.units.some(u => u.side === 'player' && u.alive) ? 'player' : 'enemy';
+  }
+
+  runRound(chooseAction, chooseTarget) {
+    this.turnCount++;
+    this.buildTurnOrder();
+    for (const unit of this.turnOrder) {
+      if (this.isOver()) break;
+      this.takeTurn(unit, chooseAction, chooseTarget);
+    }
+  }
+};
+</script>
+
+<style>
+  body { font-family: 'Hanken Grotesk', sans-serif; background:#0c0d11; color:#eee; }
+  h1,h2,.title { font-family:'Space Grotesk', sans-serif; }
+  .hpbar { height:8px; border-radius:4px; background:#222; overflow:hidden; }
+  .hpfill { height:100%; background:linear-gradient(90deg,#22c55e,#4ade80); transition:width .3s; }
+  .enfill { height:100%; background:linear-gradient(90deg,#3b82f6,#60a5fa); transition:width .3s; }
+  .unitcard { background:#15171d; border:1px solid #262a33; border-radius:14px; padding:12px; }
+  .unitcard.broken { outline:2px solid #ef4444; }
+  .log { background:#0f1116; border:1px solid #222; border-radius:10px; padding:10px; height:220px; overflow-y:auto; font-size:12px; line-height:1.5; }
+</style>
+</head>
+<body class="min-h-screen p-6 max-w-5xl mx-auto">
+
+<header class="flex items-center justify-between mb-6">
+  <h1 class="title text-2xl font-bold uppercase">Chiến Đấu</h1>
+  <nav class="flex gap-3 text-xs uppercase tracking-widest text-white/60">
+    <a href="index.html" class="hover:text-white">Trang Chủ</a>
+    <a href="gacha.html" class="hover:text-white">Triệu Hồi</a>
+    <a href="inventory.html" class="hover:text-white">Kho Đồ</a>
+    <a href="challenge.html" class="hover:text-white">Thử Thách</a>
+    <a href="raid.html" class="hover:text-white">Đột Kích</a>
+  </nav>
+</header>
+
+<section class="mb-6">
+  <h2 class="title text-sm uppercase tracking-widest text-white/50 mb-2">Đội Hình (4 ô)</h2>
+  <div id="teamSlots" class="grid grid-cols-4 gap-3"></div>
+</section>
+
+<section class="mb-6">
+  <button id="startBattleBtn" class="px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm hover:scale-[1.02] transition-transform">Bắt Đầu Trận Đấu</button>
+  <button id="autoBattleBtn" class="px-6 py-3 ml-3 bg-white/10 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-white/20">Tự Động Đến Hết</button>
+</section>
+
+<section id="battleArea" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h3 class="title text-sm uppercase text-white/50 mb-2">Đội Của Bạn</h3>
+    <div id="playerUnits" class="space-y-3"></div>
+  </div>
+  <div>
+    <h3 class="title text-sm uppercase text-white/50 mb-2">Kẻ Địch</h3>
+    <div id="enemyUnits" class="space-y-3"></div>
+  </div>
+</section>
+
+<section id="battleArea2" class="hidden mt-6">
+  <h3 class="title text-sm uppercase text-white/50 mb-2">Nhật Ký Trận Đấu</h3>
+  <div id="battleLog" class="log"></div>
+  <button id="nextRoundBtn" class="mt-3 px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm">Lượt Tiếp Theo</button>
+</section>
+
+<div id="resultModal" class="fixed inset-0 hidden items-center justify-center bg-black/80 z-50">
+  <div class="bg-[#15171d] border border-white/10 rounded-2xl p-8 text-center max-w-sm w-full">
+    <h2 id="resultTitle" class="title text-3xl font-bold mb-2"></h2>
+    <p id="resultDesc" class="text-white/60 mb-6"></p>
+    <button id="resultCloseBtn" class="px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm w-full">Đóng</button>
+  </div>
+</div>
+
+<script>
+const ELEMENT_ICON = { Fire:'🔥', Water:'💧', Wind:'🌪️', Earth:'🪨', Light:'✨', Dark:'🌑' };
+const RARITY_COLOR = { 1:'#9CA3AF', 2:'#34D399', 3:'#3B82F6', 4:'#A855F7', 5:'#FACC15', 6:'#EF4444', 7:'#f472b6' };
+
+let team = AQ.Storage.getTeam();
+let inv = AQ.Storage.getInventory();
+let engine = null;
+
+function ownedCardOptions() {
+  return inv.map(u => ({ unit: u, card: AQ.getCard(u.cardId) })).filter(x => x.card);
+}
+
+function renderTeamSlots() {
+  const wrap = document.getElementById('teamSlots');
+  wrap.innerHTML = '';
+  for (let i = 0; i < 4; i++) {
+    const slot = document.createElement('div');
+    const filled = team[i];
+    const card = filled ? AQ.getCard(filled) : null;
+    slot.className = 'unitcard cursor-pointer text-center';
+    slot.innerHTML = card
+      ? `<div style="color:${RARITY_COLOR[card.rarity]}" class="text-xs font-bold mb-1">${card.rarity}★</div>
+         <div class="text-sm font-semibold">${card.name}</div>
+         <div class="text-[10px] text-white/50">${ELEMENT_ICON[card.element]} ${card.element} · ${card.role}</div>`
+      : `<div class="text-white/30 text-sm py-6">+ Chọn Nhân Vật</div>`;
+    slot.addEventListener('click', () => openPicker(i));
+    wrap.appendChild(slot);
+  }
+}
+
+function openPicker(slotIndex) {
+  const options = ownedCardOptions();
+  if (!options.length) { alert('Bạn chưa có nhân vật nào. Hãy triệu hồi trước.'); return; }
+  const names = options.map((o, i) => `${i + 1}. ${o.card.name} (${o.card.rarity}★)`).join('\n');
+  const pick = prompt(`Chọn nhân vật cho ô ${slotIndex + 1}:\n${names}`);
+  const idx = parseInt(pick, 10) - 1;
+  if (options[idx]) {
+    team[slotIndex] = options[idx].unit.cardId;
+    AQ.Storage.setTeam(team);
+    renderTeamSlots();
+  }
+}
+
+const ENEMY_TEAM = [
+  { id: 'e001', name: 'Giặc Phương Bắc', rarity: 5, element: 'Dark', role: 'DPS', hp: 1400, atk: 190, def: 100, spd: 90, energy: 0, skills: { basic:{name:'Chém'},skill:{name:'Cung Tên'},ultimate:{name:'Vây Hãm'} } },
+  { id: 'e002', name: 'Cung Thủ Địch', rarity: 4, element: 'Wind', role: 'DPS', hp: 1000, atk: 160, def: 70, spd: 105, energy: 0, skills: { basic:{name:'Bắn'},skill:{name:'Mưa Tên'},ultimate:{name:'Loạn Tiễn'} } },
+  { id: 'e003', name: 'Khiên Binh Địch', rarity: 4, element: 'Earth', role: 'Tank', hp: 1700, atk: 110, def: 160, spd: 75, energy: 0, skills: { basic:{name:'Đâm'},skill:{name:'Phòng Thủ'},ultimate:{name:'Trấn Áp'} } }
+];
+
+function buildUnits() {
+  const playerUnits = team.filter(Boolean).map(cardId => {
+    const card = AQ.getCard(cardId);
+    const u = inv.find(x => x.cardId === cardId) || { level: 1, ascension: 0 };
+    return new AQ.Unit(card, u, 'player');
+  });
+  const enemyUnits = ENEMY_TEAM.map(card => new AQ.Unit(card, { level: 1, ascension: 0 }, 'enemy'));
+  return { playerUnits, enemyUnits };
+}
+
+function logLine(msg) {
+  const log = document.getElementById('battleLog');
+  const line = document.createElement('div');
+  line.textContent = msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function unitCardHTML(u) {
+  const hpPct = Math.max(0, (u.hp / u.maxHp) * 100);
+  const enPct = (u.energy / u.maxEnergy) * 100;
+  return `
+    <div class="unitcard ${u.broken ? 'broken' : ''}" data-id="${u.card.id}-${u.side}">
+      <div class="flex justify-between text-sm font-semibold mb-1">
+        <span>${ELEMENT_ICON[u.element]} ${u.card.name}</span>
+        <span style="color:${RARITY_COLOR[u.card.rarity]}">${u.card.rarity}★</span>
+      </div>
+      <div class="hpbar mb-1"><div class="hpfill" style="width:${hpPct}%"></div></div>
+      <div class="hpbar"><div class="enfill" style="width:${enPct}%"></div></div>
+      <div class="text-[10px] text-white/40 mt-1">HP ${u.hp}/${u.maxHp} · EN ${u.energy} · SPD ${u.spd} ${u.broken ? '· BREAK!' : ''}</div>
+    </div>`;
+}
+
+function renderUnits() {
+  document.getElementById('playerUnits').innerHTML = engine.units.filter(u => u.side === 'player').map(unitCardHTML).join('');
+  document.getElementById('enemyUnits').innerHTML = engine.units.filter(u => u.side === 'enemy').map(unitCardHTML).join('');
+}
+
+function checkEnd() {
+  if (!engine.isOver()) return false;
+  const win = engine.winner() === 'player';
+  document.getElementById('resultTitle').textContent = win ? 'CHIẾN THẮNG!' : 'THẤT BẠI';
+  document.getElementById('resultTitle').style.color = win ? '#4ade80' : '#ef4444';
+  document.getElementById('resultDesc').textContent = win ? 'Đội của bạn đã đánh bại kẻ địch.' : 'Đội của bạn đã bị đánh bại.';
+  document.getElementById('resultModal').classList.remove('hidden');
+  document.getElementById('resultModal').classList.add('flex');
+  return true;
+}
+
+document.getElementById('startBattleBtn').addEventListener('click', () => {
+  team = AQ.Storage.getTeam();
+  inv = AQ.Storage.getInventory();
+  const { playerUnits, enemyUnits } = buildUnits();
+  if (!playerUnits.length) { alert('Hãy chọn ít nhất 1 nhân vật vào đội hình.'); return; }
+  engine = new AQ.BattleEngine(playerUnits, enemyUnits, logLine);
+  document.getElementById('battleArea').classList.remove('hidden');
+  document.getElementById('battleArea').classList.add('grid');
+  document.getElementById('battleArea2').classList.remove('hidden');
+  document.getElementById('battleLog').innerHTML = '';
+  renderUnits();
+});
+
+document.getElementById('nextRoundBtn').addEventListener('click', () => {
+  if (!engine || engine.isOver()) return;
+  logLine(`— Lượt ${engine.turnCount + 1} —`);
+  engine.runRound();
+  renderUnits();
+  checkEnd();
+});
+
+document.getElementById('autoBattleBtn').addEventListener('click', () => {
+  team = AQ.Storage.getTeam();
+  inv = AQ.Storage.getInventory();
+  const { playerUnits, enemyUnits } = buildUnits();
+  if (!playerUnits.length) { alert('Hãy chọn ít nhất 1 nhân vật vào đội hình.'); return; }
+  engine = new AQ.BattleEngine(playerUnits, enemyUnits, logLine);
+  document.getElementById('battleArea').classList.remove('hidden');
+  document.getElementById('battleArea').classList.add('grid');
+  document.getElementById('battleArea2').classList.remove('hidden');
+  document.getElementById('battleLog').innerHTML = '';
+  let guard = 0;
+  while (!engine.isOver() && guard < 50) {
+    logLine(`— Lượt ${engine.turnCount + 1} —`);
+    engine.runRound();
+    guard++;
+  }
+  renderUnits();
+  checkEnd();
+});
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultModal').classList.add('hidden');
+  document.getElementById('resultModal').classList.remove('flex');
+});
+
+renderTeamSlots();
+</script>
+</body></html>

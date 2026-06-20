@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANH QUỐC - Trang Chủ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "secondary-fixed": "rgb(var(--c-secondary-fixed) / <alpha-value>)",
+        "on-secondary-fixed-variant": "rgb(var(--c-on-secondary-fixed-variant) / <alpha-value>)",
+        "inverse-on-surface": "rgb(var(--c-inverse-on-surface) / <alpha-value>)",
+        "on-tertiary-container": "rgb(var(--c-on-tertiary-container) / <alpha-value>)",
+        "surface-variant": "rgb(var(--c-surface-variant) / <alpha-value>)",
+        "inverse-primary": "rgb(var(--c-inverse-primary) / <alpha-value>)",
+        "surface-tint": "rgb(var(--c-surface-tint) / <alpha-value>)",
+        "on-primary": "rgb(var(--c-on-primary) / <alpha-value>)",
+        "primary-fixed-dim": "rgb(var(--c-primary-fixed-dim) / <alpha-value>)",
+        "on-primary-fixed": "rgb(var(--c-on-primary-fixed) / <alpha-value>)",
+        "secondary": "rgb(var(--c-secondary) / <alpha-value>)",
+        "surface-dim": "rgb(var(--c-surface-dim) / <alpha-value>)",
+        "tertiary-fixed-dim": "rgb(var(--c-tertiary-fixed-dim) / <alpha-value>)",
+        "primary": "rgb(var(--c-primary) / <alpha-value>)",
+        "on-background": "rgb(var(--c-on-background) / <alpha-value>)",
+        "tertiary-container": "rgb(var(--c-tertiary-container) / <alpha-value>)",
+        "surface-container-high": "rgb(var(--c-surface-container-high) / <alpha-value>)",
+        "secondary-container": "rgb(var(--c-secondary-container) / <alpha-value>)",
+        "on-tertiary-fixed": "rgb(var(--c-on-tertiary-fixed) / <alpha-value>)",
+        "surface": "rgb(var(--c-surface) / <alpha-value>)",
+        "outline-variant": "rgb(var(--c-outline-variant) / <alpha-value>)",
+        "on-surface-variant": "rgb(var(--c-on-surface-variant) / <alpha-value>)",
+        "error-container": "rgb(var(--c-error-container) / <alpha-value>)",
+        "on-secondary": "rgb(var(--c-on-secondary) / <alpha-value>)",
+        "surface-bright": "rgb(var(--c-surface-bright) / <alpha-value>)",
+        "background": "rgb(var(--c-background) / <alpha-value>)",
+        "surface-container-low": "rgb(var(--c-surface-container-low) / <alpha-value>)",
+        "secondary-fixed-dim": "rgb(var(--c-secondary-fixed-dim) / <alpha-value>)",
+        "outline": "rgb(var(--c-outline) / <alpha-value>)",
+        "on-primary-container": "rgb(var(--c-on-primary-container) / <alpha-value>)",
+        "surface-container-highest": "rgb(var(--c-surface-container-highest) / <alpha-value>)",
+        "surface-container": "rgb(var(--c-surface-container) / <alpha-value>)",
+        "inverse-surface": "rgb(var(--c-inverse-surface) / <alpha-value>)",
+        "surface-container-lowest": "rgb(var(--c-surface-container-lowest) / <alpha-value>)",
+        "primary-container": "rgb(var(--c-primary-container) / <alpha-value>)",
+        "on-error": "rgb(var(--c-on-error) / <alpha-value>)",
+        "error": "rgb(var(--c-error) / <alpha-value>)",
+        "on-primary-fixed-variant": "rgb(var(--c-on-primary-fixed-variant) / <alpha-value>)",
+        "on-tertiary": "rgb(var(--c-on-tertiary) / <alpha-value>)",
+        "on-error-container": "rgb(var(--c-on-error-container) / <alpha-value>)",
+        "on-tertiary-fixed-variant": "rgb(var(--c-on-tertiary-fixed-variant) / <alpha-value>)",
+        "on-secondary-fixed": "rgb(var(--c-on-secondary-fixed) / <alpha-value>)",
+        "on-secondary-container": "rgb(var(--c-on-secondary-container) / <alpha-value>)",
+        "on-surface": "rgb(var(--c-on-surface) / <alpha-value>)",
+        "primary-fixed": "rgb(var(--c-primary-fixed) / <alpha-value>)",
+        "tertiary": "rgb(var(--c-tertiary) / <alpha-value>)",
+        "tertiary-fixed": "rgb(var(--c-tertiary-fixed) / <alpha-value>)",
+        "gold": "rgb(var(--c-gold) / <alpha-value>)",
+        "epic": "rgb(var(--c-epic) / <alpha-value>)",
+        "rare": "rgb(var(--c-rare) / <alpha-value>)",
+        "mythic": "rgb(var(--c-mythic) / <alpha-value>)",
+        "legendary": "rgb(var(--c-legendary) / <alpha-value>)",
+        "uncommon": "rgb(var(--c-uncommon) / <alpha-value>)",
+        "common": "rgb(var(--c-common) / <alpha-value>)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "gutter": "24px",
+        "margin-mobile": "16px",
+        "margin-desktop": "64px",
+        "unit": "4px"
+      },
+      "fontFamily": {
+        "label-sm": ["JetBrains Mono"],
+        "body-md": ["Hanken Grotesk"],
+        "headline-lg-mobile": ["Space Grotesk"],
+        "display-lg": ["Space Grotesk"],
+        "headline-lg": ["Space Grotesk"],
+        "body-lg": ["Hanken Grotesk"],
+        "headline-md": ["Space Grotesk"]
+      },
+      "fontSize": {
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+        "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}]
+      }
+    },
+  },
+}
+</script>
+<style>
+  .bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    background: rgb(var(--c-background) / 0.25);
+  }
+  html.dark .bg-video-overlay {
+    background: rgb(var(--c-background) / 0.35);
+  }
+
+  :root {
+    /* ===== LIGHT THEME (contrast-boosted) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 50 49 54;
+    --c-inverse-on-surface: 244 240 239;
+    --c-on-tertiary-container: 78 71 61;
+    --c-surface-variant: 229 226 225;
+    --c-inverse-primary: 198 198 199;
+    --c-surface-tint: 51 54 61;
+    --c-on-primary: 255 255 255;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 59 58 64;
+    --c-surface-dim: 221 217 217;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 51 54 61;
+    --c-on-background: 20 21 23;
+    --c-tertiary-container: 251 240 229;
+    --c-surface-container-high: 235 231 231;
+    --c-secondary-container: 228 225 231;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 252 248 248;
+    --c-outline-variant: 168 172 174;
+    --c-on-surface-variant: 53 56 58;
+    --c-error-container: 255 218 214;
+    --c-on-secondary: 255 255 255;
+    --c-surface-bright: 252 248 248;
+    --c-background: 252 248 248;
+    --c-surface-container-low: 246 243 242;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 89 93 94;
+    --c-on-primary-container: 30 32 36;
+    --c-surface-container-highest: 229 226 225;
+    --c-surface-container: 241 237 236;
+    --c-inverse-surface: 49 48 48;
+    --c-surface-container-lowest: 255 255 255;
+    --c-primary-container: 222 224 230;
+    --c-on-error: 255 255 255;
+    --c-error: 186 26 26;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 147 0 10;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 40 39 44;
+    --c-on-surface: 20 21 23;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 100 93 85;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 176 134 12;
+    --c-epic: 124 73 196;
+    --c-rare: 30 102 184;
+    --c-mythic: 214 40 57;
+    --c-legendary: 199 41 142;
+    --c-uncommon: 46 138 86;
+    --c-common: 90 94 99;
+
+    --sun-opacity: 1;
+    --moon-opacity: 0;
+  }
+
+  html.dark {
+    /* ===== DARK THEME (cosmic) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 215 212 219;
+    --c-inverse-on-surface: 28 27 31;
+    --c-on-tertiary-container: 224 213 200;
+    --c-surface-variant: 56 59 66;
+    --c-inverse-primary: 51 54 61;
+    --c-surface-tint: 197 202 219;
+    --c-on-primary: 16 18 26;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 207 211 224;
+    --c-surface-dim: 13 14 18;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 197 202 219;
+    --c-on-background: 232 233 237;
+    --c-tertiary-container: 72 62 48;
+    --c-surface-container-high: 33 35 41;
+    --c-secondary-container: 47 50 58;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 12 13 17;
+    --c-outline-variant: 70 74 82;
+    --c-on-surface-variant: 200 204 214;
+    --c-error-container: 96 30 30;
+    --c-on-secondary: 26 28 34;
+    --c-surface-bright: 36 38 45;
+    --c-background: 9 10 14;
+    --c-surface-container-low: 19 20 25;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 138 143 153;
+    --c-on-primary-container: 222 224 230;
+    --c-surface-container-highest: 41 43 50;
+    --c-surface-container: 24 25 31;
+    --c-inverse-surface: 232 233 237;
+    --c-surface-container-lowest: 6 7 10;
+    --c-primary-container: 51 56 74;
+    --c-on-error: 255 255 255;
+    --c-error: 255 138 128;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 255 218 214;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 222 224 235;
+    --c-on-surface: 237 238 241;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 214 199 180;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 240 196 80;
+    --c-epic: 178 140 230;
+    --c-rare: 110 165 235;
+    --c-mythic: 255 90 90;
+    --c-legendary: 240 100 200;
+    --c-uncommon: 110 220 150;
+    --c-common: 170 175 185;
+
+    --sun-opacity: 0;
+    --moon-opacity: 1;
+  }
+
+  /* Smooth theme transition */
+  body, .glass, nav, aside { transition: background-color .35s ease, border-color .35s ease, color .35s ease; }
+
+  /* ===== Theme toggle (sun/moon) ===== */
+  .theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(120,120,130,0.25);
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  html.dark .theme-toggle {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .theme-toggle:hover { transform: scale(1.06); }
+  .theme-toggle svg { position: absolute; width: 20px; height: 20px; transition: opacity .3s ease, transform .4s ease; }
+  .theme-toggle .icon-sun { opacity: var(--sun-opacity); transform: rotate(0deg) scale(1); color: #b08600; }
+  .theme-toggle .icon-moon { opacity: var(--moon-opacity); transform: rotate(0deg) scale(1); color: #c9d2ff; }
+  html:not(.dark) .theme-toggle .icon-moon { transform: rotate(-60deg) scale(.5); }
+  html.dark .theme-toggle .icon-sun { transform: rotate(60deg) scale(.5); }
+  html, body {
+    background-color: transparent;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .glass {
+    background: rgba(var(--c-surface-variant), 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--c-on-surface), 0.08);
+  }
+  html.dark .glass {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cosmic-gradient {
+    background-color: rgb(var(--c-background));
+    background-image: radial-gradient(circle at top left, rgba(var(--c-primary), 0.07), transparent 60%),
+                radial-gradient(circle at bottom right, rgba(var(--c-primary), 0.1), transparent 60%);
+  }
+  html.dark .cosmic-gradient {
+    background-image: radial-gradient(circle at top left, rgba(120, 130, 200, 0.16), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(90, 70, 160, 0.18), transparent 55%);
+  }
+  .nebula-glow {
+    box-shadow: 0 0 25px rgba(var(--c-primary), 0.18);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  .fill-icon {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(var(--c-primary), 0.3); border-radius: 9999px; }
+  .rarity-glow-7 { box-shadow: 0 0 0 2px rgba(var(--c-mythic),0.85), 0 0 28px rgba(var(--c-mythic),0.45), 0 0 50px rgba(var(--c-mythic),0.2); animation: pulse-soft 1.6s ease-in-out infinite; }
+  .rarity-glow-6 { box-shadow: 0 0 0 2px rgba(var(--c-legendary),0.8), 0 0 24px rgba(var(--c-legendary),0.35); }
+  .rarity-glow-5 { box-shadow: 0 0 0 2px rgba(var(--c-gold),0.7), 0 0 20px rgba(var(--c-gold),0.25); }
+  .rarity-glow-4 { box-shadow: 0 0 0 2px rgba(var(--c-epic),0.6), 0 0 16px rgba(var(--c-epic),0.2); }
+  .rarity-glow-3 { box-shadow: 0 0 0 2px rgba(var(--c-rare),0.5); }
+  .rarity-glow-2 { box-shadow: 0 0 0 2px rgba(var(--c-uncommon),0.4); }
+  .rarity-glow-1 { box-shadow: 0 0 0 1px rgba(var(--c-common),0.3); }
+  @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+  .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+</style>
+<script>
+(function() {
+  try {
+    var t = localStorage.getItem('anhquoc-theme');
+    if (t === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+  } catch (e) {}
+})();
+</script>
+<script>
+/* AQ.Data — định nghĩa thẻ bài, hệ, vai trò, hằng số rarity */
+window.AQ = window.AQ || {};
+
+AQ.RARITY = {
+  1: { stars: 1, color: '#9CA3AF', glow: 'rgba(156,163,175,.6)',  rateBase: 42.0, name: 'Phổ Thông' },
+  2: { stars: 2, color: '#34D399', glow: 'rgba(52,211,153,.6)',   rateBase: 30.0, name: 'Thường' },
+  3: { stars: 3, color: '#3B82F6', glow: 'rgba(59,130,246,.7)',   rateBase: 18.0, name: 'Hiếm', anim: 'blue' },
+  4: { stars: 4, color: '#A855F7', glow: 'rgba(168,85,247,.8)',   rateBase: 7.5,  name: 'Sử Thi', anim: 'purple' },
+  5: { stars: 5, color: '#FACC15', glow: 'rgba(250,204,21,.9)',   rateBase: 1.8,  name: 'Huyền Thoại', anim: 'gold' },
+  6: { stars: 6, color: '#EF4444', glow: 'rgba(239,68,68,1)',     rateBase: 0.6,  name: 'Thần Thoại', anim: 'red' },
+  7: { stars: 7, color: 'rainbow', glow: 'rainbow',                rateBase: 0.1,  name: 'Vĩnh Cửu', anim: 'rainbow', cutscene: true }
+};
+
+AQ.ELEMENTS = ['Fire', 'Water', 'Wind', 'Earth', 'Light', 'Dark'];
+
+// hệ khắc hệ: key thắng value (+30% dmg)
+AQ.ELEMENT_ADV = {
+  Fire: 'Wind', Wind: 'Earth', Earth: 'Water', Water: 'Fire',
+  Light: 'Dark', Dark: 'Light'
+};
+
+AQ.ROLES = ['DPS', 'Tank', 'Support', 'Healer', 'Debuffer', 'Buffer'];
+
+AQ.CONST = {
+  PITY_SOFT: 70,        // pity mềm bắt đầu tăng rate 5★+
+  PITY_HARD: 90,         // pity cứng đảm bảo 5★+
+  PITY_HARD_6: 180,
+  PITY_HARD_7: 500,
+  BASIC_MULT: 1.0, BASIC_ENERGY: 20,
+  SKILL_MULT: 1.8, SKILL_ENERGY: 30,
+  ULT_MULT: 3.0, ULT_ENERGY_COST: 100,
+  DEF_FACTOR: 0.5,
+  ELEMENT_ADV_MULT: 1.3,
+  BREAK_STUN_MULT: 1.5,
+  MAX_LEVEL: 80,
+  MAX_ASCENSION: 6,
+  MAX_SKILL_LV: 10
+};
+
+/* Mẫu thẻ bài — id, name, rarity, element, role, base stats @ Lv1, skills, passive */
+AQ.CARDS = [
+  { id: 'c001', name: 'Lý Thường Kiệt', rarity: 7, element: 'Light', role: 'DPS',
+    hp: 1200, atk: 220, def: 90, spd: 112, energy: 0, img: 'assets/cards/c001.png',
+    skills: {
+      basic: { name: 'Trảm Phong', desc: 'Đòn chém cơ bản gây 100% ATK.' },
+      skill: { name: 'Nam Quốc Sơn Hà', desc: 'Gây 180% ATK, hồi 15 năng lượng đồng đội.' },
+      ultimate: { name: 'Thiên Mệnh Giáng Thế', desc: '300% ATK toàn bộ kẻ địch, +50% crit dmg 2 lượt.' },
+      passive: { name: 'Hồn Thiêng Sông Núi', desc: 'Mỗi lượt +8% ATK cho cả đội (cộng dồn, tối đa 3 lần), synergy với hệ Light.' }
+    }},
+  { id: 'c002', name: 'Bùi Thị Xuân', rarity: 6, element: 'Fire', role: 'DPS',
+    hp: 1050, atk: 205, def: 80, spd: 104, energy: 0, img: 'assets/cards/c002.png',
+    skills: {
+      basic: { name: 'Hỏa Tiễn', desc: '100% ATK, 20% gây Bỏng (DoT 2 lượt).' },
+      skill: { name: 'Voi Chiến Xung Trận', desc: '180% ATK lan rộng 2 mục tiêu liền kề.' },
+      ultimate: { name: 'Tây Sơn Liệt Hỏa', desc: '300% ATK + đốt cháy Break gauge -40%.' },
+      passive: { name: 'Nộ Hỏa', desc: 'Khi địch dưới 30% HP, ATK bản thân +25%.' }
+    }},
+  { id: 'c003', name: 'Trần Hưng Đạo', rarity: 6, element: 'Earth', role: 'Tank',
+    hp: 1800, atk: 130, def: 180, spd: 88, energy: 0, img: 'assets/cards/c003.png',
+    skills: {
+      basic: { name: 'Khiên Vạn Kiếp', desc: '100% ATK, hút 1 mục tiêu công kích.' },
+      skill: { name: 'Hịch Tướng Sĩ', desc: '180% ATK + Khiêu khích toàn địch 1 lượt.' },
+      ultimate: { name: 'Bạch Đằng Giang', desc: '300% ATK + giảm 30% sát thương nhận vào cho cả đội 2 lượt.' },
+      passive: { name: 'Trấn Quốc', desc: 'Giảm 15% sát thương nhận; khi Break, hồi 20% HP tối đa.' }
+    }},
+  { id: 'c004', name: 'Ỷ Lan', rarity: 5, element: 'Light', role: 'Healer',
+    hp: 950, atk: 140, def: 95, spd: 96, energy: 0, img: 'assets/cards/c004.png',
+    skills: {
+      basic: { name: 'Liễu Pháp', desc: '100% ATK, hồi máu nhẹ 10% ATK.' },
+      skill: { name: 'Nhiếp Chính Từ Tâm', desc: 'Hồi 180% ATK máu cho cả đội.' },
+      ultimate: { name: 'Quan Âm Hiển Linh', desc: 'Hồi đầy 1 đồng đội + miễn nhiễm 1 lượt.' },
+      passive: { name: 'Từ Bi', desc: 'Cuối mỗi lượt hồi 5% HP tối đa cho đồng đội thấp máu nhất.' }
+    }},
+  { id: 'c005', name: 'Nguyễn Trãi', rarity: 5, element: 'Dark', role: 'Debuffer',
+    hp: 980, atk: 165, def: 85, spd: 100, energy: 0, img: 'assets/cards/c005.png',
+    skills: {
+      basic: { name: 'Bút Sắc', desc: '100% ATK, -10% DEF địch 1 lượt.' },
+      skill: { name: 'Bình Ngô Đại Cáo', desc: '180% ATK toàn địch, -20% ATK địch 2 lượt.' },
+      ultimate: { name: 'Tâm Công', desc: '300% ATK + khóa skill địch yếu nhất 1 lượt.' },
+      passive: { name: 'Mưu Lược', desc: 'Debuff do đồng đội gây ra kéo dài thêm 1 lượt.' }
+    }},
+  { id: 'c006', name: 'Phạm Ngũ Lão', rarity: 4, element: 'Earth', role: 'DPS',
+    hp: 1000, atk: 175, def: 100, spd: 98, energy: 0, img: 'assets/cards/c006.png',
+    skills: {
+      basic: { name: 'Thương Pháp', desc: '100% ATK.' },
+      skill: { name: 'Đan Tâm', desc: '180% ATK, +Break dmg 20%.' },
+      ultimate: { name: 'Thiết Giáp Phá Trận', desc: '300% ATK, phá Break tức thì nếu còn dưới 30%.' },
+      passive: { name: 'Kiên Định', desc: 'Synergy Earth: +10% DEF cho đội nếu có ≥2 hệ Earth.' }
+    }},
+  { id: 'c007', name: 'Lê Lợi', rarity: 5, element: 'Earth', role: 'Buffer',
+    hp: 1100, atk: 150, def: 110, spd: 94, energy: 0, img: 'assets/cards/c007.png',
+    skills: {
+      basic: { name: 'Gươm Thần', desc: '100% ATK.' },
+      skill: { name: 'Lam Sơn Tụ Nghĩa', desc: '+25% ATK cả đội 2 lượt.' },
+      ultimate: { name: 'Hoàn Kiếm', desc: '+40% ATK & SPD cả đội 1 lượt, hồi 20 energy mỗi người.' },
+      passive: { name: 'Khởi Nghĩa', desc: 'Đầu trận, cả đội +15 năng lượng khởi điểm.' }
+    }},
+  { id: 'c008', name: 'Triệu Thị Trinh', rarity: 4, element: 'Wind', role: 'DPS',
+    hp: 980, atk: 180, def: 75, spd: 118, energy: 0, img: 'assets/cards/c008.png',
+    skills: {
+      basic: { name: 'Song Đao', desc: '100% ATK, 2 hit liên hoàn.' },
+      skill: { name: 'Cưỡi Voi Xung Phong', desc: '180% ATK, +SPD bản thân 15% 1 lượt.' },
+      ultimate: { name: 'Nhụy Kiều Tướng Quân', desc: '300% ATK, hành động lại nếu hạ gục mục tiêu.' },
+      passive: { name: 'Tốc Chiến', desc: 'Synergy Wind: SPD cao nhất đội +10% ATK toàn đội.' }
+    }},
+  { id: 'c009', name: 'Mai Hắc Đế', rarity: 3, element: 'Fire', role: 'DPS',
+    hp: 850, atk: 150, def: 70, spd: 90, energy: 0, img: 'assets/cards/c009.png',
+    skills: {
+      basic: { name: 'Hỏa Quyền', desc: '100% ATK.' },
+      skill: { name: 'Khởi Nghĩa Hoan Châu', desc: '180% ATK lan rộng nhẹ.' },
+      ultimate: { name: 'Đế Vương Chi Nộ', desc: '300% ATK đơn mục tiêu.' }
+    }},
+  { id: 'c010', name: 'Dân Binh', rarity: 1, element: 'Earth', role: 'Tank',
+    hp: 700, atk: 90, def: 90, spd: 70, energy: 0, img: 'assets/cards/c010.png',
+    skills: {
+      basic: { name: 'Đỡ Đòn', desc: '100% ATK.' },
+      skill: { name: 'Phòng Ngự', desc: '180% ATK, +10% DEF bản thân.' },
+      ultimate: { name: 'Tử Thủ', desc: '300% ATK, -20% sát thương nhận 1 lượt.' }
+    }}
+];
+
+AQ.getCard = function (id) { return AQ.CARDS.find(c => c.id === id); };
+/* AQ.Gacha — quay thẻ, pity system, lưu trữ kho */
+window.AQ = window.AQ || {};
+
+AQ.Storage = {
+  KEY_INV: 'aq-inventory',
+  KEY_PITY: 'aq-pity',
+  KEY_CURRENCY: 'aq-currency',
+  KEY_TEAM: 'aq-team',
+  KEY_PROFILE: 'aq-profile',
+
+  load(key, fallback) {
+    try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; }
+    catch { return fallback; }
+  },
+  save(key, val) { localStorage.setItem(key, JSON.stringify(val)); },
+
+  getInventory() { return this.load(this.KEY_INV, []); },
+  setInventory(inv) { this.save(this.KEY_INV, inv); },
+
+  getPity() { return this.load(this.KEY_PITY, { count: 0, count6: 0, count7: 0 }); },
+  setPity(p) { this.save(this.KEY_PITY, p); },
+
+  getCurrency() { return this.load(this.KEY_CURRENCY, { gem: 1600, ticket: 10 }); },
+  setCurrency(c) { this.save(this.KEY_CURRENCY, c); },
+
+  getTeam() { return this.load(this.KEY_TEAM, [null, null, null, null]); },
+  setTeam(t) { this.save(this.KEY_TEAM, t); }
+};
+
+AQ.Gacha = {
+  COST_GEM: 160,
+
+  /** trả về tỉ lệ hiện tại đã áp dụng pity mềm */
+  currentRates(pity) {
+    const r = {};
+    for (const k in AQ.RARITY) r[k] = AQ.RARITY[k].rateBase;
+    if (pity.count >= AQ.CONST.PITY_SOFT) {
+      const bonus = (pity.count - AQ.CONST.PITY_SOFT + 1) * 4;
+      r[5] += bonus; r[6] += bonus * 0.3;
+    }
+    return r;
+  },
+
+  rollRarity(pity) {
+    if (pity.count7 + 1 >= AQ.CONST.PITY_HARD_7) return 7;
+    if (pity.count6 + 1 >= AQ.CONST.PITY_HARD_6) return 6;
+    if (pity.count + 1 >= AQ.CONST.PITY_HARD) return Math.random() < 0.15 ? 6 : 5;
+
+    const rates = this.currentRates(pity);
+    const total = Object.values(rates).reduce((a, b) => a + b, 0);
+    let roll = Math.random() * total;
+    for (const k of [7, 6, 5, 4, 3, 2, 1]) {
+      if (roll < rates[k]) return k;
+      roll -= rates[k];
+    }
+    return 1;
+  },
+
+  pickCardByRarity(rarity) {
+    const pool = AQ.CARDS.filter(c => c.rarity === rarity);
+    if (!pool.length) return AQ.CARDS[AQ.CARDS.length - 1];
+    return pool[Math.floor(Math.random() * pool.length)];
+  },
+
+  updatePity(pity, rarity) {
+    pity.count++; pity.count6++; pity.count7++;
+    if (rarity >= 5) pity.count = 0;
+    if (rarity >= 6) pity.count6 = 0;
+    if (rarity >= 7) pity.count7 = 0;
+    return pity;
+  },
+
+  /** quay n lần, trả {results:[{card,rarity,isNew}], pity, currency} */
+  pull(n = 1) {
+    const currency = AQ.Storage.getCurrency();
+    const cost = this.COST_GEM * n;
+    if (currency.gem < cost) return { error: 'NOT_ENOUGH_GEM' };
+    currency.gem -= cost;
+
+    let pity = AQ.Storage.getPity();
+    const inv = AQ.Storage.getInventory();
+    const results = [];
+
+    for (let i = 0; i < n; i++) {
+      const rarity = this.rollRarity(pity);
+      pity = this.updatePity(pity, rarity);
+      const card = this.pickCardByRarity(rarity);
+      const existing = inv.find(x => x.cardId === card.id);
+      const isNew = !existing;
+      if (existing) existing.dupes = (existing.dupes || 0) + 1;
+      else inv.push({ cardId: card.id, level: 1, ascension: 0, skillLv: { basic: 1, skill: 1, ultimate: 1 }, dupes: 0, equipment: [] });
+      results.push({ card, rarity, isNew });
+    }
+
+    AQ.Storage.setCurrency(currency);
+    AQ.Storage.setPity(pity);
+    AQ.Storage.setInventory(inv);
+    return { results, pity, currency };
+  },
+
+  /** thời lượng animation gợi ý (ms) theo sao, dùng cho UI */
+  animDuration(rarity) {
+    return rarity >= 7 ? 4500 : rarity >= 6 ? 3200 : rarity >= 5 ? 2600 : rarity >= 4 ? 1800 : 1000;
+  }
+};
+/* AQ.Battle — turn-based theo SPD, break gauge, element advantage */
+window.AQ = window.AQ || {};
+
+AQ.Progression = {
+  statAtLevel(base, level, ascension) {
+    const lvFactor = 1 + (level - 1) * 0.045;
+    const ascFactor = 1 + ascension * 0.12;
+    return Math.round(base * lvFactor * ascFactor);
+  },
+  resolvedStats(card, unit) {
+    const lvl = unit.level || 1, asc = unit.ascension || 0;
+    return {
+      hp: this.statAtLevel(card.hp, lvl, asc),
+      atk: this.statAtLevel(card.atk, lvl, asc),
+      def: this.statAtLevel(card.def, lvl, asc),
+      spd: card.spd + Math.floor(asc * 1.5),
+      maxEnergy: 100
+    };
+  }
+};
+
+AQ.Unit = class {
+  constructor(card, unitData, side) {
+    this.card = card;
+    this.side = side; // 'player' | 'enemy'
+    const stats = AQ.Progression.resolvedStats(card, unitData || {});
+    this.maxHp = stats.hp; this.hp = stats.hp;
+    this.atk = stats.atk; this.def = stats.def; this.spd = stats.spd;
+    this.energy = 0; this.maxEnergy = 100;
+    this.element = card.element; this.role = card.role;
+    this.breakGauge = 100; this.broken = false; this.brokenTurns = 0;
+    this.buffs = []; this.debuffs = [];
+    this.alive = true;
+  }
+  isElementWeakAgainst(attackerElement) {
+    return AQ.ELEMENT_ADV[attackerElement] === this.element;
+  }
+};
+
+AQ.BattleEngine = class {
+  constructor(playerUnits, enemyUnits, log = console.log) {
+    this.units = [...playerUnits, ...enemyUnits];
+    this.turnOrder = [];
+    this.log = log;
+    this.turnCount = 0;
+  }
+
+  buildTurnOrder() {
+    this.turnOrder = this.units
+      .filter(u => u.alive)
+      .sort((a, b) => b.spd - a.spd);
+  }
+
+  damage(attacker, target, mult, actionElement) {
+    let raw = attacker.atk * mult - target.def * AQ.CONST.DEF_FACTOR;
+    raw = Math.max(raw, 1);
+
+    const isAdv = AQ.ELEMENT_ADV[attacker.element] === target.element;
+    if (isAdv) raw *= AQ.CONST.ELEMENT_ADV_MULT;
+
+    if (target.broken) raw *= AQ.CONST.BREAK_STUN_MULT;
+
+    if (isAdv && !target.broken) {
+      target.breakGauge -= 25;
+      if (target.breakGauge <= 0) {
+        target.breakGauge = 0;
+        target.broken = true;
+        target.brokenTurns = 1;
+        this.log(`${target.card.name} bị BREAK! Choáng + nhận 50% dmg tăng.`);
+      }
+    }
+
+    target.hp = Math.max(0, target.hp - Math.round(raw));
+    if (target.hp === 0) target.alive = false;
+    return Math.round(raw);
+  }
+
+  basicAttack(attacker, target) {
+    const dmg = this.damage(attacker, target, AQ.CONST.BASIC_MULT);
+    attacker.energy = Math.min(attacker.maxEnergy, attacker.energy + AQ.CONST.BASIC_ENERGY);
+    this.log(`${attacker.card.name} dùng [${attacker.card.skills.basic.name}] gây ${dmg} dmg lên ${target.card.name}.`);
+    return dmg;
+  }
+
+  skillAttack(attacker, target) {
+    if (attacker.energy < AQ.CONST.SKILL_ENERGY) return null;
+    const dmg = this.damage(attacker, target, AQ.CONST.SKILL_MULT);
+    attacker.energy = Math.min(attacker.maxEnergy, attacker.energy + AQ.CONST.SKILL_ENERGY);
+    this.log(`${attacker.card.name} dùng [${attacker.card.skills.skill.name}] gây ${dmg} dmg lên ${target.card.name}.`);
+    return dmg;
+  }
+
+  ultimateAttack(attacker, target) {
+    if (attacker.energy < AQ.CONST.ULT_ENERGY_COST) return null;
+    const dmg = this.damage(attacker, target, AQ.CONST.ULT_MULT);
+    attacker.energy = 0;
+    this.log(`${attacker.card.name} kích hoạt TUYỆT KỸ [${attacker.card.skills.ultimate.name}] gây ${dmg} dmg lên ${target.card.name}!`);
+    return dmg;
+  }
+
+  takeTurn(unit, chooseAction, chooseTarget) {
+    if (!unit.alive) return;
+    if (unit.broken && unit.brokenTurns > 0) {
+      unit.brokenTurns--;
+      if (unit.brokenTurns === 0) { unit.broken = false; unit.breakGauge = 100; }
+      this.log(`${unit.card.name} đang choáng, bỏ lượt.`);
+      return;
+    }
+    const enemies = this.units.filter(u => u.side !== unit.side && u.alive);
+    if (!enemies.length) return;
+    const target = chooseTarget ? chooseTarget(unit, enemies) : enemies[0];
+    const action = chooseAction ? chooseAction(unit) : (unit.energy >= AQ.CONST.ULT_ENERGY_COST ? 'ultimate' : unit.energy >= AQ.CONST.SKILL_ENERGY ? 'skill' : 'basic');
+
+    if (action === 'ultimate') this.ultimateAttack(unit, target) ?? this.basicAttack(unit, target);
+    else if (action === 'skill') this.skillAttack(unit, target) ?? this.basicAttack(unit, target);
+    else this.basicAttack(unit, target);
+  }
+
+  isOver() {
+    const p = this.units.some(u => u.side === 'player' && u.alive);
+    const e = this.units.some(u => u.side === 'enemy' && u.alive);
+    return !p || !e;
+  }
+
+  winner() {
+    if (!this.isOver()) return null;
+    return this.units.some(u => u.side === 'player' && u.alive) ? 'player' : 'enemy';
+  }
+
+  runRound(chooseAction, chooseTarget) {
+    this.turnCount++;
+    this.buildTurnOrder();
+    for (const unit of this.turnOrder) {
+      if (this.isOver()) break;
+      this.takeTurn(unit, chooseAction, chooseTarget);
+    }
+  }
+};
+</script>
+
+</head>
+<body class="min-h-screen font-body-md text-on-surface">
+<video class="bg-video" autoplay muted loop playsinline preload="auto" id="bgVideo">
+  <source src="https://res.cloudinary.com/da3wvlqvd/video/upload/v1781928497/PinGrab_1781928471662_orybdp.mp4" type="video/mp4">
+</video>
+<div class="bg-video-overlay"></div>
+<nav class="fixed top-0 left-0 right-0 flex justify-between items-center px-6 md:px-8 py-3 z-50 max-w-7xl mx-auto rounded-full mt-4 mx-margin-desktop bg-surface-variant/15 backdrop-blur-[40px] border border-white/20">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary text-[26px] fill-icon">shield_moon</span>
+    <span class="text-headline-md font-headline-md font-extrabold text-on-surface tracking-tight">ANH QUỐC</span>
+  </div>
+  <div class="hidden md:flex gap-6">
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+      <span class="text-label-sm font-label-sm uppercase">Vàng</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="gold">0</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">diamond</span>
+      <span class="text-label-sm font-label-sm uppercase">Kim Cương</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="diamond">0</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+      <span class="text-label-sm font-label-sm uppercase">Thể Lực</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="energy">150/150</span>
+    </div>
+  </div>
+  <div class="flex items-center gap-3">
+    <button class="theme-toggle" id="themeToggle" title="Đổi giao diện sáng/tối" type="button">
+      <svg class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      <svg class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Thông báo">notifications</button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Tài khoản">account_circle</button>
+  </div>
+</nav>
+
+<aside class="fixed left-0 top-0 bottom-0 w-64 hidden lg:flex flex-col p-6 z-40 my-8 ml-margin-desktop rounded-xl bg-surface-variant/15 backdrop-blur-[40px] border border-white/20 shadow-xl shadow-primary/5">
+  <div class="mb-10 px-2">
+    <h2 class="font-headline-md text-on-surface font-bold text-headline-md">ANH QUỐC</h2>
+    <p class="text-label-sm font-label-sm text-on-surface-variant/60">SECTOR 7 · NEBULA HUB</p>
+  </div>
+  <div class="space-y-2 flex-grow">
+      <a class="flex items-center gap-4 p-3 bg-primary text-on-primary rounded-lg font-bold shadow-[0_0_15px_rgba(93,95,95,0.4)] translate-x-1 transition-all duration-300" href="index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span class="text-label-sm font-label-sm uppercase">Trang Chủ</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="story.html">
+        <span class="material-symbols-outlined">auto_stories</span>
+        <span class="text-label-sm font-label-sm uppercase">Cốt Truyện</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="challenge.html">
+        <span class="material-symbols-outlined">swords</span>
+        <span class="text-label-sm font-label-sm uppercase">Thử Thách</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="raid.html">
+        <span class="material-symbols-outlined">groups</span>
+        <span class="text-label-sm font-label-sm uppercase">Đột Kích</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="gacha.html">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span class="text-label-sm font-label-sm uppercase">Triệu Hồi</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="battle.html">
+        <span class="material-symbols-outlined">swords</span>
+        <span class="text-label-sm font-label-sm uppercase">Chiến Đấu</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="inventory.html">
+        <span class="material-symbols-outlined">inventory_2</span>
+        <span class="text-label-sm font-label-sm uppercase">Kho Đồ</span>
+      </a>
+  </div>
+  <a href="gacha.html" class="w-full block text-center py-4 mt-8 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.02] transition-transform active:scale-95">
+    TRIỆU HỒI NGAY
+  </a>
+</aside>
+<main class="lg:ml-[320px] pt-32 pb-32 px-6 lg:pr-margin-desktop min-h-screen">
+  <!-- Header Section -->
+  <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+      <h1 class="font-headline-lg text-headline-lg uppercase mb-2">Chào Mừng Trở Lại</h1>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">military_tech</span>
+          <span class="text-label-sm font-label-sm">CHỈ HUY · CẤP 47</span>
+        </div>
+        <div class="h-4 w-[1px] bg-outline-variant"></div>
+        <p class="text-on-surface-variant/70 italic">Sector 7 đang chờ lệnh của bạn.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 px-5 py-2 glass rounded-full">
+        <span class="material-symbols-outlined text-primary text-[18px] fill-icon">local_fire_department</span>
+        <span class="text-label-sm font-label-sm">ĐIỂM DANH: 12 NGÀY LIÊN TIẾP</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Hero Event Banner -->
+    <div class="lg:col-span-2 glass rounded-[32px] overflow-hidden group relative min-h-[340px]">
+      <div class="absolute inset-0 bg-cover bg-center opacity-30 transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDgM6LsvKrbU1od2FxSfTglGVOeHTbWUGY9pRy_ZNUOsJbzfxlkLkp5zD-7T3McwyarJUNwoWfRSxXSDqQkX8i_vOQ-fEFFuUHq2uVuRIgz2Ns9jCGlDB_nVwOpAXF2TjICm8qhcHKjiTMviHj-3-aG1dt5PPVA3XBM-PIaT3dV2ZC9Fh9NE2NdaiBWBrW2vN6_qfrIP8L5vi95uuwdNdIq9rgwXmZT77Oi5z3N8-nUQNFOo0vmSjjrnFzfM9Y_sIYQKQP2C3KuWro')"></div>
+      <div class="relative p-10 h-full flex flex-col justify-end">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary/20 text-primary text-label-sm font-label-sm mb-6 w-fit">
+          <span class="material-symbols-outlined text-sm">auto_awesome</span>
+          SỰ KIỆN GIỚI HẠN · CÒN 12 NGÀY
+        </div>
+        <h2 class="font-headline-lg text-headline-lg mb-3 uppercase">Kỷ Nguyên Vàng Của Nebula</h2>
+        <p class="text-body-md text-on-surface-variant/80 mb-6 max-w-lg">Hoàn thành chuỗi thử thách đặc biệt để mở khóa Avatar "Hộ Vệ Tinh Không" và 10.000 Kim Cương Tím.</p>
+        <div class="flex items-center gap-4">
+          <a href="gacha.html" class="px-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:shadow-lg transition-all active:scale-95">TRIỆU HỒI NGAY</a>
+          <a href="challenge.html" class="px-8 py-3 glass rounded-xl font-label-sm tracking-widest hover:bg-white/20 transition-all active:scale-95">XEM THỬ THÁCH</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Check-in -->
+    <div class="glass rounded-[32px] p-6 flex flex-col">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-headline-md text-[18px] font-bold">Điểm Danh Hàng Ngày</h3>
+        <span class="material-symbols-outlined text-primary text-[18px]">event_available</span>
+      </div>
+      <div id="locationTimeRow" class="flex items-center gap-1.5 text-label-sm font-label-sm text-on-surface-variant/60 mb-4">
+        <span class="material-symbols-outlined text-[14px]">location_on</span>
+        <span id="locationTimeText">Đang xác định vị trí…</span>
+      </div>
+      <div id="checkinGrid" class="grid grid-cols-7 gap-2 mb-4">
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="0"><span class="text-[10px] font-label-sm">T2</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="1"><span class="text-[10px] font-label-sm">T3</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="2"><span class="text-[10px] font-label-sm">T4</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="3"><span class="text-[10px] font-label-sm">T5</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="4"><span class="text-[10px] font-label-sm">T6</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="5"><span class="text-[10px] font-label-sm">T7</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+        <div class="flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50" data-day="6"><span class="text-[10px] font-label-sm">CN</span><span class="material-symbols-outlined text-[16px]">lock</span></div>
+      </div>
+      <p class="text-label-sm font-label-sm text-on-surface-variant/60 mb-4">Phần thưởng hôm nay: 500 Kim Cương + Vé Triệu Hồi x1</p>
+      <button id="claimDailyBtn" class="mt-auto w-full py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.02] transition-transform active:scale-95">NHẬN NGAY</button>
+    </div>
+  </div>
+
+  <!-- Quick Access -->
+  <div class="mt-12">
+    <div class="flex items-center gap-4 mb-6">
+      <h3 class="font-headline-md text-headline-md">Truy Cập Nhanh</h3>
+      <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <a href="story.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">auto_stories</span>
+        <span class="font-headline-md text-[16px] font-bold">Cốt Truyện</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Chương 1 · Chưa bắt đầu</span>
+      </a>
+      <a href="raid.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">groups</span>
+        <span class="font-headline-md text-[16px] font-bold">Đột Kích</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Chưa mở khóa</span>
+      </a>
+      <a href="gacha.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group nebula-glow">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">auto_awesome</span>
+        <span class="font-headline-md text-[16px] font-bold">Triệu Hồi</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Chưa triệu hồi lần nào</span>
+      </a>
+      <a href="inventory.html" class="glass p-6 rounded-[24px] flex flex-col gap-3 hover:bg-white/20 transition-all group">
+        <span class="material-symbols-outlined text-primary text-3xl group-hover:scale-110 transition-transform">inventory_2</span>
+        <span class="font-headline-md text-[16px] font-bold">Kho Đồ</span>
+        <span class="text-label-sm font-label-sm text-on-surface-variant/60">Kho đồ trống</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Announcements -->
+  <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2">
+      <div class="flex items-center gap-4 mb-6">
+        <h3 class="font-headline-md text-headline-md">Thông Báo</h3>
+        <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+      </div>
+      <div class="space-y-3">
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-label-sm font-label-sm uppercase shrink-0">Sự Kiện</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Kỷ Nguyên Vàng Của Nebula đã bắt đầu</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">18/06/2026</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-error/10 text-error text-label-sm font-label-sm uppercase shrink-0">Bảo Trì</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Bảo trì định kỳ máy chủ Sector 7</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">20/06/2026 · 02:00 - 04:00</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+        <div class="glass rounded-2xl p-5 flex items-center gap-4 hover:bg-white/10 transition-colors">
+          <span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-label-sm font-label-sm uppercase shrink-0">Cập Nhật</span>
+          <div class="flex-grow">
+            <p class="font-bold text-[15px]">Phiên bản 3.2 - Thêm Chương 8 Cốt Truyện</p>
+            <p class="text-label-sm font-label-sm text-on-surface-variant/60">15/06/2026</p>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant/40">chevron_right</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Summary -->
+    <div>
+      <div class="flex items-center gap-4 mb-6">
+        <h3 class="font-headline-md text-headline-md">Tiến Độ</h3>
+        <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+      </div>
+      <div class="glass rounded-[24px] p-6 space-y-5">
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>NHIỆM VỤ HÀNG NGÀY</span><span>0/6</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 0%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>THỬ THÁCH TUẦN</span><span>0/5</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 0%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-label-sm font-label-sm mb-2"><span>SỰ KIỆN MÙA</span><span>0/10</span></div>
+          <div class="w-full h-2 rounded-full bg-white/10"><div class="h-2 rounded-full bg-primary" style="width: 0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex lg:hidden justify-around items-center px-2 py-2 pb-safe bg-surface-variant/20 backdrop-blur-[40px] rounded-t-[32px] border-t border-white/20 shadow-2xl overflow-x-auto">
+  <a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-3 py-1.5 shadow-[0_0_10px_rgba(93,95,95,0.5)]" href="index.html">
+    <span class="material-symbols-outlined text-[20px]">home</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Trang Chủ</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="story.html">
+    <span class="material-symbols-outlined text-[20px]">auto_stories</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Cốt Truyện</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="challenge.html">
+    <span class="material-symbols-outlined text-[20px]">swords</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Thử Thách</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="raid.html">
+    <span class="material-symbols-outlined text-[20px]">groups</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Đột Kích</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="gacha.html">
+    <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Triệu Hồi</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="inventory.html">
+    <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Kho Đồ</span>
+  </a>
+</nav>
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+
+<script>
+// Daily claim button
+const claimBtn = document.getElementById('claimDailyBtn');
+if (claimBtn) {
+  claimBtn.addEventListener('click', () => {
+    claimBtn.innerText = 'ĐÃ NHẬN';
+    claimBtn.classList.add('opacity-50', 'pointer-events-none');
+  });
+}
+
+// Micro-interaction: Hover glow tracking
+document.querySelectorAll('.glass').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+</script>
+
+<script>
+// Theme toggle: sync across pages via localStorage
+(function() {
+  const html = document.documentElement;
+  const stored = localStorage.getItem('anhquoc-theme');
+  if (stored === 'dark') { html.classList.add('dark'); html.classList.remove('light'); }
+  else if (stored === 'light') { html.classList.remove('dark'); html.classList.add('light'); }
+
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isDark = html.classList.toggle('dark');
+      html.classList.toggle('light', !isDark);
+      localStorage.setItem('anhquoc-theme', isDark ? 'dark' : 'light');
+    });
+  }
+})();
+</script>
+<script>
+// ===== Custom laser cursor trail =====
+(function() {
+  // Skip on touch-only devices (no real mouse)
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'laserCursorCanvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '2147483647';
+  // mixBlendMode set dynamically per-theme in colors()
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function colors() {
+    const isDark = document.documentElement.classList.contains('dark');
+    canvas.style.mixBlendMode = isDark ? 'screen' : 'normal';
+    return isDark
+      ? { core: 'rgba(210, 225, 255, 1)', glow: 'rgba(140, 160, 255, 0.95)', tail: 'rgba(170, 120, 255, 0.55)', ring: 'rgba(40, 30, 70, 0)' }
+      : { core: 'rgba(255, 60, 20, 1)', glow: 'rgba(255, 110, 20, 0.95)', tail: 'rgba(220, 50, 10, 0.6)', ring: 'rgba(255, 255, 255, 0.9)' };
+  }
+
+  const points = [];
+  const MAX_POINTS = 16;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let lastX = mouseX, lastY = mouseY;
+  let active = false;
+  let hideTimer = null;
+
+  function onMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    active = true;
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => { active = false; }, 2500);
+  }
+  window.addEventListener('mousemove', onMove, { passive: true });
+
+  // Click pulse burst
+  const bursts = [];
+  window.addEventListener('mousedown', (e) => {
+    bursts.push({ x: e.clientX, y: e.clientY, r: 2, life: 1 });
+  });
+
+  function tick() {
+    requestAnimationFrame(tick);
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    if (!active && points.length === 0 && bursts.length === 0) return;
+
+    const c = colors();
+
+    // Add new point with velocity-based spacing
+    const dx = mouseX - lastX, dy = mouseY - lastY;
+    const dist = Math.hypot(dx, dy);
+    points.push({ x: mouseX, y: mouseY, life: 1 });
+    if (points.length > MAX_POINTS) points.shift();
+    lastX = mouseX; lastY = mouseY;
+
+    // Draw laser trail (fading line strip)
+    if (points.length > 1) {
+      for (let i = 1; i < points.length; i++) {
+        const p0 = points[i - 1];
+        const p1 = points[i];
+        const t = i / points.length; // 0 (old) -> 1 (new)
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.lineWidth = 0.6 + t * 2.6;
+        ctx.strokeStyle = c.tail;
+        ctx.globalAlpha = t * 0.55;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+    }
+
+    // Decay points
+    for (let i = points.length - 1; i >= 0; i--) {
+      points[i].life -= 0.06;
+      if (points[i].life <= 0) points.splice(i, 1);
+    }
+
+    // Core glow at current position
+    ctx.globalAlpha = 1;
+    const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 14);
+    grad.addColorStop(0, c.core);
+    grad.addColorStop(0.35, c.glow);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Contrast ring so the dot stays visible on any background (mainly for light mode)
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 4.2, 0, Math.PI * 2);
+    ctx.strokeStyle = c.ring;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 3, 0, Math.PI * 2);
+    ctx.fillStyle = c.core;
+    ctx.fill();
+
+    // Click bursts
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      ctx.globalAlpha = b.life * 0.6;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = c.glow;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      b.r += 2.2;
+      b.life -= 0.045;
+      if (b.life <= 0) bursts.splice(i, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(tick);
+
+  // Hide native cursor, use our own
+  const styleTag = document.createElement('style');
+  styleTag.textContent = '* { cursor: none !important; }';
+  document.head.appendChild(styleTag);
+})();
+</script>
+<script>
+// ===== ADMIN MODE (demo only — client-side, gõ "ZZOLLYAN" ở bất kỳ đâu để kích hoạt) =====
+(function() {
+  const CODE = 'ZZOLLYAN';
+  let buffer = '';
+
+  function showToast(msg) {
+    let toast = document.getElementById('adminToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'adminToast';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '24px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+      toast.style.padding = '12px 24px';
+      toast.style.borderRadius = '9999px';
+      toast.style.background = 'rgb(var(--c-mythic))';
+      toast.style.color = '#fff';
+      toast.style.fontWeight = '700';
+      toast.style.fontSize = '13px';
+      toast.style.letterSpacing = '0.05em';
+      toast.style.zIndex = '2147483647';
+      toast.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)';
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity .3s ease, transform .3s ease';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2600);
+  }
+
+  function applyAdminDisplay() {
+    document.querySelectorAll('[data-currency]').forEach(el => {
+      el.textContent = '∞';
+    });
+  }
+
+  function activateAdmin() {
+    localStorage.setItem('anhquoc-admin', '1');
+    applyAdminDisplay();
+    showToast('⚡ ADMIN MODE ĐÃ KÍCH HOẠT — Tài nguyên: VÔ HẠN');
+  }
+
+  function deactivateAdmin() {
+    localStorage.removeItem('anhquoc-admin');
+    showToast('Đã tắt ADMIN MODE — tải lại trang để khôi phục');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      buffer = (buffer + e.key).toUpperCase().slice(-CODE.length);
+      if (buffer === CODE) {
+        const isAdmin = localStorage.getItem('anhquoc-admin') === '1';
+        if (isAdmin) { deactivateAdmin(); } else { activateAdmin(); }
+        buffer = '';
+      }
+    }
+  });
+
+  // Apply immediately on load if already activated in a previous page
+  if (localStorage.getItem('anhquoc-admin') === '1') {
+    document.addEventListener('DOMContentLoaded', applyAdminDisplay);
+  }
+})();
+</script>
+<script>
+// ===== Điểm danh theo vị trí & giờ thực tế (qua IP) =====
+(function() {
+  const textEl = document.getElementById('locationTimeText');
+  const grid = document.getElementById('checkinGrid');
+  if (!textEl || !grid) return;
+
+  let timezone = null;
+  let placeLabel = null;
+
+  function highlightToday() {
+    if (!timezone) return;
+    const now = new Date();
+    const weekdayName = new Intl.DateTimeFormat('en-US', { timeZone: timezone, weekday: 'short' }).format(now);
+    const map = { 'Mon': 0, 'Tue': 1, 'Wed': 2, 'Thu': 3, 'Fri': 4, 'Sat': 5, 'Sun': 6 };
+    const idx = map[weekdayName];
+    if (idx === undefined) return;
+
+    grid.querySelectorAll('[data-day]').forEach(cell => {
+      const d = parseInt(cell.getAttribute('data-day'), 10);
+      const icon = cell.querySelector('.material-symbols-outlined');
+      if (d === idx) {
+        cell.className = 'flex flex-col items-center gap-1 p-2 rounded-lg bg-on-background text-on-primary nebula-glow';
+        if (icon) icon.textContent = 'redeem';
+      } else if (d < idx) {
+        cell.className = 'flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-40';
+        if (icon) icon.textContent = 'remove_circle';
+      } else {
+        cell.className = 'flex flex-col items-center gap-1 p-2 rounded-lg bg-white/5 opacity-50';
+        if (icon) icon.textContent = 'lock';
+      }
+    });
+  }
+
+  function updateClock() {
+    if (!timezone) return;
+    const now = new Date();
+    const timeStr = new Intl.DateTimeFormat('vi-VN', {
+      timeZone: timezone, hour: '2-digit', minute: '2-digit', hour12: false
+    }).format(now);
+    const dateStr = new Intl.DateTimeFormat('vi-VN', {
+      timeZone: timezone, day: '2-digit', month: '2-digit'
+    }).format(now);
+    textEl.textContent = `${placeLabel || 'Không xác định'} · ${dateStr} · ${timeStr}`;
+  }
+
+  async function init() {
+    // Fallback: browser's own timezone, works offline, no network needed
+    try {
+      timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch (e) {
+      timezone = 'Asia/Ho_Chi_Minh';
+    }
+    placeLabel = 'Đang xác định vị trí…';
+    updateClock();
+    highlightToday();
+
+    // Try to enrich with city/country from IP (best-effort, may fail offline or if blocked)
+    try {
+      const res = await fetch('https://ipapi.co/json/', { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && !data.error) {
+          if (data.timezone) timezone = data.timezone;
+          const city = data.city || '';
+          const country = data.country_name || '';
+          placeLabel = [city, country].filter(Boolean).join(', ') || 'Không xác định';
+        }
+      }
+    } catch (e) {
+      placeLabel = 'Vị trí không xác định (mất kết nối)';
+    }
+
+    updateClock();
+    highlightToday();
+    setInterval(updateClock, 30000);
+  }
+
+  init();
+})();
+</script>
+
+<script>
+(function(){
+  var v = document.getElementById('bgVideo');
+  if(!v) return;
+  v.loop = true;
+  v.muted = true;
+  v.play().catch(function(){});
+  v.addEventListener('ended', function(){ v.currentTime = 0; v.play().catch(function(){}); });
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) v.play().catch(function(){}); });
+})();
+</script>
+</body></html>
