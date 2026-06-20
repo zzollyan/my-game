@@ -283,10 +283,6 @@ tailwind.config = {
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
   }
-  body > *:not(.bg-video):not(.bg-video-overlay) {
-    position: relative;
-    z-index: 2;
-  }
   .glass {
     background: rgba(var(--c-surface-variant), 0.15);
     backdrop-filter: blur(20px);
@@ -337,6 +333,58 @@ tailwind.config = {
     }
   } catch (e) {}
 })();
+</script>
+<script>
+const INV_KEY = 'anhquoc-inventory';
+const INV_CAP = 150;
+const INV_AUTODEL_KEY = 'anhquoc-autodelete-threshold';
+
+function invLoad() {
+  try { return JSON.parse(localStorage.getItem(INV_KEY)) || []; }
+  catch (e) { return []; }
+}
+
+function invSave(items) {
+  localStorage.setItem(INV_KEY, JSON.stringify(items));
+}
+
+function invGetThreshold() {
+  const v = parseInt(localStorage.getItem(INV_AUTODEL_KEY), 10);
+  return isNaN(v) ? 0 : v;
+}
+
+function invSetThreshold(v) {
+  localStorage.setItem(INV_AUTODEL_KEY, String(v));
+}
+
+function invAdd(item) {
+  const items = invLoad();
+  items.push({ ...item, id: Date.now() + '-' + Math.random().toString(36).slice(2) });
+  invAutoDelete(items);
+  invSave(items);
+  return items;
+}
+
+function invAutoDelete(items) {
+  const threshold = invGetThreshold();
+  if (threshold > 0) {
+    for (let i = items.length - 1; i >= 0; i--) {
+      if (!items[i].locked && items[i].rarity < threshold) items.splice(i, 1);
+    }
+  }
+  while (items.length > INV_CAP) {
+    let worstIdx = -1, worstRarity = 99;
+    for (let i = 0; i < items.length; i++) {
+      if (!items[i].locked && items[i].rarity < worstRarity) {
+        worstRarity = items[i].rarity;
+        worstIdx = i;
+      }
+    }
+    if (worstIdx === -1) break;
+    items.splice(worstIdx, 1);
+  }
+}
+
 </script>
 </head>
 <body class="min-h-screen font-body-md text-on-surface">
@@ -452,6 +500,11 @@ tailwind.config = {
         </button>
       </div>
       <p class="text-label-sm font-label-sm text-on-surface-variant/50 mt-4">Tỉ lệ: 7★ 0.005% · 6★ 0.05% · 5★ 0.5% · 4★ 5% · 3★ 15% · 2★ 30% · 1★ 49.445%</p>
+      <button id="previewBtn" class="mt-4 flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant/70 hover:text-on-surface underline">
+        <span class="material-symbols-outlined text-[16px]">visibility</span>
+        Xem trước thẻ trong banner
+      </button>
+      <div id="previewPanel" class="hidden mt-4 w-full grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-3"></div>
     </div>
   </div>
 
@@ -573,7 +626,7 @@ function rollItem() {
   const rarity = rollRarity();
   const pool = ITEM_POOL[rarity];
   const item = pool[Math.floor(Math.random() * pool.length)];
-  return { ...item, rarity };
+  return { ...item, rarity, type: 'character', desc: `Nhân vật ${rarity}★ thu được từ Triệu Hồi.` };
 }
 
 function rarityClasses(rarity) {
@@ -605,6 +658,7 @@ function renderResults(items) {
 
 function doPull(count) {
   const items = Array.from({ length: count }, rollItem);
+  items.forEach(it => invAdd(it));
   renderResults(items);
   document.getElementById('pullModal').classList.remove('hidden');
   document.getElementById('pullModal').classList.add('flex');
@@ -615,6 +669,30 @@ const pull10Btn = document.getElementById('pull10Btn');
 const pullModal = document.getElementById('pullModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const confirmModalBtn = document.getElementById('confirmModalBtn');
+
+const previewBtn = document.getElementById('previewBtn');
+const previewPanel = document.getElementById('previewPanel');
+previewBtn.addEventListener('click', () => {
+  if (!previewPanel.classList.contains('hidden')) {
+    previewPanel.classList.add('hidden');
+    return;
+  }
+  previewPanel.innerHTML = '';
+  [7, 6, 5, 4, 3, 2, 1].forEach(rarity => {
+    ITEM_POOL[rarity].forEach(item => {
+      const cls = rarityClasses(rarity);
+      const card = document.createElement('div');
+      card.className = `flex flex-col items-center gap-1 p-3 rounded-2xl ${cls.bg} ${cls.ring}`;
+      card.innerHTML = `
+        <span class="material-symbols-outlined text-2xl ${cls.color} fill-icon">${item.icon}</span>
+        <span class="text-[10px] font-label-sm text-center leading-tight">${item.name}</span>
+        <span class="text-[9px] font-label-sm ${cls.color}">${rarity}★</span>
+      `;
+      previewPanel.appendChild(card);
+    });
+  });
+  previewPanel.classList.remove('hidden');
+});
 
 if (pull1Btn) pull1Btn.addEventListener('click', () => doPull(1));
 if (pull10Btn) pull10Btn.addEventListener('click', () => doPull(10));
