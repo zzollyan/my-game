@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANH QUỐC - Triệu Hồi</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "secondary-fixed": "rgb(var(--c-secondary-fixed) / <alpha-value>)",
+        "on-secondary-fixed-variant": "rgb(var(--c-on-secondary-fixed-variant) / <alpha-value>)",
+        "inverse-on-surface": "rgb(var(--c-inverse-on-surface) / <alpha-value>)",
+        "on-tertiary-container": "rgb(var(--c-on-tertiary-container) / <alpha-value>)",
+        "surface-variant": "rgb(var(--c-surface-variant) / <alpha-value>)",
+        "inverse-primary": "rgb(var(--c-inverse-primary) / <alpha-value>)",
+        "surface-tint": "rgb(var(--c-surface-tint) / <alpha-value>)",
+        "on-primary": "rgb(var(--c-on-primary) / <alpha-value>)",
+        "primary-fixed-dim": "rgb(var(--c-primary-fixed-dim) / <alpha-value>)",
+        "on-primary-fixed": "rgb(var(--c-on-primary-fixed) / <alpha-value>)",
+        "secondary": "rgb(var(--c-secondary) / <alpha-value>)",
+        "surface-dim": "rgb(var(--c-surface-dim) / <alpha-value>)",
+        "tertiary-fixed-dim": "rgb(var(--c-tertiary-fixed-dim) / <alpha-value>)",
+        "primary": "rgb(var(--c-primary) / <alpha-value>)",
+        "on-background": "rgb(var(--c-on-background) / <alpha-value>)",
+        "tertiary-container": "rgb(var(--c-tertiary-container) / <alpha-value>)",
+        "surface-container-high": "rgb(var(--c-surface-container-high) / <alpha-value>)",
+        "secondary-container": "rgb(var(--c-secondary-container) / <alpha-value>)",
+        "on-tertiary-fixed": "rgb(var(--c-on-tertiary-fixed) / <alpha-value>)",
+        "surface": "rgb(var(--c-surface) / <alpha-value>)",
+        "outline-variant": "rgb(var(--c-outline-variant) / <alpha-value>)",
+        "on-surface-variant": "rgb(var(--c-on-surface-variant) / <alpha-value>)",
+        "error-container": "rgb(var(--c-error-container) / <alpha-value>)",
+        "on-secondary": "rgb(var(--c-on-secondary) / <alpha-value>)",
+        "surface-bright": "rgb(var(--c-surface-bright) / <alpha-value>)",
+        "background": "rgb(var(--c-background) / <alpha-value>)",
+        "surface-container-low": "rgb(var(--c-surface-container-low) / <alpha-value>)",
+        "secondary-fixed-dim": "rgb(var(--c-secondary-fixed-dim) / <alpha-value>)",
+        "outline": "rgb(var(--c-outline) / <alpha-value>)",
+        "on-primary-container": "rgb(var(--c-on-primary-container) / <alpha-value>)",
+        "surface-container-highest": "rgb(var(--c-surface-container-highest) / <alpha-value>)",
+        "surface-container": "rgb(var(--c-surface-container) / <alpha-value>)",
+        "inverse-surface": "rgb(var(--c-inverse-surface) / <alpha-value>)",
+        "surface-container-lowest": "rgb(var(--c-surface-container-lowest) / <alpha-value>)",
+        "primary-container": "rgb(var(--c-primary-container) / <alpha-value>)",
+        "on-error": "rgb(var(--c-on-error) / <alpha-value>)",
+        "error": "rgb(var(--c-error) / <alpha-value>)",
+        "on-primary-fixed-variant": "rgb(var(--c-on-primary-fixed-variant) / <alpha-value>)",
+        "on-tertiary": "rgb(var(--c-on-tertiary) / <alpha-value>)",
+        "on-error-container": "rgb(var(--c-on-error-container) / <alpha-value>)",
+        "on-tertiary-fixed-variant": "rgb(var(--c-on-tertiary-fixed-variant) / <alpha-value>)",
+        "on-secondary-fixed": "rgb(var(--c-on-secondary-fixed) / <alpha-value>)",
+        "on-secondary-container": "rgb(var(--c-on-secondary-container) / <alpha-value>)",
+        "on-surface": "rgb(var(--c-on-surface) / <alpha-value>)",
+        "primary-fixed": "rgb(var(--c-primary-fixed) / <alpha-value>)",
+        "tertiary": "rgb(var(--c-tertiary) / <alpha-value>)",
+        "tertiary-fixed": "rgb(var(--c-tertiary-fixed) / <alpha-value>)",
+        "gold": "rgb(var(--c-gold) / <alpha-value>)",
+        "epic": "rgb(var(--c-epic) / <alpha-value>)",
+        "rare": "rgb(var(--c-rare) / <alpha-value>)",
+        "mythic": "rgb(var(--c-mythic) / <alpha-value>)",
+        "legendary": "rgb(var(--c-legendary) / <alpha-value>)",
+        "uncommon": "rgb(var(--c-uncommon) / <alpha-value>)",
+        "common": "rgb(var(--c-common) / <alpha-value>)"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "container-max": "1440px",
+        "gutter": "24px",
+        "margin-mobile": "16px",
+        "margin-desktop": "64px",
+        "unit": "4px"
+      },
+      "fontFamily": {
+        "label-sm": ["JetBrains Mono"],
+        "body-md": ["Hanken Grotesk"],
+        "headline-lg-mobile": ["Space Grotesk"],
+        "display-lg": ["Space Grotesk"],
+        "headline-lg": ["Space Grotesk"],
+        "body-lg": ["Hanken Grotesk"],
+        "headline-md": ["Space Grotesk"]
+      },
+      "fontSize": {
+        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+        "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}]
+      }
+    },
+  },
+}
+</script>
+<style>
+  .bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .bg-video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    background: rgb(var(--c-background) / 0.25);
+  }
+  html.dark .bg-video-overlay {
+    background: rgb(var(--c-background) / 0.35);
+  }
+
+  @keyframes aqPulse3 { 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.5)} 50%{box-shadow:0 0 24px 6px rgba(59,130,246,.6)} }
+  @keyframes aqPulse4 { 0%,100%{box-shadow:0 0 0 0 rgba(168,85,247,.5)} 50%{box-shadow:0 0 28px 8px rgba(168,85,247,.7)} }
+  @keyframes aqPulse5 { 0%,100%{box-shadow:0 0 0 0 rgba(250,204,21,.6)} 50%{box-shadow:0 0 32px 10px rgba(250,204,21,.85)} }
+  @keyframes aqPulse6 { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.6)} 50%{box-shadow:0 0 38px 12px rgba(239,68,68,.9)} }
+  @keyframes aqRainbow { 0%{box-shadow:0 0 30px 10px #ff004080} 20%{box-shadow:0 0 30px 10px #ff990080} 40%{box-shadow:0 0 30px 10px #fff70080} 60%{box-shadow:0 0 30px 10px #00ff4780} 80%{box-shadow:0 0 30px 10px #00aaff80} 100%{box-shadow:0 0 30px 10px #b300ff80} }
+  .aq-anim-3 { animation: aqPulse3 1.4s ease-in-out infinite; }
+  .aq-anim-4 { animation: aqPulse4 1.3s ease-in-out infinite; }
+  .aq-anim-5 { animation: aqPulse5 1.2s ease-in-out infinite; }
+  .aq-anim-6 { animation: aqPulse6 1.1s ease-in-out infinite; }
+  .aq-anim-7 { animation: aqRainbow 1.8s linear infinite; }
+  .aq-cutscene-7 { animation: aqRainbow 1.8s linear infinite; border: 2px solid transparent; }
+
+  :root {
+    /* ===== LIGHT THEME (contrast-boosted) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 50 49 54;
+    --c-inverse-on-surface: 244 240 239;
+    --c-on-tertiary-container: 78 71 61;
+    --c-surface-variant: 229 226 225;
+    --c-inverse-primary: 198 198 199;
+    --c-surface-tint: 51 54 61;
+    --c-on-primary: 255 255 255;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 59 58 64;
+    --c-surface-dim: 221 217 217;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 51 54 61;
+    --c-on-background: 20 21 23;
+    --c-tertiary-container: 251 240 229;
+    --c-surface-container-high: 235 231 231;
+    --c-secondary-container: 228 225 231;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 252 248 248;
+    --c-outline-variant: 168 172 174;
+    --c-on-surface-variant: 53 56 58;
+    --c-error-container: 255 218 214;
+    --c-on-secondary: 255 255 255;
+    --c-surface-bright: 252 248 248;
+    --c-background: 252 248 248;
+    --c-surface-container-low: 246 243 242;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 89 93 94;
+    --c-on-primary-container: 30 32 36;
+    --c-surface-container-highest: 229 226 225;
+    --c-surface-container: 241 237 236;
+    --c-inverse-surface: 49 48 48;
+    --c-surface-container-lowest: 255 255 255;
+    --c-primary-container: 222 224 230;
+    --c-on-error: 255 255 255;
+    --c-error: 186 26 26;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 147 0 10;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 40 39 44;
+    --c-on-surface: 20 21 23;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 100 93 85;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 176 134 12;
+    --c-epic: 124 73 196;
+    --c-rare: 30 102 184;
+    --c-mythic: 214 40 57;
+    --c-legendary: 199 41 142;
+    --c-uncommon: 46 138 86;
+    --c-common: 90 94 99;
+
+    --sun-opacity: 1;
+    --moon-opacity: 0;
+  }
+
+  html.dark {
+    /* ===== DARK THEME (cosmic) ===== */
+    --c-secondary-fixed: 228 225 231;
+    --c-on-secondary-fixed-variant: 215 212 219;
+    --c-inverse-on-surface: 28 27 31;
+    --c-on-tertiary-container: 224 213 200;
+    --c-surface-variant: 56 59 66;
+    --c-inverse-primary: 51 54 61;
+    --c-surface-tint: 197 202 219;
+    --c-on-primary: 16 18 26;
+    --c-primary-fixed-dim: 198 198 199;
+    --c-on-primary-fixed: 26 28 28;
+    --c-secondary: 207 211 224;
+    --c-surface-dim: 13 14 18;
+    --c-tertiary-fixed-dim: 207 197 187;
+    --c-primary: 197 202 219;
+    --c-on-background: 232 233 237;
+    --c-tertiary-container: 72 62 48;
+    --c-surface-container-high: 33 35 41;
+    --c-secondary-container: 47 50 58;
+    --c-on-tertiary-fixed: 32 27 21;
+    --c-surface: 12 13 17;
+    --c-outline-variant: 70 74 82;
+    --c-on-surface-variant: 200 204 214;
+    --c-error-container: 96 30 30;
+    --c-on-secondary: 26 28 34;
+    --c-surface-bright: 36 38 45;
+    --c-background: 9 10 14;
+    --c-surface-container-low: 19 20 25;
+    --c-secondary-fixed-dim: 200 197 203;
+    --c-outline: 138 143 153;
+    --c-on-primary-container: 222 224 230;
+    --c-surface-container-highest: 41 43 50;
+    --c-surface-container: 24 25 31;
+    --c-inverse-surface: 232 233 237;
+    --c-surface-container-lowest: 6 7 10;
+    --c-primary-container: 51 56 74;
+    --c-on-error: 255 255 255;
+    --c-error: 255 138 128;
+    --c-on-primary-fixed-variant: 45 47 47;
+    --c-on-tertiary: 255 255 255;
+    --c-on-error-container: 255 218 214;
+    --c-on-tertiary-fixed-variant: 76 70 62;
+    --c-on-secondary-fixed: 27 27 31;
+    --c-on-secondary-container: 222 224 235;
+    --c-on-surface: 237 238 241;
+    --c-primary-fixed: 226 226 226;
+    --c-tertiary: 214 199 180;
+    --c-tertiary-fixed: 235 225 214;
+    --c-gold: 240 196 80;
+    --c-epic: 178 140 230;
+    --c-rare: 110 165 235;
+    --c-mythic: 255 90 90;
+    --c-legendary: 240 100 200;
+    --c-uncommon: 110 220 150;
+    --c-common: 170 175 185;
+
+    --sun-opacity: 0;
+    --moon-opacity: 1;
+  }
+
+  /* Smooth theme transition */
+  body, .glass, nav, aside { transition: background-color .35s ease, border-color .35s ease, color .35s ease; }
+
+  /* ===== Theme toggle (sun/moon) ===== */
+  .theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(120,120,130,0.25);
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  html.dark .theme-toggle {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
+  }
+  .theme-toggle:hover { transform: scale(1.06); }
+  .theme-toggle svg { position: absolute; width: 20px; height: 20px; transition: opacity .3s ease, transform .4s ease; }
+  .theme-toggle .icon-sun { opacity: var(--sun-opacity); transform: rotate(0deg) scale(1); color: #b08600; }
+  .theme-toggle .icon-moon { opacity: var(--moon-opacity); transform: rotate(0deg) scale(1); color: #c9d2ff; }
+  html:not(.dark) .theme-toggle .icon-moon { transform: rotate(-60deg) scale(.5); }
+  html.dark .theme-toggle .icon-sun { transform: rotate(60deg) scale(.5); }
+  html, body {
+    background-color: transparent;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .glass {
+    background: rgba(var(--c-surface-variant), 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--c-on-surface), 0.08);
+  }
+  html.dark .glass {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .cosmic-gradient {
+    background-color: rgb(var(--c-background));
+    background-image: radial-gradient(circle at top left, rgba(var(--c-primary), 0.07), transparent 60%),
+                radial-gradient(circle at bottom right, rgba(var(--c-primary), 0.1), transparent 60%);
+  }
+  html.dark .cosmic-gradient {
+    background-image: radial-gradient(circle at top left, rgba(120, 130, 200, 0.16), transparent 55%),
+                radial-gradient(circle at bottom right, rgba(90, 70, 160, 0.18), transparent 55%);
+  }
+  .nebula-glow {
+    box-shadow: 0 0 25px rgba(var(--c-primary), 0.18);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  .fill-icon {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(var(--c-primary), 0.3); border-radius: 9999px; }
+  .rarity-glow-7 { box-shadow: 0 0 0 2px rgba(var(--c-mythic),0.85), 0 0 28px rgba(var(--c-mythic),0.45), 0 0 50px rgba(var(--c-mythic),0.2); animation: pulse-soft 1.6s ease-in-out infinite; }
+  .rarity-glow-6 { box-shadow: 0 0 0 2px rgba(var(--c-legendary),0.8), 0 0 24px rgba(var(--c-legendary),0.35); }
+  .rarity-glow-5 { box-shadow: 0 0 0 2px rgba(var(--c-gold),0.7), 0 0 20px rgba(var(--c-gold),0.25); }
+  .rarity-glow-4 { box-shadow: 0 0 0 2px rgba(var(--c-epic),0.6), 0 0 16px rgba(var(--c-epic),0.2); }
+  .rarity-glow-3 { box-shadow: 0 0 0 2px rgba(var(--c-rare),0.5); }
+  .rarity-glow-2 { box-shadow: 0 0 0 2px rgba(var(--c-uncommon),0.4); }
+  .rarity-glow-1 { box-shadow: 0 0 0 1px rgba(var(--c-common),0.3); }
+  @keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+  .pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+</style>
+<script>
+(function() {
+  try {
+    var t = localStorage.getItem('anhquoc-theme');
+    if (t === 'dark') {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    }
+  } catch (e) {}
+})();
+</script>
+<script>
+const INV_KEY = 'anhquoc-inventory';
+const INV_CAP = 150;
+const INV_AUTODEL_KEY = 'anhquoc-autodelete-threshold';
+
+function invLoad() {
+  try { return JSON.parse(localStorage.getItem(INV_KEY)) || []; }
+  catch (e) { return []; }
+}
+
+function invSave(items) {
+  localStorage.setItem(INV_KEY, JSON.stringify(items));
+}
+
+function invGetThreshold() {
+  const v = parseInt(localStorage.getItem(INV_AUTODEL_KEY), 10);
+  return isNaN(v) ? 0 : v;
+}
+
+function invSetThreshold(v) {
+  localStorage.setItem(INV_AUTODEL_KEY, String(v));
+}
+
+function invAdd(item) {
+  const items = invLoad();
+  items.push({ ...item, id: Date.now() + '-' + Math.random().toString(36).slice(2) });
+  invAutoDelete(items);
+  invSave(items);
+  return items;
+}
+
+function invAutoDelete(items) {
+  const threshold = invGetThreshold();
+  if (threshold > 0) {
+    for (let i = items.length - 1; i >= 0; i--) {
+      if (!items[i].locked && items[i].rarity < threshold) items.splice(i, 1);
+    }
+  }
+  while (items.length > INV_CAP) {
+    let worstIdx = -1, worstRarity = 99;
+    for (let i = 0; i < items.length; i++) {
+      if (!items[i].locked && items[i].rarity < worstRarity) {
+        worstRarity = items[i].rarity;
+        worstIdx = i;
+      }
+    }
+    if (worstIdx === -1) break;
+    items.splice(worstIdx, 1);
+  }
+}
+
+</script>
+<script src="js/aq-data.js"></script>
+<script src="js/aq-gacha.js"></script>
+<script src="js/aq-battle.js"></script>
+</head>
+<body class="min-h-screen font-body-md text-on-surface">
+<video class="bg-video" autoplay muted loop playsinline preload="auto" id="bgVideo">
+  <source src="https://res.cloudinary.com/da3wvlqvd/video/upload/v1781928497/PinGrab_1781928471662_orybdp.mp4" type="video/mp4">
+</video>
+<div class="bg-video-overlay"></div>
+<nav class="fixed top-0 left-0 right-0 flex justify-between items-center px-6 md:px-8 py-3 z-50 max-w-7xl mx-auto rounded-full mt-4 mx-margin-desktop bg-surface-variant/15 backdrop-blur-[40px] border border-white/20">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary text-[26px] fill-icon">shield_moon</span>
+    <span class="text-headline-md font-headline-md font-extrabold text-on-surface tracking-tight">ANH QUỐC</span>
+  </div>
+  <div class="hidden md:flex gap-6">
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+      <span class="text-label-sm font-label-sm uppercase">Vàng</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="gold">0</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">diamond</span>
+      <span class="text-label-sm font-label-sm uppercase">Kim Cương</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="diamond">0</span>
+    </div>
+    <div class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10">
+      <span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+      <span class="text-label-sm font-label-sm uppercase">Thể Lực</span>
+      <span class="text-label-sm font-label-sm font-bold ml-2" data-currency="energy">150/150</span>
+    </div>
+  </div>
+  <div class="flex items-center gap-3">
+    <button class="theme-toggle" id="themeToggle" title="Đổi giao diện sáng/tối" type="button">
+      <svg class="icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      <svg class="icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Thông báo">notifications</button>
+    <button class="material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors" title="Tài khoản">account_circle</button>
+  </div>
+</nav>
+
+<aside class="fixed left-0 top-0 bottom-0 w-64 hidden lg:flex flex-col p-6 z-40 my-8 ml-margin-desktop rounded-xl bg-surface-variant/15 backdrop-blur-[40px] border border-white/20 shadow-xl shadow-primary/5">
+  <div class="mb-10 px-2">
+    <h2 class="font-headline-md text-on-surface font-bold text-headline-md">ANH QUỐC</h2>
+    <p class="text-label-sm font-label-sm text-on-surface-variant/60">SECTOR 7 · NEBULA HUB</p>
+  </div>
+  <div class="space-y-2 flex-grow">
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="index.html">
+        <span class="material-symbols-outlined">home</span>
+        <span class="text-label-sm font-label-sm uppercase">Trang Chủ</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="story.html">
+        <span class="material-symbols-outlined">auto_stories</span>
+        <span class="text-label-sm font-label-sm uppercase">Cốt Truyện</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="challenge.html">
+        <span class="material-symbols-outlined">swords</span>
+        <span class="text-label-sm font-label-sm uppercase">Thử Thách</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="raid.html">
+        <span class="material-symbols-outlined">groups</span>
+        <span class="text-label-sm font-label-sm uppercase">Đột Kích</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 bg-primary text-on-primary rounded-lg font-bold shadow-[0_0_15px_rgba(93,95,95,0.4)] translate-x-1 transition-all duration-300" href="gacha.html">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        <span class="text-label-sm font-label-sm uppercase">Triệu Hồi</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="battle.html">
+        <span class="material-symbols-outlined">swords</span>
+        <span class="text-label-sm font-label-sm uppercase">Chiến Đấu</span>
+      </a>
+      <a class="flex items-center gap-4 p-3 text-on-surface-variant/60 hover:text-on-surface hover:bg-white/5 transition-all hover:translate-x-1 duration-200" href="inventory.html">
+        <span class="material-symbols-outlined">inventory_2</span>
+        <span class="text-label-sm font-label-sm uppercase">Kho Đồ</span>
+      </a>
+  </div>
+  <a href="gacha.html" class="w-full block text-center py-4 mt-8 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.02] transition-transform active:scale-95">
+    TRIỆU HỒI NGAY
+  </a>
+</aside>
+<main class="lg:ml-[320px] pt-32 pb-32 px-6 lg:pr-margin-desktop min-h-screen">
+  <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+      <h1 class="font-headline-lg text-headline-lg uppercase mb-2">Triệu Hồi</h1>
+      <div class="flex items-center gap-6">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">confirmation_number</span>
+          <span class="text-label-sm font-label-sm">VÉ TRIỆU HỒI: 12</span>
+        </div>
+        <div class="h-4 w-[1px] bg-outline-variant"></div>
+        <p class="text-on-surface-variant/70 italic">Vận may là sức mạnh thực sự của Sector 7.</p>
+      </div>
+    </div>
+    <button id="historyBtn" class="flex items-center gap-3 px-6 py-3 glass rounded-full hover:bg-white/20 transition-all active:scale-95 group">
+      <span class="material-symbols-outlined group-hover:rotate-12 transition-transform">history</span>
+      <span class="font-label-sm text-label-sm uppercase tracking-widest">Lịch Sử Triệu Hồi</span>
+    </button>
+  </header>
+
+  <!-- Featured Banner -->
+  <div class="glass rounded-[32px] overflow-hidden relative mb-10 min-h-[380px] group">
+    <div id="featuredBannerImg" class="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://res.cloudinary.com/da3wvlqvd/image/upload/v1781929243/download_2_huabza.jpg')"></div>
+    <div class="relative p-10 flex flex-col items-start">
+      <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-legendary/20 text-legendary text-label-sm font-label-sm mb-6 w-fit">
+        <span class="material-symbols-outlined text-sm fill-icon">auto_awesome</span>
+        BANNER GIỚI HẠN · 6★
+      </div>
+      <h2 id="featuredBannerTitle" class="font-headline-lg text-headline-lg mb-2 uppercase">Naruto</h2>
+      <p id="featuredBannerDesc" class="text-body-md text-on-surface-variant/80 mb-8 max-w-lg">Tỉ lệ tăng gấp đôi cho nhân vật 6★ trong banner Naruto. Đảm bảo nhận tối thiểu 6★ sau 80 lượt.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl">
+        <button id="pull1Btn" class="flex items-center justify-between px-6 py-4 glass rounded-2xl hover:bg-white/20 transition-all active:scale-95">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest">Triệu Hồi x1</span>
+          <span class="flex items-center gap-1 text-label-sm font-label-sm"><span class="material-symbols-outlined text-[16px] text-primary">confirmation_number</span>1</span>
+        </button>
+        <button id="pull10Btn" class="flex items-center justify-between px-6 py-4 bg-on-background text-on-primary rounded-2xl hover:shadow-lg transition-all active:scale-95">
+          <span class="font-label-sm text-label-sm uppercase tracking-widest">Triệu Hồi x10</span>
+          <span class="flex items-center gap-1 text-label-sm font-label-sm"><span class="material-symbols-outlined text-[16px]">confirmation_number</span>10</span>
+        </button>
+      </div>
+      <p class="text-label-sm font-label-sm text-on-surface-variant/50 mt-4">Tỉ lệ: 7★ 0.005% · 6★ 0.05% · 5★ 0.5% · 4★ 5% · 3★ 15% · 2★ 30% · 1★ 49.445%</p>
+      <button id="previewBtn" class="mt-4 flex items-center gap-2 text-label-sm font-label-sm text-on-surface-variant/70 hover:text-on-surface underline">
+        <span class="material-symbols-outlined text-[16px]">visibility</span>
+        Xem trước thẻ trong banner
+      </button>
+      <div id="previewPanel" class="hidden mt-4 w-full grid grid-cols-3 sm:grid-cols-5 md:grid-cols-7 gap-3"></div>
+    </div>
+  </div>
+
+  <!-- Other banners -->
+  <div class="flex items-center gap-4 mb-6">
+    <h3 class="font-headline-md text-headline-md">Banner Khác</h3>
+    <div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="glass p-6 rounded-[28px] flex items-center gap-6">
+      <div class="w-20 h-20 rounded-2xl bg-cover bg-center shrink-0" style="background-image: url('https://res.cloudinary.com/da3wvlqvd/image/upload/v1781929243/download_2_huabza.jpg')"></div>
+      <div class="flex-grow">
+        <h4 class="font-headline-md text-[16px] font-bold">Naruto</h4>
+        <p class="text-label-sm font-label-sm text-on-surface-variant/60 mt-1">Banner giới hạn chủ đề Naruto.</p>
+      </div>
+      <button data-banner="naruto" class="banner-switch-btn px-5 py-2 glass rounded-full text-label-sm font-label-sm hover:bg-white/20 transition-all active:scale-95 shrink-0">XEM</button>
+    </div>
+    <div class="glass p-6 rounded-[28px] flex items-center gap-6">
+      <div class="w-20 h-20 rounded-2xl bg-cover bg-center shrink-0" style="background-image: url('https://res.cloudinary.com/da3wvlqvd/image/upload/v1781929245/2853732_jpg_2880_1620_eqbtzl.jpg')"></div>
+      <div class="flex-grow">
+        <h4 class="font-headline-md text-[16px] font-bold">One Piece</h4>
+        <p class="text-label-sm font-label-sm text-on-surface-variant/60 mt-1">Banner giới hạn chủ đề One Piece.</p>
+      </div>
+      <button data-banner="onepiece" class="banner-switch-btn px-5 py-2 glass rounded-full text-label-sm font-label-sm hover:bg-white/20 transition-all active:scale-95 shrink-0">XEM</button>
+    </div>
+  </div>
+</main>
+
+<!-- Pull Result Modal -->
+<div id="pullModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-6">
+  <video id="gachaCutscene" class="absolute inset-0 w-full h-full object-cover" src="https://res.cloudinary.com/da3wvlqvd/video/upload/v1781882190/PinGrab_1781882136881_riqrlf.mp4" autoplay muted playsinline></video>
+  <div class="relative glass rounded-[32px] p-8 max-w-3xl w-full hidden" id="pullResultsWrap">
+    <button id="closeModalBtn" class="absolute top-4 right-4 material-symbols-outlined text-on-surface hover:bg-white/10 p-2 rounded-full transition-colors">close</button>
+    <h3 class="font-headline-md text-headline-md text-center mb-6 uppercase">Kết Quả Triệu Hồi</h3>
+    <div id="pullResults" class="grid grid-cols-3 sm:grid-cols-5 gap-3"></div>
+    <button id="confirmModalBtn" class="w-full mt-8 py-3 bg-on-background text-on-primary rounded-xl font-label-sm tracking-widest hover:scale-[1.01] transition-transform active:scale-95">XÁC NHẬN</button>
+  </div>
+</div>
+
+<nav class="fixed bottom-0 left-0 w-full z-50 flex lg:hidden justify-around items-center px-2 py-2 pb-safe bg-surface-variant/20 backdrop-blur-[40px] rounded-t-[32px] border-t border-white/20 shadow-2xl overflow-x-auto">
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="index.html">
+    <span class="material-symbols-outlined text-[20px]">home</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Trang Chủ</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="story.html">
+    <span class="material-symbols-outlined text-[20px]">auto_stories</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Cốt Truyện</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="challenge.html">
+    <span class="material-symbols-outlined text-[20px]">swords</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Thử Thách</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="raid.html">
+    <span class="material-symbols-outlined text-[20px]">groups</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Đột Kích</span>
+  </a>
+  <a class="flex flex-col items-center justify-center bg-primary text-on-primary rounded-xl px-3 py-1.5 shadow-[0_0_10px_rgba(93,95,95,0.5)]" href="gacha.html">
+    <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Triệu Hồi</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant/70 hover:bg-white/10 p-2 rounded-xl" href="inventory.html">
+    <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+    <span class="text-[10px] font-label-sm font-label-sm">Kho Đồ</span>
+  </a>
+</nav>
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+  <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+  <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+
+<script>
+const BANNERS = {
+  naruto: {
+    title: 'Naruto',
+    desc: 'Tỉ lệ tăng gấp đôi cho nhân vật 6★ trong banner Naruto. Đảm bảo nhận tối thiểu 6★ sau 80 lượt.',
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781929243/download_2_huabza.jpg',
+  },
+  onepiece: {
+    title: 'One Piece',
+    desc: 'Tỉ lệ tăng gấp đôi cho nhân vật 6★ trong banner One Piece. Đảm bảo nhận tối thiểu 6★ sau 80 lượt.',
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781929245/2853732_jpg_2880_1620_eqbtzl.jpg',
+  },
+};
+document.querySelectorAll('.banner-switch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const b = BANNERS[btn.getAttribute('data-banner')];
+    if (!b) return;
+    document.getElementById('featuredBannerImg').style.backgroundImage = `url('${b.img}')`;
+    document.getElementById('featuredBannerTitle').textContent = b.title;
+    document.getElementById('featuredBannerDesc').textContent = b.desc;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+<script>
+function rarityClasses(rarity) {
+  if (rarity === 7) return { ring: 'rarity-glow-7', bg: 'bg-mythic/10', color: 'text-mythic', anim: 'aq-anim-7' };
+  if (rarity === 6) return { ring: 'rarity-glow-6', bg: 'bg-legendary/10', color: 'text-legendary', anim: 'aq-anim-6' };
+  if (rarity === 5) return { ring: 'rarity-glow-5', bg: 'bg-gold/10', color: 'text-gold', anim: 'aq-anim-5' };
+  if (rarity === 4) return { ring: 'rarity-glow-4', bg: 'bg-epic/10', color: 'text-epic', anim: 'aq-anim-4' };
+  if (rarity === 3) return { ring: 'rarity-glow-3', bg: 'bg-rare/10', color: 'text-rare', anim: 'aq-anim-3' };
+  if (rarity === 2) return { ring: 'rarity-glow-2', bg: 'bg-uncommon/10', color: 'text-uncommon', anim: '' };
+  return { ring: 'rarity-glow-1', bg: 'bg-common/10', color: 'text-common', anim: '' };
+}
+
+function renderResults(results) {
+  const container = document.getElementById('pullResults');
+  container.innerHTML = '';
+  results.forEach((res, i) => {
+    const { card, rarity, isNew } = res;
+    const cls = rarityClasses(rarity);
+    const el = document.createElement('div');
+    el.className = `relative flex flex-col items-center gap-2 p-3 rounded-2xl ${cls.bg} ${cls.ring} ${cls.anim} opacity-0 transition-opacity duration-500`;
+    el.innerHTML = `
+      ${isNew ? '<span class="absolute -top-2 -right-2 text-[9px] px-2 py-0.5 rounded-full bg-mythic text-white font-label-sm">MỚI</span>' : ''}
+      <span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>
+      <span class="text-[11px] font-label-sm text-center leading-tight">${card.name}</span>
+      <span class="text-[10px] font-label-sm ${cls.color}">${rarity}★ · ${card.element}/${card.role}</span>
+      <span class="text-[9px] font-label-sm text-on-surface-variant/60">ATK ${card.atk} · DEF ${card.def} · SPD ${card.spd}</span>
+    `;
+    container.appendChild(el);
+    setTimeout(() => { el.style.opacity = '1'; }, 80 * i);
+  });
+}
+
+let cutsceneTimer = null;
+
+function doPull(count) {
+  const out = AQ.Gacha.pull(count);
+  if (out.error === 'NOT_ENOUGH_GEM') { alert('Không đủ Linh Ngọc để triệu hồi.'); return; }
+  const maxRarity = Math.max(...out.results.map(r => r.rarity));
+  const modal = document.getElementById('pullModal');
+  const video = document.getElementById('gachaCutscene');
+  const wrap = document.getElementById('pullResultsWrap');
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  wrap.classList.add('hidden');
+  video.classList.remove('hidden');
+  video.currentTime = 0;
+  video.play();
+  clearTimeout(cutsceneTimer);
+  cutsceneTimer = setTimeout(() => {
+    video.pause();
+    video.classList.add('hidden');
+    wrap.classList.remove('hidden');
+    wrap.classList.toggle('aq-cutscene-7', maxRarity >= 7);
+    renderResults(out.results);
+    renderCurrency();
+  }, AQ.Gacha.animDuration(maxRarity));
+}
+
+const gachaCutscene = document.getElementById('gachaCutscene');
+
+const pull1Btn = document.getElementById('pull1Btn');
+const pull10Btn = document.getElementById('pull10Btn');
+const pullModal = document.getElementById('pullModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const confirmModalBtn = document.getElementById('confirmModalBtn');
+
+const previewBtn = document.getElementById('previewBtn');
+const previewPanel = document.getElementById('previewPanel');
+previewBtn.addEventListener('click', () => {
+  if (!previewPanel.classList.contains('hidden')) {
+    previewPanel.classList.add('hidden');
+    return;
+  }
+  previewPanel.innerHTML = '';
+  [7, 6, 5, 4, 3, 2, 1].forEach(rarity => {
+    AQ.CARDS.filter(c => c.rarity === rarity).forEach(card => {
+      const cls = rarityClasses(rarity);
+      const el = document.createElement('div');
+      el.className = `flex flex-col items-center gap-1 p-3 rounded-2xl ${cls.bg} ${cls.ring}`;
+      el.innerHTML = `
+        <span class="material-symbols-outlined text-2xl ${cls.color} fill-icon">military_tech</span>
+        <span class="text-[10px] font-label-sm text-center leading-tight">${card.name}</span>
+        <span class="text-[9px] font-label-sm ${cls.color}">${rarity}★</span>
+      `;
+      previewPanel.appendChild(el);
+    });
+  });
+  previewPanel.classList.remove('hidden');
+});
+
+if (pull1Btn) pull1Btn.addEventListener('click', () => doPull(1));
+if (pull10Btn) pull10Btn.addEventListener('click', () => doPull(10));
+function hideModal() {
+  pullModal.classList.add('hidden');
+  pullModal.classList.remove('flex');
+  clearTimeout(cutsceneTimer);
+  gachaCutscene.pause();
+}
+if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
+if (confirmModalBtn) confirmModalBtn.addEventListener('click', hideModal);
+if (pullModal) pullModal.addEventListener('click', (e) => { if (e.target === pullModal) hideModal(); });
+
+function renderCurrency() {
+  const c = AQ.Storage.getCurrency();
+  document.querySelectorAll('[data-currency="diamond"]').forEach(el => el.textContent = c.gem);
+  document.querySelectorAll('[data-currency="ticket"]').forEach(el => el.textContent = c.ticket);
+}
+renderCurrency();
+
+const historyBtn = document.getElementById('historyBtn');
+if (historyBtn) historyBtn.addEventListener('click', () => {
+  const inv = AQ.Storage.getInventory();
+  alert(inv.length ? `Bạn đang sở hữu ${inv.length} nhân vật.` : 'Chưa có lịch sử triệu hồi.');
+});
+
+document.querySelectorAll('.glass').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+</script>
+
+<script>
+// Theme toggle: sync across pages via localStorage
+(function() {
+  const html = document.documentElement;
+  const stored = localStorage.getItem('anhquoc-theme');
+  if (stored === 'dark') { html.classList.add('dark'); html.classList.remove('light'); }
+  else if (stored === 'light') { html.classList.remove('dark'); html.classList.add('light'); }
+
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const isDark = html.classList.toggle('dark');
+      html.classList.toggle('light', !isDark);
+      localStorage.setItem('anhquoc-theme', isDark ? 'dark' : 'light');
+    });
+  }
+})();
+</script>
+<script>
+// ===== Custom laser cursor trail =====
+(function() {
+  // Skip on touch-only devices (no real mouse)
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.id = 'laserCursorCanvas';
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.pointerEvents = 'none';
+  canvas.style.zIndex = '2147483647';
+  // mixBlendMode set dynamically per-theme in colors()
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function colors() {
+    const isDark = document.documentElement.classList.contains('dark');
+    canvas.style.mixBlendMode = isDark ? 'screen' : 'normal';
+    return isDark
+      ? { core: 'rgba(210, 225, 255, 1)', glow: 'rgba(140, 160, 255, 0.95)', tail: 'rgba(170, 120, 255, 0.55)', ring: 'rgba(40, 30, 70, 0)' }
+      : { core: 'rgba(255, 60, 20, 1)', glow: 'rgba(255, 110, 20, 0.95)', tail: 'rgba(220, 50, 10, 0.6)', ring: 'rgba(255, 255, 255, 0.9)' };
+  }
+
+  const points = [];
+  const MAX_POINTS = 16;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let lastX = mouseX, lastY = mouseY;
+  let active = false;
+  let hideTimer = null;
+
+  function onMove(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    active = true;
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => { active = false; }, 2500);
+  }
+  window.addEventListener('mousemove', onMove, { passive: true });
+
+  // Click pulse burst
+  const bursts = [];
+  window.addEventListener('mousedown', (e) => {
+    bursts.push({ x: e.clientX, y: e.clientY, r: 2, life: 1 });
+  });
+
+  function tick() {
+    requestAnimationFrame(tick);
+    ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
+    if (!active && points.length === 0 && bursts.length === 0) return;
+
+    const c = colors();
+
+    // Add new point with velocity-based spacing
+    const dx = mouseX - lastX, dy = mouseY - lastY;
+    const dist = Math.hypot(dx, dy);
+    points.push({ x: mouseX, y: mouseY, life: 1 });
+    if (points.length > MAX_POINTS) points.shift();
+    lastX = mouseX; lastY = mouseY;
+
+    // Draw laser trail (fading line strip)
+    if (points.length > 1) {
+      for (let i = 1; i < points.length; i++) {
+        const p0 = points[i - 1];
+        const p1 = points[i];
+        const t = i / points.length; // 0 (old) -> 1 (new)
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.lineWidth = 0.6 + t * 2.6;
+        ctx.strokeStyle = c.tail;
+        ctx.globalAlpha = t * 0.55;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      }
+    }
+
+    // Decay points
+    for (let i = points.length - 1; i >= 0; i--) {
+      points[i].life -= 0.06;
+      if (points[i].life <= 0) points.splice(i, 1);
+    }
+
+    // Core glow at current position
+    ctx.globalAlpha = 1;
+    const grad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 14);
+    grad.addColorStop(0, c.core);
+    grad.addColorStop(0.35, c.glow);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 14, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Contrast ring so the dot stays visible on any background (mainly for light mode)
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 4.2, 0, Math.PI * 2);
+    ctx.strokeStyle = c.ring;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 3, 0, Math.PI * 2);
+    ctx.fillStyle = c.core;
+    ctx.fill();
+
+    // Click bursts
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i];
+      ctx.globalAlpha = b.life * 0.6;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+      ctx.strokeStyle = c.glow;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      b.r += 2.2;
+      b.life -= 0.045;
+      if (b.life <= 0) bursts.splice(i, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+  requestAnimationFrame(tick);
+
+  // Hide native cursor, use our own
+  const styleTag = document.createElement('style');
+  styleTag.textContent = '* { cursor: none !important; }';
+  document.head.appendChild(styleTag);
+})();
+</script>
+<script>
+// ===== ADMIN MODE (demo only — client-side, gõ "ZZOLLYAN" ở bất kỳ đâu để kích hoạt) =====
+(function() {
+  const CODE = 'ZZOLLYAN';
+  let buffer = '';
+
+  function showToast(msg) {
+    let toast = document.getElementById('adminToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'adminToast';
+      toast.style.position = 'fixed';
+      toast.style.bottom = '24px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+      toast.style.padding = '12px 24px';
+      toast.style.borderRadius = '9999px';
+      toast.style.background = 'rgb(var(--c-mythic))';
+      toast.style.color = '#fff';
+      toast.style.fontWeight = '700';
+      toast.style.fontSize = '13px';
+      toast.style.letterSpacing = '0.05em';
+      toast.style.zIndex = '2147483647';
+      toast.style.boxShadow = '0 8px 30px rgba(0,0,0,0.35)';
+      toast.style.opacity = '0';
+      toast.style.transition = 'opacity .3s ease, transform .3s ease';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    });
+    clearTimeout(toast._hideTimer);
+    toast._hideTimer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2600);
+  }
+
+  function applyAdminDisplay() {
+    document.querySelectorAll('[data-currency]').forEach(el => {
+      el.textContent = '∞';
+    });
+  }
+
+  function activateAdmin() {
+    localStorage.setItem('anhquoc-admin', '1');
+    applyAdminDisplay();
+    showToast('⚡ ADMIN MODE ĐÃ KÍCH HOẠT — Tài nguyên: VÔ HẠN');
+  }
+
+  function deactivateAdmin() {
+    localStorage.removeItem('anhquoc-admin');
+    showToast('Đã tắt ADMIN MODE — tải lại trang để khôi phục');
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      buffer = (buffer + e.key).toUpperCase().slice(-CODE.length);
+      if (buffer === CODE) {
+        const isAdmin = localStorage.getItem('anhquoc-admin') === '1';
+        if (isAdmin) { deactivateAdmin(); } else { activateAdmin(); }
+        buffer = '';
+      }
+    }
+  });
+
+  // Apply immediately on load if already activated in a previous page
+  if (localStorage.getItem('anhquoc-admin') === '1') {
+    document.addEventListener('DOMContentLoaded', applyAdminDisplay);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var v = document.getElementById('bgVideo');
+  if(!v) return;
+  v.loop = true;
+  v.muted = true;
+  v.play().catch(function(){});
+  v.addEventListener('ended', function(){ v.currentTime = 0; v.play().catch(function(){}); });
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) v.play().catch(function(){}); });
+})();
+</script>
+</body></html>

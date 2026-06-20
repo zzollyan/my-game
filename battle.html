@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ANH QUỐC - Chiến Đấu</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Hanken+Grotesk:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="js/aq-data.js"></script>
+<script src="js/aq-gacha.js"></script>
+<script src="js/aq-battle.js"></script>
+<style>
+  body { font-family: 'Hanken Grotesk', sans-serif; background:#0c0d11; color:#eee; }
+  h1,h2,.title { font-family:'Space Grotesk', sans-serif; }
+  .hpbar { height:8px; border-radius:4px; background:#222; overflow:hidden; }
+  .hpfill { height:100%; background:linear-gradient(90deg,#22c55e,#4ade80); transition:width .3s; }
+  .enfill { height:100%; background:linear-gradient(90deg,#3b82f6,#60a5fa); transition:width .3s; }
+  .unitcard { background:#15171d; border:1px solid #262a33; border-radius:14px; padding:12px; }
+  .unitcard.broken { outline:2px solid #ef4444; }
+  .log { background:#0f1116; border:1px solid #222; border-radius:10px; padding:10px; height:220px; overflow-y:auto; font-size:12px; line-height:1.5; }
+</style>
+</head>
+<body class="min-h-screen p-6 max-w-5xl mx-auto">
+
+<header class="flex items-center justify-between mb-6">
+  <h1 class="title text-2xl font-bold uppercase">Chiến Đấu</h1>
+  <nav class="flex gap-3 text-xs uppercase tracking-widest text-white/60">
+    <a href="index.html" class="hover:text-white">Trang Chủ</a>
+    <a href="gacha.html" class="hover:text-white">Triệu Hồi</a>
+    <a href="inventory.html" class="hover:text-white">Kho Đồ</a>
+    <a href="challenge.html" class="hover:text-white">Thử Thách</a>
+    <a href="raid.html" class="hover:text-white">Đột Kích</a>
+  </nav>
+</header>
+
+<section class="mb-6">
+  <h2 class="title text-sm uppercase tracking-widest text-white/50 mb-2">Đội Hình (4 ô)</h2>
+  <div id="teamSlots" class="grid grid-cols-4 gap-3"></div>
+</section>
+
+<section class="mb-6">
+  <button id="startBattleBtn" class="px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm hover:scale-[1.02] transition-transform">Bắt Đầu Trận Đấu</button>
+  <button id="autoBattleBtn" class="px-6 py-3 ml-3 bg-white/10 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-white/20">Tự Động Đến Hết</button>
+</section>
+
+<section id="battleArea" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div>
+    <h3 class="title text-sm uppercase text-white/50 mb-2">Đội Của Bạn</h3>
+    <div id="playerUnits" class="space-y-3"></div>
+  </div>
+  <div>
+    <h3 class="title text-sm uppercase text-white/50 mb-2">Kẻ Địch</h3>
+    <div id="enemyUnits" class="space-y-3"></div>
+  </div>
+</section>
+
+<section id="battleArea2" class="hidden mt-6">
+  <h3 class="title text-sm uppercase text-white/50 mb-2">Nhật Ký Trận Đấu</h3>
+  <div id="battleLog" class="log"></div>
+  <button id="nextRoundBtn" class="mt-3 px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm">Lượt Tiếp Theo</button>
+</section>
+
+<div id="resultModal" class="fixed inset-0 hidden items-center justify-center bg-black/80 z-50">
+  <div class="bg-[#15171d] border border-white/10 rounded-2xl p-8 text-center max-w-sm w-full">
+    <h2 id="resultTitle" class="title text-3xl font-bold mb-2"></h2>
+    <p id="resultDesc" class="text-white/60 mb-6"></p>
+    <button id="resultCloseBtn" class="px-6 py-3 bg-white text-black rounded-xl font-bold uppercase tracking-widest text-sm w-full">Đóng</button>
+  </div>
+</div>
+
+<script>
+const ELEMENT_ICON = { Fire:'🔥', Water:'💧', Wind:'🌪️', Earth:'🪨', Light:'✨', Dark:'🌑' };
+const RARITY_COLOR = { 1:'#9CA3AF', 2:'#34D399', 3:'#3B82F6', 4:'#A855F7', 5:'#FACC15', 6:'#EF4444', 7:'#f472b6' };
+
+let team = AQ.Storage.getTeam();
+let inv = AQ.Storage.getInventory();
+let engine = null;
+
+function ownedCardOptions() {
+  return inv.map(u => ({ unit: u, card: AQ.getCard(u.cardId) })).filter(x => x.card);
+}
+
+function renderTeamSlots() {
+  const wrap = document.getElementById('teamSlots');
+  wrap.innerHTML = '';
+  for (let i = 0; i < 4; i++) {
+    const slot = document.createElement('div');
+    const filled = team[i];
+    const card = filled ? AQ.getCard(filled) : null;
+    slot.className = 'unitcard cursor-pointer text-center';
+    slot.innerHTML = card
+      ? `<div style="color:${RARITY_COLOR[card.rarity]}" class="text-xs font-bold mb-1">${card.rarity}★</div>
+         <div class="text-sm font-semibold">${card.name}</div>
+         <div class="text-[10px] text-white/50">${ELEMENT_ICON[card.element]} ${card.element} · ${card.role}</div>`
+      : `<div class="text-white/30 text-sm py-6">+ Chọn Nhân Vật</div>`;
+    slot.addEventListener('click', () => openPicker(i));
+    wrap.appendChild(slot);
+  }
+}
+
+function openPicker(slotIndex) {
+  const options = ownedCardOptions();
+  if (!options.length) { alert('Bạn chưa có nhân vật nào. Hãy triệu hồi trước.'); return; }
+  const names = options.map((o, i) => `${i + 1}. ${o.card.name} (${o.card.rarity}★)`).join('\n');
+  const pick = prompt(`Chọn nhân vật cho ô ${slotIndex + 1}:\n${names}`);
+  const idx = parseInt(pick, 10) - 1;
+  if (options[idx]) {
+    team[slotIndex] = options[idx].unit.cardId;
+    AQ.Storage.setTeam(team);
+    renderTeamSlots();
+  }
+}
+
+const ENEMY_TEAM = [
+  { id: 'e001', name: 'Giặc Phương Bắc', rarity: 5, element: 'Dark', role: 'DPS', hp: 1400, atk: 190, def: 100, spd: 90, energy: 0, skills: { basic:{name:'Chém'},skill:{name:'Cung Tên'},ultimate:{name:'Vây Hãm'} } },
+  { id: 'e002', name: 'Cung Thủ Địch', rarity: 4, element: 'Wind', role: 'DPS', hp: 1000, atk: 160, def: 70, spd: 105, energy: 0, skills: { basic:{name:'Bắn'},skill:{name:'Mưa Tên'},ultimate:{name:'Loạn Tiễn'} } },
+  { id: 'e003', name: 'Khiên Binh Địch', rarity: 4, element: 'Earth', role: 'Tank', hp: 1700, atk: 110, def: 160, spd: 75, energy: 0, skills: { basic:{name:'Đâm'},skill:{name:'Phòng Thủ'},ultimate:{name:'Trấn Áp'} } }
+];
+
+function buildUnits() {
+  const playerUnits = team.filter(Boolean).map(cardId => {
+    const card = AQ.getCard(cardId);
+    const u = inv.find(x => x.cardId === cardId) || { level: 1, ascension: 0 };
+    return new AQ.Unit(card, u, 'player');
+  });
+  const enemyUnits = ENEMY_TEAM.map(card => new AQ.Unit(card, { level: 1, ascension: 0 }, 'enemy'));
+  return { playerUnits, enemyUnits };
+}
+
+function logLine(msg) {
+  const log = document.getElementById('battleLog');
+  const line = document.createElement('div');
+  line.textContent = msg;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+function unitCardHTML(u) {
+  const hpPct = Math.max(0, (u.hp / u.maxHp) * 100);
+  const enPct = (u.energy / u.maxEnergy) * 100;
+  return `
+    <div class="unitcard ${u.broken ? 'broken' : ''}" data-id="${u.card.id}-${u.side}">
+      <div class="flex justify-between text-sm font-semibold mb-1">
+        <span>${ELEMENT_ICON[u.element]} ${u.card.name}</span>
+        <span style="color:${RARITY_COLOR[u.card.rarity]}">${u.card.rarity}★</span>
+      </div>
+      <div class="hpbar mb-1"><div class="hpfill" style="width:${hpPct}%"></div></div>
+      <div class="hpbar"><div class="enfill" style="width:${enPct}%"></div></div>
+      <div class="text-[10px] text-white/40 mt-1">HP ${u.hp}/${u.maxHp} · EN ${u.energy} · SPD ${u.spd} ${u.broken ? '· BREAK!' : ''}</div>
+    </div>`;
+}
+
+function renderUnits() {
+  document.getElementById('playerUnits').innerHTML = engine.units.filter(u => u.side === 'player').map(unitCardHTML).join('');
+  document.getElementById('enemyUnits').innerHTML = engine.units.filter(u => u.side === 'enemy').map(unitCardHTML).join('');
+}
+
+function checkEnd() {
+  if (!engine.isOver()) return false;
+  const win = engine.winner() === 'player';
+  document.getElementById('resultTitle').textContent = win ? 'CHIẾN THẮNG!' : 'THẤT BẠI';
+  document.getElementById('resultTitle').style.color = win ? '#4ade80' : '#ef4444';
+  document.getElementById('resultDesc').textContent = win ? 'Đội của bạn đã đánh bại kẻ địch.' : 'Đội của bạn đã bị đánh bại.';
+  document.getElementById('resultModal').classList.remove('hidden');
+  document.getElementById('resultModal').classList.add('flex');
+  return true;
+}
+
+document.getElementById('startBattleBtn').addEventListener('click', () => {
+  team = AQ.Storage.getTeam();
+  inv = AQ.Storage.getInventory();
+  const { playerUnits, enemyUnits } = buildUnits();
+  if (!playerUnits.length) { alert('Hãy chọn ít nhất 1 nhân vật vào đội hình.'); return; }
+  engine = new AQ.BattleEngine(playerUnits, enemyUnits, logLine);
+  document.getElementById('battleArea').classList.remove('hidden');
+  document.getElementById('battleArea').classList.add('grid');
+  document.getElementById('battleArea2').classList.remove('hidden');
+  document.getElementById('battleLog').innerHTML = '';
+  renderUnits();
+});
+
+document.getElementById('nextRoundBtn').addEventListener('click', () => {
+  if (!engine || engine.isOver()) return;
+  logLine(`— Lượt ${engine.turnCount + 1} —`);
+  engine.runRound();
+  renderUnits();
+  checkEnd();
+});
+
+document.getElementById('autoBattleBtn').addEventListener('click', () => {
+  team = AQ.Storage.getTeam();
+  inv = AQ.Storage.getInventory();
+  const { playerUnits, enemyUnits } = buildUnits();
+  if (!playerUnits.length) { alert('Hãy chọn ít nhất 1 nhân vật vào đội hình.'); return; }
+  engine = new AQ.BattleEngine(playerUnits, enemyUnits, logLine);
+  document.getElementById('battleArea').classList.remove('hidden');
+  document.getElementById('battleArea').classList.add('grid');
+  document.getElementById('battleArea2').classList.remove('hidden');
+  document.getElementById('battleLog').innerHTML = '';
+  let guard = 0;
+  while (!engine.isOver() && guard < 50) {
+    logLine(`— Lượt ${engine.turnCount + 1} —`);
+    engine.runRound();
+    guard++;
+  }
+  renderUnits();
+  checkEnd();
+});
+
+document.getElementById('resultCloseBtn').addEventListener('click', () => {
+  document.getElementById('resultModal').classList.add('hidden');
+  document.getElementById('resultModal').classList.remove('flex');
+});
+
+renderTeamSlots();
+</script>
+</body></html>
