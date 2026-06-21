@@ -1028,8 +1028,9 @@ function renderGrid(filter) {
   filtered.forEach((item) => {
     const cls = rarityClasses(item.rarity);
     const card = document.createElement('button');
-    card.className = `glass rounded-2xl p-4 flex flex-col items-center gap-2 hover:bg-white/20 transition-all hover:-translate-y-1 ${cls.ring}`;
+    card.className = `relative glass rounded-2xl p-4 flex flex-col items-center gap-2 hover:bg-white/20 transition-all hover:-translate-y-1 ${cls.ring}`;
     card.innerHTML = `
+      ${item.dupes > 0 ? `<span class="absolute -top-2 -right-2 text-[10px] px-2 py-0.5 rounded-full bg-black/80 border border-white/30 font-label-sm">x${item.dupes + 1}</span>` : ''}
       <div class="w-16 h-16 rounded-xl ${cls.bg} flex items-center justify-center overflow-hidden">
         ${item.img ? `<img src="${item.img}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>`}
       </div>
