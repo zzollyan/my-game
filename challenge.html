@@ -335,6 +335,7 @@ tailwind.config = {
 })();
 </script>
 <script>
+
 /* AQ.Data — định nghĩa thẻ bài, hệ, vai trò, hằng số rarity */
 window.AQ = window.AQ || {};
 
@@ -457,6 +458,64 @@ AQ.CARDS = [
 ];
 
 AQ.getCard = function (id) { return AQ.CARDS.find(c => c.id === id); };
+
+AQ.CARDS.push(
+  { id: 'a001', name: 'Luffy', rarity: 6, element: 'Fire', role: 'DPS',
+    hp: 1150, atk: 215, def: 78, spd: 108, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Instagram_kruos6.jpg',
+    skills: {
+      basic: { name: 'Gomu Gomu no Pistol', desc: '100% ATK.' },
+      skill: { name: 'Gomu Gomu no Gatling', desc: '180% ATK liên hoàn.' },
+      ultimate: { name: 'Gear 5', desc: '300% ATK + miễn nhiễm choáng 1 lượt.' },
+      passive: { name: 'Vua Hải Tặc', desc: 'Khi HP dưới 50%, ATK +20%.' }
+    }},
+  { id: 'a002', name: 'Naruto', rarity: 6, element: 'Wind', role: 'DPS',
+    hp: 1100, atk: 208, def: 80, spd: 104, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928311/download_1_ntp22q.jpg',
+    skills: {
+      basic: { name: 'Rasengan', desc: '100% ATK.' },
+      skill: { name: 'Kage Bunshin', desc: '180% ATK, tạo 1 bản sao tấn công phụ.' },
+      ultimate: { name: 'Kyuubi Mode', desc: '300% ATK + hồi 15% HP bản thân.' },
+      passive: { name: 'Ý Chí Hỏa', desc: '+10% kháng debuff cho cả đội.' }
+    }},
+  { id: 'a003', name: 'Zoro', rarity: 6, element: 'Earth', role: 'DPS',
+    hp: 1080, atk: 212, def: 85, spd: 100, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Zoro_Roronoa_lyrnyl.jpg',
+    skills: {
+      basic: { name: 'Santoryu', desc: '100% ATK.' },
+      skill: { name: 'Oni Giri', desc: '180% ATK xuyên giáp 20%.' },
+      ultimate: { name: 'Asura', desc: '300% ATK toàn địch.' },
+      passive: { name: 'Tam Đao Lưu', desc: 'Đòn cơ bản có 15% chí mạng x1.5.' }
+    }},
+  { id: 'a004', name: 'Sasuke', rarity: 6, element: 'Dark', role: 'DPS',
+    hp: 1050, atk: 218, def: 76, spd: 110, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Sasuke_Wallpaper_Mobile_wzvwxb.jpg',
+    skills: {
+      basic: { name: 'Chidori', desc: '100% ATK.' },
+      skill: { name: 'Katon Goukakyuu', desc: '180% ATK lan rộng.' },
+      ultimate: { name: 'Susanoo', desc: '300% ATK + giảm 30% sát thương nhận 2 lượt.' },
+      passive: { name: 'Sharingan', desc: 'Né 10% đòn đánh đơn mục tiêu.' }
+    }},
+  { id: 'a005', name: 'Minato', rarity: 7, element: 'Light', role: 'DPS',
+    hp: 1250, atk: 228, def: 88, spd: 125, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928307/download_3_nmsvsz.jpg',
+    skills: {
+      basic: { name: 'Hiraishin', desc: '100% ATK, luôn đánh trước.' },
+      skill: { name: 'Rasengan Cấp 4', desc: '180% ATK + dịch chuyển tức thời né đòn tiếp theo.' },
+      ultimate: { name: 'Tử Thần Phong Ấn', desc: '300% ATK + khóa hành động địch 1 lượt.' },
+      passive: { name: 'Lôi Ảnh', desc: 'SPD +15%, mở đầu trận luôn ra tay trước.' }
+    }},
+  { id: 'a006', name: 'Shanks', rarity: 7, element: 'Water', role: 'Tank',
+    hp: 1900, atk: 200, def: 150, spd: 95, energy: 0,
+    img: 'https://res.cloudinary.com/da3wvlqvd/image/upload/v1781928308/Shanks_HD_WALLPAPER_ccpmsl.jpg',
+    skills: {
+      basic: { name: 'Kiếm Khí', desc: '100% ATK.' },
+      skill: { name: 'Bá Vương Sắc', desc: '180% ATK toàn địch + 20% choáng.' },
+      ultimate: { name: 'Tứ Hoàng Chi Uy', desc: '300% ATK + hồi 25% HP tối đa cho cả đội.' },
+      passive: { name: 'Tứ Hoàng', desc: 'Giảm 20% sát thương nhận cho cả đội khi Shanks còn sống.' }
+    }}
+);
+
 /* AQ.Gacha — quay thẻ, pity system, lưu trữ kho */
 window.AQ = window.AQ || {};
 
@@ -466,6 +525,7 @@ AQ.Storage = {
   KEY_CURRENCY: 'aq-currency',
   KEY_TEAM: 'aq-team',
   KEY_PROFILE: 'aq-profile',
+  KEY_ADMIN: 'aq-admin',
 
   load(key, fallback) {
     try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; }
@@ -483,7 +543,20 @@ AQ.Storage = {
   setCurrency(c) { this.save(this.KEY_CURRENCY, c); },
 
   getTeam() { return this.load(this.KEY_TEAM, [null, null, null, null]); },
-  setTeam(t) { this.save(this.KEY_TEAM, t); }
+  setTeam(t) { this.save(this.KEY_TEAM, t); },
+
+  isAdmin() { return this.load(this.KEY_ADMIN, false); },
+  setAdmin(v) { this.save(this.KEY_ADMIN, v); }
+};
+
+AQ.Admin = {
+  PASSWORD: 'zzollyan',
+  login(pw) {
+    if (pw === this.PASSWORD) { AQ.Storage.setAdmin(true); return true; }
+    return false;
+  },
+  logout() { AQ.Storage.setAdmin(false); },
+  isActive() { return AQ.Storage.isAdmin(); }
 };
 
 AQ.Gacha = {
@@ -532,8 +605,9 @@ AQ.Gacha = {
   /** quay n lần, trả {results:[{card,rarity,isNew}], pity, currency} */
   pull(n = 1) {
     const currency = AQ.Storage.getCurrency();
-    const cost = this.COST_GEM * n;
-    if (currency.gem < cost) return { error: 'NOT_ENOUGH_GEM' };
+    const isAdmin = AQ.Admin.isActive();
+    const cost = isAdmin ? 0 : this.COST_GEM * n;
+    if (!isAdmin && currency.gem < cost) return { error: 'NOT_ENOUGH_GEM' };
     currency.gem -= cost;
 
     let pity = AQ.Storage.getPity();
@@ -700,8 +774,9 @@ AQ.BattleEngine = class {
     }
   }
 };
-</script>
 
+
+</script>
 </head>
 <body class="min-h-screen font-body-md text-on-surface">
 <video class="bg-video" autoplay muted loop playsinline preload="auto" id="bgVideo">
