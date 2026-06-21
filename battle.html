@@ -582,9 +582,12 @@ function unitCardHTML(u) {
   const enPct = (u.energy / u.maxEnergy) * 100;
   return `
     <div class="unitcard ${u.broken ? 'broken' : ''}" data-id="${u.card.id}-${u.side}">
-      <div class="flex justify-between text-sm font-semibold mb-1">
-        <span>${ELEMENT_ICON[u.element]} ${u.card.name}</span>
-        <span style="color:${RARITY_COLOR[u.card.rarity]}">${u.card.rarity}★</span>
+      <div class="flex items-center gap-2 mb-1">
+        ${u.card.img ? `<img src="${u.card.img}" class="w-8 h-8 rounded-md object-cover">` : ''}
+        <div class="flex justify-between flex-1 text-sm font-semibold">
+          <span>${ELEMENT_ICON[u.element]} ${u.card.name}</span>
+          <span style="color:${RARITY_COLOR[u.card.rarity]}">${u.card.rarity}★</span>
+        </div>
       </div>
       <div class="hpbar mb-1"><div class="hpfill" style="width:${hpPct}%"></div></div>
       <div class="hpbar"><div class="enfill" style="width:${enPct}%"></div></div>

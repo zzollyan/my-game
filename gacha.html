@@ -1083,7 +1083,7 @@ function renderResults(results) {
     el.className = `relative flex flex-col items-center gap-2 p-3 rounded-2xl ${cls.bg} ${cls.ring} ${cls.anim} opacity-0 transition-opacity duration-500`;
     el.innerHTML = `
       ${isNew ? '<span class="absolute -top-2 -right-2 text-[9px] px-2 py-0.5 rounded-full bg-mythic text-white font-label-sm">MỚI</span>' : ''}
-      <span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>
+      ${card.img ? `<img src="${card.img}" class="w-16 h-16 rounded-xl object-cover">` : `<span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>`}
       <span class="text-[11px] font-label-sm text-center leading-tight">${card.name}</span>
       <span class="text-[10px] font-label-sm ${cls.color}">${rarity}★ · ${card.element}/${card.role}</span>
       <span class="text-[9px] font-label-sm text-on-surface-variant/60">ATK ${card.atk} · DEF ${card.def} · SPD ${card.spd}</span>
@@ -1141,7 +1141,7 @@ previewBtn.addEventListener('click', () => {
       const el = document.createElement('div');
       el.className = `flex flex-col items-center gap-1 p-3 rounded-2xl ${cls.bg} ${cls.ring}`;
       el.innerHTML = `
-        <span class="material-symbols-outlined text-2xl ${cls.color} fill-icon">military_tech</span>
+        ${card.img ? `<img src="${card.img}" class="w-12 h-12 rounded-lg object-cover">` : `<span class="material-symbols-outlined text-2xl ${cls.color} fill-icon">military_tech</span>`}
         <span class="text-[10px] font-label-sm text-center leading-tight">${card.name}</span>
         <span class="text-[9px] font-label-sm ${cls.color}">${rarity}★</span>
       `;

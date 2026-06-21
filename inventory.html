@@ -1031,7 +1031,7 @@ function renderGrid(filter) {
     card.className = `glass rounded-2xl p-4 flex flex-col items-center gap-2 hover:bg-white/20 transition-all hover:-translate-y-1 ${cls.ring}`;
     card.innerHTML = `
       <div class="w-16 h-16 rounded-xl ${cls.bg} flex items-center justify-center overflow-hidden">
-        <span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>
+        ${item.img ? `<img src="${item.img}" class="w-full h-full object-cover">` : `<span class="material-symbols-outlined text-3xl ${cls.color} fill-icon">military_tech</span>`}
       </div>
       <span class="text-[11px] font-label-sm text-center leading-tight line-clamp-2">${item.name}</span>
       <span class="text-[10px] font-label-sm ${cls.color}">${item.rarity}★ Lv.${item.level}</span>
@@ -1046,7 +1046,9 @@ function openItemModal(item) {
   const cls = rarityClasses(item.rarity);
   const iconWrap = document.getElementById('itemModalIconWrap');
   iconWrap.className = `w-24 h-24 rounded-2xl flex items-center justify-center overflow-hidden ${cls.bg} ${cls.ring}`;
-  iconWrap.innerHTML = `<span id="itemModalIcon" class="material-symbols-outlined text-5xl fill-icon ${cls.color}">military_tech</span>`;
+  iconWrap.innerHTML = item.img
+    ? `<img src="${item.img}" class="w-full h-full object-cover">`
+    : `<span id="itemModalIcon" class="material-symbols-outlined text-5xl fill-icon ${cls.color}">military_tech</span>`;
   document.getElementById('itemModalName').innerText = item.name;
   const rarityEl = document.getElementById('itemModalRarity');
   rarityEl.innerText = `${item.rarity}★ · ${item.element} · ${item.role} · Lv.${item.level} · Đột Phá ${item.ascension}`;
